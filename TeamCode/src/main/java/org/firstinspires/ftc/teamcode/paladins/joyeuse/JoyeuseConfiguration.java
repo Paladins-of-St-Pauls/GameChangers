@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.paladins.jeffs;
+package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -15,10 +15,14 @@ import org.firstinspires.ftc.teamcode.paladins.common.RobotConfiguration;
  * It is also assumed that the device names in the 'init()' method below are the same as the devices
  * named on the activated configuration on the robot.
  */
-public class JeffsBotConfiguration extends RobotConfiguration {
+public class JoyeuseConfiguration extends RobotConfiguration {
     // Left motors
-    public DcMotor leftMotor;
-    public DcMotor rightMotor;
+    public DcMotor leftMidMotor;
+    public DcMotor leftBackMotor;
+
+    // Right motors
+    public DcMotor rightMidMotor;
+    public DcMotor rightBackMotor;
 
     BNO055IMU imu;
 
@@ -35,9 +39,8 @@ public class JeffsBotConfiguration extends RobotConfiguration {
      * @param telemetry
      * @return
      */
-    public static JeffsBotConfiguration newConfig(HardwareMap hardwareMap, Telemetry telemetry) {
-
-        JeffsBotConfiguration config = new JeffsBotConfiguration();
+    public static JoyeuseConfiguration newConfig(HardwareMap hardwareMap, Telemetry telemetry) {
+        JoyeuseConfiguration config = new JoyeuseConfiguration();
         config.init(hardwareMap, telemetry);
         return config;
     }
@@ -53,10 +56,15 @@ public class JeffsBotConfiguration extends RobotConfiguration {
 
         setTelemetry(telemetry);
 
-        leftMotor = (DcMotor) getHardwareOn("leftMotor", hardwareMap.dcMotor);
+        leftMidMotor = (DcMotor) getHardwareOn("leftMidMotor", hardwareMap.dcMotor);
+        leftBackMotor = (DcMotor) getHardwareOn("leftBackMotor", hardwareMap.dcMotor);
 
-        rightMotor = (DcMotor) getHardwareOn("rightMotor", hardwareMap.dcMotor);
-        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightMidMotor = (DcMotor) getHardwareOn("rightMidMotor", hardwareMap.dcMotor);
+        rightBackMotor = (DcMotor) getHardwareOn("rightBackMotor", hardwareMap.dcMotor);
+
+
+        rightMidMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Set up the parameters with which we will use our IMU. Note that integration
         // algorithm here just reports accelerations to the logcat log; it doesn't actually

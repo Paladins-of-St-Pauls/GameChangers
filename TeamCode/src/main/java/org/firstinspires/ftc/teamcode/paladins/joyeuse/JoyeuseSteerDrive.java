@@ -48,15 +48,20 @@ this.drive = drive;
 //        float scalePower = scaleTriggerPower(gamepad.left_trigger - gamepad.right_trigger);
         float scalePower = scaleTriggerPower(gamepad.left_stick_y);
 
-        float steer = scaleSteerPower(gamepad.right_stick_x);
+        float steer = scaleSteerPower(-gamepad.right_stick_x);
         float leftPower;
         float rightPower;
         if (scalePower == 0.0f) {
             leftPower = steer;
             rightPower = -steer;
         } else {
-            leftPower = scalePower * ((steer < 0) ? 1.0f + steer : 1.0f);
-            rightPower = scalePower * ((steer > 0) ? 1.0f - steer : 1.0f);
+            leftPower = scalePower * ((steer < 0) ? 1.0f - steer : 1.0f);
+            rightPower = scalePower * ((steer > 0) ? 1.0f + steer : 1.0f);
+        }
+
+        if(gamepad.right_bumper) {
+            leftPower = leftPower / 2.0f;
+            rightPower = rightPower / 2.0f;
         }
 
         drive.setPower(leftPower, rightPower);

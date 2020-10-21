@@ -16,18 +16,19 @@ import java.util.ArrayDeque;
 public class TestDrive extends PaladinsOpMode {
     private JoyeuseConfiguration config;
     private JoyeuseDrive drive;
+    private JoyeuseSteerDrive steerDrive;
 
     @Override
     protected void onInit() {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
+        steerDrive = new JoyeuseSteerDrive(this, gamepad1, drive);
     }
 
     @Override
     protected void activeLoop() throws InterruptedException {
-        drive.setPower(gamepad1.left_stick_y, gamepad1.right_stick_y);
-        drive.update();
+        steerDrive.update();
     }
 
 }

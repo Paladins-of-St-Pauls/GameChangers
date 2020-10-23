@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
+import org.firstinspires.ftc.teamcode.paladins.common.TankDrive;
 
 @TeleOp(name = "TankDrive")
 public class TankDriveOpMode extends PaladinsOpMode {

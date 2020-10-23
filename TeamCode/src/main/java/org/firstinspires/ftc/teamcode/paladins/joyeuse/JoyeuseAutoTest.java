@@ -1,33 +1,32 @@
-package org.firstinspires.ftc.teamcode.paladins.jeffs;
+package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.common.TankDrive;
+import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseConfiguration;
+import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
 import org.firstinspires.ftc.teamcode.paladins.tasks.TankDriveEncTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
 import java.util.ArrayDeque;
 
-@Disabled
-@Autonomous(name = "JeffsAutonomous1")
-public class JeffsAutonomous1 extends PaladinsOpMode {
-    private JeffsBotConfiguration config;
-    private TankDrive drive;
+@Autonomous(name = "JoyeuseAutoTest")
+public class JoyeuseAutoTest extends PaladinsOpMode {
+    private JoyeuseConfiguration config;
+    private JoyeuseDrive drive;
     private ArrayDeque<Task> tasks = new ArrayDeque<>();
 
     @Override
     protected void onInit() {
-        config = JeffsBotConfiguration.newConfig(hardwareMap, telemetry);
+        config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
-        drive = new TankDrive(this, gamepad1, config.leftMotor, config.rightMotor);
-        drive.setCountsPerCm(config.countsPerCm);
-        config.leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        config.rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        tasks.add(new TankDriveEncTask(this, 0.5, drive, 0.2, 0.2, 20, 20));
-        tasks.add(new TankDriveEncTask(this, 20, drive, 0.5, 0.5, 300, 300));
+        drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
+        tasks.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0.5));
+        tasks.add(new JoyeuseDriveTask(this, 1, drive, -0.5, 0.5));
+        tasks.add(new JoyeuseDriveTask(this, 1, drive, 0.5, -0.5));
+        tasks.add(new JoyeuseDriveTask(this, 1, drive, 1, 1));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.paladins.jeffs;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
 import java.util.ArrayDeque;
 
+@Disabled
 @Autonomous(name = "StabilizedAutonomous")
 public class StabilizedAutonomous extends PaladinsOpMode {
     private JeffsBotConfiguration config;

@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.paladins.jeffs;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.common.TankDrive;
 
+@Disabled
 @TeleOp(name = "JeffsTeleOpTankDrive")
 public class JeffsTeleOpTankDrive extends PaladinsOpMode {
     private JeffsBotConfiguration config;

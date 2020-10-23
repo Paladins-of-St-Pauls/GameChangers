@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.paladins.jeffs;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.GamePadSteerDrive;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 
+@Disabled
 @TeleOp(name = "JeffsTeleOpSteerDrive")
 public class JeffsTeleOpSteerDrive extends PaladinsOpMode {
     private JeffsBotConfiguration config;

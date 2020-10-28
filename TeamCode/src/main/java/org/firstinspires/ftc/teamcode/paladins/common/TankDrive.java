@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class TankDrive extends PaladinsComponent {
 
     private static float[] power_curve =
-            {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
+            {0.00f, 0.5f, 0.55f, 0.6f, 0.65f, 0.7f, 0.75f, 0.8f,0.85f,0.90f};
     private static float[] steer_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
     final private DcMotor leftMotor;
@@ -94,13 +94,16 @@ public class TankDrive extends PaladinsComponent {
      */
     @SuppressLint("DefaultLocale")
     public void update() {
-        leftMotor.setPower((leftPower));
-        rightMotor.setPower((rightPower));
-//        leftMotor.setPower(scaleTriggerPower(leftPower));
-//        rightMotor.setPower(scaleTriggerPower(rightPower));
+//        leftMotor.setPower((leftPower));
+//        rightMotor.setPower((rightPower));
+        double scaledLeftPower = scaleTriggerPower(leftPower);
+        double scaledRightPower = scaleTriggerPower(rightPower);
 
-        leftPowerItem.setValue("%.2f", leftPower);
-        rightPowerItem.setValue("%.2f", rightPower);
+        leftMotor.setPower(scaledLeftPower);
+        rightMotor.setPower(scaledRightPower);
+
+        leftPowerItem.setValue("%.2f", scaledLeftPower);
+        rightPowerItem.setValue("%.2f", scaledRightPower);
 
         getOpMode().telemetry.addLine(String.format("%d, %d", leftMotor.getCurrentPosition(), rightMotor.getCurrentPosition()));
     }

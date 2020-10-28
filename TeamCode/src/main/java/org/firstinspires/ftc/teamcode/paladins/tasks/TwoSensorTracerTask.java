@@ -4,16 +4,17 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.common.TankDrive;
+import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
 
 public class TwoSensorTracerTask extends BaseTask implements Task {
 
-    private final TankDrive drive;
+    private final JoyeuseDrive drive;
     private final double leftSpeed;
     private final double rightSpeed;
     private final ColorSensor leftSensor;
     private final ColorSensor rightSensor;
 
-    public TwoSensorTracerTask(PaladinsOpMode opMode, double time, TankDrive drive, double leftSpeed, double rightSpeed, ColorSensor leftSensor, ColorSensor rightSensor) {
+    public TwoSensorTracerTask(PaladinsOpMode opMode, double time, JoyeuseDrive drive, double leftSpeed, double rightSpeed, ColorSensor leftSensor, ColorSensor rightSensor) {
         super(opMode, time);
         this.drive = drive;
         this.leftSpeed = leftSpeed;
@@ -27,7 +28,6 @@ public class TwoSensorTracerTask extends BaseTask implements Task {
     @Override
     public void init() {
         super.init();
-        drive.setEncoderMode(false);
     }
 
     @Override

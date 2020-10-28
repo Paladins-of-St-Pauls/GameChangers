@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseConfiguration;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
 import org.firstinspires.ftc.teamcode.paladins.tasks.TankDriveEncTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
+import org.firstinspires.ftc.teamcode.paladins.tasks.TwoSensorTracerTask;
 
 import java.util.ArrayDeque;
 
@@ -23,10 +24,6 @@ public class JoyeuseAutoTest extends PaladinsOpMode {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
-        tasks.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0.5));
-        tasks.add(new JoyeuseDriveTask(this, 1, drive, -0.5, 0.5));
-        tasks.add(new JoyeuseDriveTask(this, 1, drive, 0.5, -0.5));
-        tasks.add(new JoyeuseDriveTask(this, 1, drive, 1, 1));
     }
 
     @Override

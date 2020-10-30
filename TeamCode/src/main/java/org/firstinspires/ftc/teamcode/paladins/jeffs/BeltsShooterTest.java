@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.common.TankDrive;
 
+@Disabled
 @TeleOp(name = "BeltsShooterTest")
 public class BeltsShooterTest extends PaladinsOpMode {
     private JeffsBotConfiguration config;

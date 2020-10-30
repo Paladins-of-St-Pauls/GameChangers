@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -25,12 +26,19 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     public DcMotor rightMidMotor;
     public DcMotor rightBackMotor;
 
+    // Shooter motors
+    public DcMotor leftShooterMotor;
+    public DcMotor rightShooterMotor;
+
     // Colour sensors
-    public ColorSensor leftColourSensor;
-    public ColorSensor rightColourSensor;
+//    public ColorSensor leftColourSensor;
+//    public ColorSensor rightColourSensor;
+
+    // Servo
+    public CRServo wgServo;
 
 
-    BNO055IMU imu;
+//    BNO055IMU imu;
 
     public double countsPerMotorRev = 288;
     public double driveGearReduction = 72.0 / 90.0; // 72 Teeth -> 90 Teeth
@@ -68,30 +76,36 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         rightMidMotor = (DcMotor) getHardwareOn("rightMidMotor", hardwareMap.dcMotor);
         rightBackMotor = (DcMotor) getHardwareOn("rightBackMotor", hardwareMap.dcMotor);
 
+        leftShooterMotor = (DcMotor) getHardwareOn("leftShooterMotor", hardwareMap.dcMotor);
+        rightShooterMotor = (DcMotor) getHardwareOn("rightShooterMotor", hardwareMap.dcMotor);
+
+        rightShooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMidMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-        leftColourSensor = (ColorSensor) getHardwareOn("leftColourSensor", hardwareMap.colorSensor);
-        rightColourSensor = (ColorSensor) getHardwareOn("rightColourSensor", hardwareMap.colorSensor);
+//        leftColourSensor = (ColorSensor) getHardwareOn("leftColourSensor", hardwareMap.colorSensor);
+//        rightColourSensor = (ColorSensor) getHardwareOn("rightColourSensor", hardwareMap.colorSensor);
+
+        wgServo = (CRServo) getHardwareOn("wgServo", hardwareMap.crservo);
 
 
-        // Set up the parameters with which we will use our IMU. Note that integration
-        // algorithm here just reports accelerations to the logcat log; it doesn't actually
-        // provide positional information.
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "AdafruitIMUCalibration.json"; // see the calibration sample opmode
-        parameters.loggingEnabled = true;
-        parameters.loggingTag = "IMU";
-        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-        // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
-        // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
-        // and named "imu".
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        imu.initialize(parameters);
+//        // Set up the parameters with which we will use our IMU. Note that integration
+//        // algorithm here just reports accelerations to the logcat log; it doesn't actually
+//        // provide positional information.
+//        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+//        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+//        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+//        parameters.calibrationDataFile = "AdafruitIMUCalibration.json"; // see the calibration sample opmode
+//        parameters.loggingEnabled = true;
+//        parameters.loggingTag = "IMU";
+//        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+//
+//        // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
+//        // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
+//        // and named "imu".
+//        imu = hardwareMap.get(BNO055IMU.class, "imu");
+//        imu.initialize(parameters);
 
     }
 

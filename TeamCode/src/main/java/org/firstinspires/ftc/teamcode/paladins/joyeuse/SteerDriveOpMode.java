@@ -27,7 +27,7 @@ public class SteerDriveOpMode extends PaladinsOpMode {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
-        shoot = new JoyeuseShoot(this, gamepad1, config.leftShooterMotor, config.rightShooterMotor);
+        shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
         steerDrive = new JoyeuseSteerDrive(this, gamepad1, drive);
 
         shootMode = 0;
@@ -38,11 +38,19 @@ public class SteerDriveOpMode extends PaladinsOpMode {
         steerDrive.update();
 
         if (gamepad1.left_trigger > 0) {
-            config.wgServo.setPower(gamepad1.left_trigger);
+            config.wgArm.setPower(gamepad1.left_trigger);
         } else if (gamepad1.right_trigger > 0) {
-            config.wgServo.setPower(-gamepad1.right_trigger);
+            config.wgArm.setPower(-gamepad1.right_trigger);
         } else {
-            config.wgServo.setPower(0);
+            config.wgArm.setPower(0);
+        }
+
+        if (gamepad2.left_trigger > 0) {
+            config.wgHand.setPower(gamepad2.left_trigger);
+        } else if (gamepad2.right_trigger > 0) {
+            config.wgHand.setPower(-gamepad2.right_trigger);
+        } else {
+            config.wgHand.setPower(0);
         }
 
         if (gamepad1.y) {

@@ -24,6 +24,8 @@ public class JoyeuseAutoTest extends PaladinsOpMode {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
+
+        tasks.add(new TwoSensorTracerTask(this,125.0,drive,-0.2,-0.2,config.rightColourSensor, config.leftColourSensor));
     }
 
     @Override

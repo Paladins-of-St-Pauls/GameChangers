@@ -13,6 +13,7 @@ public class TwoSensorTracerTask extends BaseTask implements Task {
     private final double rightSpeed;
     private final ColorSensor leftSensor;
     private final ColorSensor rightSensor;
+    private int greenlimit = 4000 ;
 
     public TwoSensorTracerTask(PaladinsOpMode opMode, double time, JoyeuseDrive drive, double leftSpeed, double rightSpeed, ColorSensor leftSensor, ColorSensor rightSensor) {
         super(opMode, time);
@@ -32,33 +33,43 @@ public class TwoSensorTracerTask extends BaseTask implements Task {
 
     @Override
     public void run() {
+
+        opMode.telemetry.addData("stopp",String.format("red: %d   gren %d   bloo %d", rightSensor.red(),rightSensor.green(),rightSensor.blue()));
+
         if (isFinished()) {
+            opMode.telemetry.addData("stopp","isFinished");
             drive.setPower(0,0);
             drive.update();
             return;
 
         }
-        if (rightSensor.green() > 180 && leftSensor.green() > 180) {
+
+        //if (true) return;
+
+        if (rightSensor.green() > greenlimit && leftSensor.green() > greenlimit) {
             this.isFinished=true;
-            opMode.telemetry.addData("stopp","stop");
+            opMode.telemetry.addData("stopp","both Green");
             drive.setPower(-0.5,-0.5);
             drive.update();
             return;
 
         }
-        if (leftSensor.green() > 220) {
-            drive.setPower(-0.4,0.5);
+        if (leftSensor.green() > greenlimit) {
+            opMode.telemetry.addData("stopp","leftSensor Green");
+            drive.setPower(-0.2,0.3);
             drive.update();
             return;
 
         }
-        if (rightSensor.green() > 220) {
-            drive.setPower(0.5,-0.4);
+        if (rightSensor.green() > greenlimit) {
+            opMode.telemetry.addData("stopp","rightSensor Green");
+            drive.setPower(0.3,-0.2);
             drive.update();
             return;
 
 
         }
+        opMode.telemetry.addData("stopp","keep goingb");
 
 
         drive.setPower(leftSpeed, rightSpeed);

@@ -1,9 +1,8 @@
-package org.firstinspires.ftc.teamcode.paladins.joyeuse;
+package org.firstinspires.ftc.teamcode.paladins.jeffs;
 
 import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -12,47 +11,35 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  * Created by Shaun on 2/07/2017.
  */
 
-public class JoyeuseDrive extends PaladinsComponent {
+public class BeltsDrive extends PaladinsComponent {
     private static float[] power_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
     private static float[] steer_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
 
-    final private DcMotor leftMidMotor;
-    final private DcMotor leftBackMotor;
-
-    final private DcMotor rightMidMotor;
-    final private DcMotor rightBackMotor;
+    final private DcMotor leftMotor;
+    final private DcMotor rightMotor;
 
 //    final private Gamepad gamepad;
 //    final private Telemetry.Item leftPowerItem;
 //    final private Telemetry.Item rightPowerItem;
 //    boolean encoderMode = false;
 
-    private double leftMidPower;
-    private double leftBackPower;
-
-    private double rightMidPower;
-    private double rightBackPower;
+    private double leftPower;
+    private double rightPower;
 
 //    private double leftCm;
 //    private double rightCm;
 //    private double countsPerCm;
 
-    public JoyeuseDrive(PaladinsOpMode opMode, DcMotor leftMidMotor, DcMotor leftBackMotor, DcMotor rightMidMotor, DcMotor rightBackMotor) {
+    public BeltsDrive(PaladinsOpMode opMode, DcMotor leftMotor, DcMotor rightMotor) {
         super(opMode);
 
-        this.leftMidMotor = leftMidMotor;
-        this.leftBackMotor = leftBackMotor;
+        this.leftMotor = leftMotor;
+        this.rightMotor = rightMotor;
 
-        this.rightMidMotor = rightMidMotor;
-        this.rightBackMotor = rightBackMotor;
-
-        leftMidPower = 0;
-        leftBackPower = 0;
-
-        rightMidPower = 0;
-        rightBackPower = 0;
+        leftPower = 0;
+        rightPower = 0;
 
 //        leftPowerItem = getOpMode().telemetry.addData("Left power", "%.2f", 0.0f);
 //        leftPowerItem.setRetained(true);
@@ -67,11 +54,8 @@ public class JoyeuseDrive extends PaladinsComponent {
 
 
     public void setPower(double left, double right) {
-        leftMidPower = left;
-        leftBackPower = left;
-
-        rightMidPower = right;
-        rightBackPower = right;
+        leftPower = left;
+        rightPower = right;
     }
 
     /*
@@ -79,11 +63,8 @@ public class JoyeuseDrive extends PaladinsComponent {
      */
     @SuppressLint("DefaultLocale")
     public void update() {
-        leftMidMotor.setPower((leftMidPower));
-        leftBackMotor.setPower((leftBackPower));
-
-        rightMidMotor.setPower((rightMidPower));
-        rightBackMotor.setPower((rightBackPower));
+        leftMotor.setPower((leftPower));
+        rightMotor.setPower((rightPower));
 
 //        getOpMode().telemetry.addLine(String.format("%d, %d", leftMidMotor.getCurrentPosition(), rightMidMotor.getCurrentPosition()));
     }
@@ -134,6 +115,6 @@ public class JoyeuseDrive extends PaladinsComponent {
 //    }
 
     public boolean isFinished() {
-        return !(leftMidMotor.isBusy() || leftBackMotor.isBusy() || rightMidMotor.isBusy() || rightBackMotor.isBusy());
+        return !(leftMotor.isBusy() || rightMotor.isBusy());
     }
 }

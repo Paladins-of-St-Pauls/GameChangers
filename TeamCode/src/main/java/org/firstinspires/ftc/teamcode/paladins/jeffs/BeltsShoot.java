@@ -1,9 +1,8 @@
-package org.firstinspires.ftc.teamcode.paladins.joyeuse;
+package org.firstinspires.ftc.teamcode.paladins.jeffs;
 
 import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -12,7 +11,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  * Created by Caleb on 30/10/2020.
  */
 
-public class JoyeuseShoot extends PaladinsComponent {
+public class BeltsShoot extends PaladinsComponent {
     private static float[] power_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
     private static float[] steer_curve =
@@ -25,7 +24,7 @@ public class JoyeuseShoot extends PaladinsComponent {
 
 
 
-    public JoyeuseShoot(PaladinsOpMode opMode, DcMotor leftShooterMotor, DcMotor rightShooterMotor) {
+    public BeltsShoot(PaladinsOpMode opMode, DcMotor leftShooterMotor, DcMotor rightShooterMotor) {
         super(opMode);
 
         this.opMode = opMode;
@@ -47,6 +46,11 @@ public class JoyeuseShoot extends PaladinsComponent {
     public void setPower(double power) {
             leftShooterMotor.setPower(power);
             rightShooterMotor.setPower(power);
+    }
+
+    public void update() {
+        opMode.telemetry.addData("Left", leftShooterMotor.getCurrentPosition());
+        opMode.telemetry.addData("Right", rightShooterMotor.getCurrentPosition());
     }
 
 //    public void update() {

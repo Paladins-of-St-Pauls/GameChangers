@@ -24,15 +24,11 @@ public class JoyeuseShoot extends PaladinsComponent {
     private double leftShooterPower;
     private double rightShooterPower;
 
-    private int shootMode;
-
     final private Gamepad gamepad;
 
 
     public JoyeuseShoot(PaladinsOpMode opMode, Gamepad gamepad, DcMotor leftShooterMotor, DcMotor rightShooterMotor) {
         super(opMode);
-
-        shootMode = 0;
 
         this.gamepad = gamepad;
 
@@ -47,31 +43,9 @@ public class JoyeuseShoot extends PaladinsComponent {
      * Update the motor power based on the gamepad state
      */
     @SuppressLint("DefaultLocale")
-    public void update() {
-
-        if (gamepad.y) {
-            shootMode = 1;
-        } else if (gamepad.x) {
-            shootMode = 2;
-        } else if (gamepad.a) {
-            shootMode = 3;
-        } else if (gamepad.b) {
-            shootMode = 0;
-        }
-
-        if (shootMode == 1) {
-            leftShooterMotor.setPower(0.75);
-            rightShooterMotor.setPower(0.75);
-        } else if (shootMode == 2) {
-            leftShooterMotor.setPower(0.2);
-            rightShooterMotor.setPower(0.2);
-        } else if (shootMode == 3) {
-            leftShooterMotor.setPower(-0.2);
-            rightShooterMotor.setPower(-0.2);
-        } else {
-            leftShooterMotor.setPower(0);
-            rightShooterMotor.setPower(0);
-        }
+    public void setPower(double power) {
+            leftShooterMotor.setPower(power);
+            rightShooterMotor.setPower(power);
     }
 
     /**

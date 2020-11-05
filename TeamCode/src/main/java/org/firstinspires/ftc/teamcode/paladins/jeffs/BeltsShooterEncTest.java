@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
 import java.util.ArrayDeque;
 
-//@Disabled
+@Disabled
 @Autonomous(name = "BeltsShooterEncTest")
 public class BeltsShooterEncTest extends PaladinsOpMode {
     private JeffsBotConfiguration config;

@@ -44,7 +44,7 @@ public class StackChoiceTask extends BaseTask implements Task {
         super.init();
         int cameraMonitorViewId = opMode.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", opMode.hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new StarterStack.StarterStackDeterminationPipeline();
+        pipeline = new StarterStack.StarterStackDeterminationPipeline(135,142);
         webcam.setPipeline(pipeline);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
@@ -98,8 +98,13 @@ public class StackChoiceTask extends BaseTask implements Task {
         static final int REGION_WIDTH = 100;
         static final int REGION_HEIGHT = 100;
 
-        final int FOUR_RING_THRESHOLD = 142;
-        final int ONE_RING_THRESHOLD = 135;
+        final int FOUR_RING_THRESHOLD ;
+        final int ONE_RING_THRESHOLD ;
+
+        public StarterStackDeterminationPipeline(int oneRingThreshold, int fourRingThreshold) {
+            FOUR_RING_THRESHOLD = fourRingThreshold;
+            ONE_RING_THRESHOLD = oneRingThreshold;
+        }
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,

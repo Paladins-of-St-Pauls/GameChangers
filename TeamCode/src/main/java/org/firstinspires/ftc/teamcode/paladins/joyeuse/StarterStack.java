@@ -23,8 +23,10 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ReadWriteFile;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -36,6 +38,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
+
+import java.io.File;
 
 @TeleOp
 public class StarterStack extends LinearOpMode
@@ -50,7 +54,7 @@ public class StarterStack extends LinearOpMode
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new StarterStackDeterminationPipeline();
+        pipeline = new StarterStackDeterminationPipeline(135,142);
         webcam.setPipeline(pipeline);
 
         // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
@@ -71,12 +75,32 @@ public class StarterStack extends LinearOpMode
 
         while (opModeIsActive())
         {
+
+
+            String filename = "StarterStackCalibration.txt";
+//            File file = AppUtil.getInstance().getSettingsFile(filename);
+//            int pos1 = 132;
+//            int pos2 = 143;
+//            ReadWriteFile.writeFile(file, String.format("%d,%d",pos1,pos2));
+
+
+            File readFile = AppUtil.getInstance().getSettingsFile(filename);
+            String fileContents = ReadWriteFile.readFile(readFile);
+
+            String[] nums = fileContents.split(",");
+
+            int readPos1 = Integer.parseInt(nums[0]);
+            int readPos2 = Integer.parseInt(nums[1]);
+
             telemetry.addData("Analysis", pipeline.getAnalysis());
             telemetry.addData("Position", pipeline.position);
+            telemetry.addData("pos1", readPos1);
+            telemetry.addData("pos2", readPos2);
             telemetry.update();
 
+
             // Don't burn CPU cycles busy-looping in this sample
-            sleep(50);
+            sleep(500);
         }
     }
 
@@ -106,8 +130,13 @@ public class StarterStack extends LinearOpMode
         static final int REGION_WIDTH = 100;
         static final int REGION_HEIGHT = 100;
 
-        final int FOUR_RING_THRESHOLD = 142;
-        final int ONE_RING_THRESHOLD = 135;
+        final int FOUR_RING_THRESHOLD;
+        final int ONE_RING_THRESHOLD;
+
+        public StarterStackDeterminationPipeline(int oneRingThreshold, int fourRingThreshold) {
+            FOUR_RING_THRESHOLD = fourRingThreshold;
+            ONE_RING_THRESHOLD = oneRingThreshold;
+        }
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,

@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -13,34 +11,27 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  * Created by Caleb on 30/10/2020.
  */
 
-public class JoyeuseShoot extends PaladinsComponent {
+public class JoyeuseHarvest extends PaladinsComponent {
     private static float[] power_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
     private static float[] steer_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
 
-    final private DcMotor leftShooterMotor;
-    final private DcMotor rightShooterMotor;
-    final private CRServo shooterServo;
+    final private DcMotor harvesterMotor;
 
     final private PaladinsOpMode opMode;
 
 
 
-    public JoyeuseShoot(PaladinsOpMode opMode, DcMotor leftShooterMotor, DcMotor rightShooterMotor, CRServo shooterServo) {
+    public JoyeuseHarvest(PaladinsOpMode opMode, DcMotor harvesterMotor) {
         super(opMode);
 
         this.opMode = opMode;
 
-        this.leftShooterMotor = leftShooterMotor;
-        this.rightShooterMotor = rightShooterMotor;
-        this.shooterServo = shooterServo;
+        this.harvesterMotor = harvesterMotor;
 
-        leftShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        leftShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        harvesterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        harvesterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     /*
@@ -48,12 +39,8 @@ public class JoyeuseShoot extends PaladinsComponent {
      */
     @SuppressLint("DefaultLocale")
     public void setPower(double power) {
-            leftShooterMotor.setPower(power);
-            rightShooterMotor.setPower(power);
-    }
-
-    public void setServoPower(double power) {
-        shooterServo.setPower(power);
+            harvesterMotor.setPower(power);
+            harvesterMotor.setPower(power);
     }
 
 //    public void update() {
@@ -68,6 +55,6 @@ public class JoyeuseShoot extends PaladinsComponent {
 
 
     public boolean isFinished() {
-        return !(leftShooterMotor.isBusy() || rightShooterMotor.isBusy());
+        return !(harvesterMotor.isBusy());
     }
 }

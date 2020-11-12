@@ -2,7 +2,10 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.robotcore.util.ReadWriteFile;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.BaseTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
@@ -18,6 +21,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 
+import java.io.File;
 import java.util.ArrayDeque;
 
 public class StackChoiceTask extends BaseTask implements Task {
@@ -42,9 +46,19 @@ public class StackChoiceTask extends BaseTask implements Task {
     @Override
     public void init() {
         super.init();
+
+        String filename = "StarterStackCalibration.txt";
+        File readFile = AppUtil.getInstance().getSettingsFile(filename);
+        String fileContents = ReadWriteFile.readFile(readFile);
+
+        String[] nums = fileContents.split(",");
+
+        int oneRingThreshold = Integer.parseInt(nums[0]);
+        int fourRingThreshold = Integer.parseInt(nums[1]);
+
         int cameraMonitorViewId = opMode.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", opMode.hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new StarterStack.StarterStackDeterminationPipeline(135,142);
+        pipeline = new StarterStack.StarterStackDeterminationPipeline(oneRingThreshold, fourRingThreshold);
         webcam.setPipeline(pipeline);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
@@ -68,7 +82,6 @@ public class StackChoiceTask extends BaseTask implements Task {
             } else {
                 tasks.addAll(tasks_none_rings);
             }
-            return;
         }
     }
 

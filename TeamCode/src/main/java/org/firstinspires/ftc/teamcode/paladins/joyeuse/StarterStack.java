@@ -91,17 +91,17 @@ public class StarterStack extends LinearOpMode {
             telemetry.addData("Stored ONE Ring Threshold", oneRingThreshold);
             telemetry.addData("Stored FOUR Ring Threshold", fourRingThreshold);
             telemetry.addLine("To update calibration data, use the gamepad buttons:");
-            telemetry.addLine("A - Update ONE Ring Threshold");
-            telemetry.addLine("B - Update FOUR Ring Threshold");
+            telemetry.addLine("A - Update ONE Ring Threshold (ONE Ring is in Target)");
+            telemetry.addLine("B - Update FOUR Ring Threshold (FOUR Rings are in Target)");
             telemetry.update();
 
             if (gamepad1.a) {
                 File file = AppUtil.getInstance().getSettingsFile(filename);
-                ReadWriteFile.writeFile(file, String.format("%d, %d", pipeline.getAnalysis(), fourRingThreshold));
+                ReadWriteFile.writeFile(file, String.format("%d, %d", pipeline.getAnalysis() - 3, fourRingThreshold));
 
             } else if (gamepad1.b) {
                 File file = AppUtil.getInstance().getSettingsFile(filename);
-                ReadWriteFile.writeFile(file, String.format("%d, %d", oneRingThreshold, pipeline.getAnalysis()));
+                ReadWriteFile.writeFile(file, String.format("%d, %d", oneRingThreshold, pipeline.getAnalysis() - 3));
             }
 
 

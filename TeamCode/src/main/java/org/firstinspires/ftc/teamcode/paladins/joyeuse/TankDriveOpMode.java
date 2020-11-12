@@ -20,7 +20,7 @@ public class TankDriveOpMode extends PaladinsOpMode {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
-        shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
+        shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor, config.shooterServo);
         tankDrive = new JoyeuseTankDrive(this, gamepad1, drive);
 
         shootMode = 0;
@@ -31,19 +31,11 @@ public class TankDriveOpMode extends PaladinsOpMode {
         tankDrive.update();
 
         if (gamepad1.left_trigger > 0) {
-            config.wgArm.setPower(gamepad1.left_trigger);
+            shoot.setServoPower(gamepad1.left_trigger);
         } else if (gamepad1.right_trigger > 0) {
-            config.wgArm.setPower(-gamepad1.right_trigger);
+            shoot.setServoPower(-gamepad1.right_trigger);
         } else {
-            config.wgArm.setPower(0);
-        }
-
-        if (gamepad2.left_trigger > 0) {
-            config.wgHand.setPower(gamepad1.left_trigger);
-        } else if (gamepad2.right_trigger > 0) {
-            config.wgHand.setPower(-gamepad1.right_trigger);
-        } else {
-            config.wgHand.setPower(0);
+            shoot.setServoPower(0);
         }
 
         if (gamepad1.y) {

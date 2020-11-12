@@ -38,6 +38,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     // Servo
     public CRServo wgArm;
     public CRServo wgHand;
+    public CRServo shooterServo;
 
 
 //    BNO055IMU imu;
@@ -94,6 +95,8 @@ public class JoyeuseConfiguration extends RobotConfiguration {
 
         wgArm = (CRServo) getHardwareOn("wgArm", hardwareMap.crservo);
         wgHand = (CRServo) getHardwareOn("wgHand", hardwareMap.crservo);
+
+        shooterServo = (CRServo) getHardwareOn("shooterServo", hardwareMap.crservo);
 
 
 

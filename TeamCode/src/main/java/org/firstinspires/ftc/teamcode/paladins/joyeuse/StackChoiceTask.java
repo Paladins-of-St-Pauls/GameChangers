@@ -61,12 +61,10 @@ public class StackChoiceTask extends BaseTask implements Task {
         pipeline = new StarterStack.StarterStackDeterminationPipeline(oneRingThreshold, fourRingThreshold);
         webcam.setPipeline(pipeline);
 
-        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
-                webcam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened() {
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
         });
     }
@@ -75,7 +73,7 @@ public class StackChoiceTask extends BaseTask implements Task {
     @Override
     public void run() {
         if (isFinished()) {
-            if(pipeline.position == StarterStack.StarterStackDeterminationPipeline.RingPosition.FOUR) {
+            if (pipeline.position == StarterStack.StarterStackDeterminationPipeline.RingPosition.FOUR) {
                 tasks.addAll(tasks_four_rings);
             } else if (pipeline.position == StarterStack.StarterStackDeterminationPipeline.RingPosition.ONE) {
                 tasks.addAll(tasks_one_ring);
@@ -85,13 +83,11 @@ public class StackChoiceTask extends BaseTask implements Task {
         }
     }
 
-    public static class StarterStackDeterminationPipeline extends OpenCvPipeline
-    {
+    public static class StarterStackDeterminationPipeline extends OpenCvPipeline {
         /*
          * An enum to define the skystone position
          */
-        public enum RingPosition
-        {
+        public enum RingPosition {
             FOUR,
             ONE,
             NONE
@@ -106,13 +102,13 @@ public class StackChoiceTask extends BaseTask implements Task {
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(160,120);
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(160, 120);
 
         static final int REGION_WIDTH = 100;
         static final int REGION_HEIGHT = 100;
 
-        final int FOUR_RING_THRESHOLD ;
-        final int ONE_RING_THRESHOLD ;
+        final int FOUR_RING_THRESHOLD;
+        final int ONE_RING_THRESHOLD;
 
         public StarterStackDeterminationPipeline(int oneRingThreshold, int fourRingThreshold) {
             FOUR_RING_THRESHOLD = fourRingThreshold;
@@ -141,23 +137,20 @@ public class StackChoiceTask extends BaseTask implements Task {
          * This function takes the RGB frame, converts to YCrCb,
          * and extracts the Cb channel to the 'Cb' variable
          */
-        void inputToCb(Mat input)
-        {
+        void inputToCb(Mat input) {
             Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
             Core.extractChannel(YCrCb, Cb, 1);
         }
 
         @Override
-        public void init(Mat firstFrame)
-        {
+        public void init(Mat firstFrame) {
             inputToCb(firstFrame);
 
             region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
         }
 
         @Override
-        public Mat processFrame(Mat input)
-        {
+        public Mat processFrame(Mat input) {
             inputToCb(input);
 
             avg1 = (int) Core.mean(region1_Cb).val[0];
@@ -170,11 +163,11 @@ public class StackChoiceTask extends BaseTask implements Task {
                     2); // Thickness of the rectangle lines
 
             position = StarterStack.StarterStackDeterminationPipeline.RingPosition.FOUR; // Record our analysis
-            if(avg1 > FOUR_RING_THRESHOLD){
+            if (avg1 > FOUR_RING_THRESHOLD) {
                 position = StarterStack.StarterStackDeterminationPipeline.RingPosition.FOUR;
-            }else if (avg1 > ONE_RING_THRESHOLD){
+            } else if (avg1 > ONE_RING_THRESHOLD) {
                 position = StarterStack.StarterStackDeterminationPipeline.RingPosition.ONE;
-            }else{
+            } else {
                 position = StarterStack.StarterStackDeterminationPipeline.RingPosition.NONE;
             }
 
@@ -188,8 +181,7 @@ public class StackChoiceTask extends BaseTask implements Task {
             return input;
         }
 
-        public int getAnalysis()
-        {
+        public int getAnalysis() {
             return avg1;
         }
     }

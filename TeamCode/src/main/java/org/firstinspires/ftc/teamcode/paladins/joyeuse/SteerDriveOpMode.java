@@ -17,6 +17,7 @@ import java.util.ArrayDeque;
 public class SteerDriveOpMode extends PaladinsOpMode {
     private JoyeuseConfiguration config;
     private JoyeuseDrive drive;
+    private JoyeuseHarvest harvest;
     private JoyeuseShoot shoot;
     private JoyeuseSteerDrive steerDrive;
 
@@ -27,6 +28,7 @@ public class SteerDriveOpMode extends PaladinsOpMode {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
+        harvest = new JoyeuseHarvest(this, config.intakeMotor, config.bumpMotor);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor, config.shooterServo);
         steerDrive = new JoyeuseSteerDrive(this, gamepad1, drive);
 
@@ -37,13 +39,16 @@ public class SteerDriveOpMode extends PaladinsOpMode {
     protected void activeLoop() throws InterruptedException {
         steerDrive.update();
 
-        if (gamepad1.left_trigger > 0) {
-            shoot.setServoPower(gamepad1.left_trigger);
-        } else if (gamepad1.right_trigger > 0) {
-            shoot.setServoPower(-gamepad1.right_trigger);
-        } else {
-            shoot.setServoPower(0);
-        }
+            harvest.setIntakePower(gamepad1.right_trigger);
+            harvest.setBumpPower(gamepad1.left_trigger);
+
+//        if (gamepad1.left_trigger > 0) {
+//            shoot.setServoPower(gamepad1.left_trigger);
+//        } else if (gamepad1.right_trigger > 0) {
+//            shoot.setServoPower(-gamepad1.right_trigger);
+//        } else {
+//            shoot.setServoPower(0);
+//        }
 
         if (gamepad1.y) {
             shootMode = 1;

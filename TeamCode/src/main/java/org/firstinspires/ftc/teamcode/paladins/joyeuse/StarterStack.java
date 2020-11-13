@@ -74,12 +74,12 @@ public class StarterStack extends LinearOpMode {
 
         while (opModeIsActive()) {
             String filename = "StarterStackCalibration.txt";
-//            File file = AppUtil.getInstance().getSettingsFile(filename);
+            File file = AppUtil.getInstance().getSettingsFile(filename);
 //            int pos1 = 132;
 //            int pos2 = 143;
 //            ReadWriteFile.writeFile(file, String.format("%d,%d",pos1,pos2));
-            File readFile = AppUtil.getInstance().getSettingsFile(filename);
-            String fileContents = ReadWriteFile.readFile(readFile);
+//            File readFile = AppUtil.getInstance().getSettingsFile(filename);
+            String fileContents = ReadWriteFile.readFile(file);
 
             String[] nums = fileContents.split(",");
 
@@ -96,12 +96,10 @@ public class StarterStack extends LinearOpMode {
             telemetry.update();
 
             if (gamepad1.a) {
-                File file = AppUtil.getInstance().getSettingsFile(filename);
-                ReadWriteFile.writeFile(file, String.format("%d, %d", pipeline.getAnalysis() - 3, fourRingThreshold));
-
-            } else if (gamepad1.b) {
-                File file = AppUtil.getInstance().getSettingsFile(filename);
-                ReadWriteFile.writeFile(file, String.format("%d, %d", oneRingThreshold, pipeline.getAnalysis() - 3));
+                ReadWriteFile.writeFile(file, String.format("%d,%d",pipeline.getAnalysis() - 3, fourRingThreshold));
+            }
+            else if (gamepad1.b) {
+                ReadWriteFile.writeFile(file, String.format("%d,%d",oneRingThreshold,pipeline.getAnalysis()));
             }
 
 

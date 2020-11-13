@@ -17,30 +17,31 @@ public class JoyeuseHarvest extends PaladinsComponent {
     private static float[] steer_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
 
-    final private DcMotor harvesterMotor;
+    final private DcMotor intakeMotor;
+    final private DcMotor bumpMotor;
 
     final private PaladinsOpMode opMode;
 
 
 
-    public JoyeuseHarvest(PaladinsOpMode opMode, DcMotor harvesterMotor) {
+    public JoyeuseHarvest(PaladinsOpMode opMode, DcMotor intakeMotor, DcMotor bumpMotor) {
         super(opMode);
 
         this.opMode = opMode;
 
-        this.harvesterMotor = harvesterMotor;
-
-        harvesterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        harvesterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.intakeMotor = intakeMotor;
+        this.bumpMotor = bumpMotor;
     }
 
     /*
      * Update the motor power based on the gamepad state
      */
     @SuppressLint("DefaultLocale")
-    public void setPower(double power) {
-            harvesterMotor.setPower(power);
-            harvesterMotor.setPower(power);
+    public void setIntakePower(double power) {
+            intakeMotor.setPower(power);
+    }
+    public void setBumpPower(double power) {
+        bumpMotor.setPower(power);
     }
 
 //    public void update() {
@@ -55,6 +56,6 @@ public class JoyeuseHarvest extends PaladinsComponent {
 
 
     public boolean isFinished() {
-        return !(harvesterMotor.isBusy());
+        return !(intakeMotor.isBusy() | bumpMotor.isBusy());
     }
 }

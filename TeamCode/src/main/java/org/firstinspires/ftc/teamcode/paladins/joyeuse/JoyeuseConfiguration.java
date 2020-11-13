@@ -31,6 +31,10 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     public DcMotor leftShooterMotor;
     public DcMotor rightShooterMotor;
 
+    //Harvester motors
+    public DcMotor intakeMotor;
+    public DcMotor bumpMotor;
+
     // Colour sensors
     public ColorSensor leftColourSensor;
     public ColorSensor rightColourSensor;
@@ -82,13 +86,12 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         leftShooterMotor = (DcMotor) getHardwareOn("leftShooterMotor", hardwareMap.dcMotor);
         rightShooterMotor = (DcMotor) getHardwareOn("rightShooterMotor", hardwareMap.dcMotor);
 
+        intakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
+        bumpMotor = (DcMotor) getHardwareOn("bumpMotor", hardwareMap.dcMotor);
+
         rightShooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMidMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-
-//        leftColourSensor = (ColorSensor) getHardwareOn("leftColourSensor", hardwareMap.colorSensor);
-//        rightColourSensor = (ColorSensor) getHardwareOn("rightColourSensor", hardwareMap.colorSensor);
 
         leftColourSensor = hardwareMap.get(ColorSensor.class, "leftColourSensor");
         rightColourSensor = hardwareMap.get(ColorSensor.class, "rightColourSensor");

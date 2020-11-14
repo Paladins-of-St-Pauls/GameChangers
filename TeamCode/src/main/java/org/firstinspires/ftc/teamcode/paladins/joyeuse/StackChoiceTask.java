@@ -31,16 +31,20 @@ public class StackChoiceTask extends BaseTask implements Task {
     private final ArrayDeque<Task> tasks_one_ring;
     private final ArrayDeque<Task> tasks_four_rings;
 
+    private static Point topLeftAnchor;
+
     OpenCvWebcam webcam;
     StarterStack.StarterStackDeterminationPipeline pipeline;
 
 
-    public StackChoiceTask(PaladinsOpMode opMode, double time, ArrayDeque<Task> tasks, ArrayDeque<Task> tasks_none_rings, ArrayDeque<Task> tasks_one_ring, ArrayDeque<Task> tasks_four_rings) {
+    public StackChoiceTask(PaladinsOpMode opMode, double time, Point topLeftAnchor, ArrayDeque<Task> tasks, ArrayDeque<Task> tasks_none_rings, ArrayDeque<Task> tasks_one_ring, ArrayDeque<Task> tasks_four_rings) {
         super(opMode, time);
         this.tasks = tasks;
         this.tasks_none_rings = tasks_none_rings;
         this.tasks_one_ring = tasks_one_ring;
         this.tasks_four_rings = tasks_four_rings;
+
+        this.topLeftAnchor = topLeftAnchor;
     }
 
     @Override
@@ -102,7 +106,7 @@ public class StackChoiceTask extends BaseTask implements Task {
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(160, 120);
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = topLeftAnchor;
 
         static final int REGION_WIDTH = 100;
         static final int REGION_HEIGHT = 100;

@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.TankDriveEncTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 import org.firstinspires.ftc.teamcode.paladins.tasks.TwoSensorTracerTask;
+import org.opencv.core.Point;
 
 import java.util.ArrayDeque;
 
@@ -35,7 +36,7 @@ public class JoyeuseAutoTest extends PaladinsOpMode {
         tasks_one_ring.add(new MessageTask(this, 1.0, "TASK 2"));
         tasks_four_rings.add(new MessageTask(this, 1.0, "FOUR RINGS"));
         tasks_four_rings.add(new MessageTask(this, 1.0, "TASK 3"));
-        tasks.add(new StackChoiceTask(this, 2.0, tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));
+        tasks.add(new StackChoiceTask(this, 2.0, new Point(160, 120), tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));
     }
 
     @Override

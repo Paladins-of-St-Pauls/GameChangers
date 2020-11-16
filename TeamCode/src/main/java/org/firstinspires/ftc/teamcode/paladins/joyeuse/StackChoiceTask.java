@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ReadWriteFile;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -60,6 +61,8 @@ public class StackChoiceTask extends BaseTask implements Task {
         int oneRingThreshold = Integer.parseInt(nums[0]);
         int fourRingThreshold = Integer.parseInt(nums[1]);
 
+        opMode.telemetry.addLine(String.format("%d, %d", oneRingThreshold, fourRingThreshold));
+
         int cameraMonitorViewId = opMode.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", opMode.hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new StarterStack.StarterStackDeterminationPipeline(oneRingThreshold, fourRingThreshold);
@@ -106,7 +109,7 @@ public class StackChoiceTask extends BaseTask implements Task {
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = topLeftAnchor;
+//        static final Point REGION1_TOPLEFT_ANCHOR_POINT = topLeftAnchor;
 
         static final int REGION_WIDTH = 100;
         static final int REGION_HEIGHT = 100;
@@ -119,12 +122,13 @@ public class StackChoiceTask extends BaseTask implements Task {
             ONE_RING_THRESHOLD = oneRingThreshold;
         }
 
+
         Point region1_pointA = new Point(
-                REGION1_TOPLEFT_ANCHOR_POINT.x,
-                REGION1_TOPLEFT_ANCHOR_POINT.y);
+                topLeftAnchor.x,
+                topLeftAnchor.y);
         Point region1_pointB = new Point(
-                REGION1_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
-                REGION1_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
+                topLeftAnchor.x + REGION_WIDTH,
+                topLeftAnchor.y + REGION_HEIGHT);
 
         /*
          * Working variables

@@ -83,13 +83,16 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         rightMidMotor = (DcMotor) getHardwareOn("rightMidMotor", hardwareMap.dcMotor);
         rightBackMotor = (DcMotor) getHardwareOn("rightBackMotor", hardwareMap.dcMotor);
 
-        leftShooterMotor = (DcMotor) getHardwareOn("leftShooterMotor", hardwareMap.dcMotor);
-        rightShooterMotor = (DcMotor) getHardwareOn("rightShooterMotor", hardwareMap.dcMotor);
+//        leftShooterMotor = (DcMotor) getHardwareOn("leftShooterMotor", hardwareMap.dcMotor);
+//        rightShooterMotor = (DcMotor) getHardwareOn("rightShooterMotor", hardwareMap.dcMotor);
 
         intakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
         bumpMotor = (DcMotor) getHardwareOn("bumpMotor", hardwareMap.dcMotor);
 
-        rightShooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        bumpMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+//        rightShooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMidMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -99,7 +102,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         wgArm = (CRServo) getHardwareOn("wgArm", hardwareMap.crservo);
         wgHand = (CRServo) getHardwareOn("wgHand", hardwareMap.crservo);
 
-        shooterServo = (CRServo) getHardwareOn("shooterServo", hardwareMap.crservo);
+//        shooterServo = (CRServo) getHardwareOn("shooterServo", hardwareMap.crservo);
 
 
 

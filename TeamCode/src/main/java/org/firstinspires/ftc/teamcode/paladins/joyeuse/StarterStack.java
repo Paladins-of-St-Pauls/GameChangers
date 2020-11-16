@@ -99,7 +99,7 @@ public class StarterStack extends LinearOpMode {
                 ReadWriteFile.writeFile(file, String.format("%d,%d",pipeline.getAnalysis() - 3, fourRingThreshold));
             }
             else if (gamepad1.b) {
-                ReadWriteFile.writeFile(file, String.format("%d,%d",oneRingThreshold,pipeline.getAnalysis()));
+                ReadWriteFile.writeFile(file, String.format("%d,%d",oneRingThreshold,pipeline.getAnalysis() - 3));
             }
 
 

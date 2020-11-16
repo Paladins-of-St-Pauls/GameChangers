@@ -38,7 +38,7 @@ public class JoyeuseHarvest extends PaladinsComponent {
      */
     @SuppressLint("DefaultLocale")
     public void setIntakePower(double power) {
-            intakeMotor.setPower(power);
+        intakeMotor.setPower(power);
     }
     public void setBumpPower(double power) {
         bumpMotor.setPower(power);

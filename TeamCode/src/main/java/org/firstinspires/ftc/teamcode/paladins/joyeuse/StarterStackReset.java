@@ -1,14 +1,34 @@
+/*
+ * Copyright (c) 2020 OpenFTC Team
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ReadWriteFile;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
-import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.tasks.BaseTask;
-import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -22,46 +42,26 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.io.File;
-import java.util.ArrayDeque;
 
-public class StackChoiceTask extends BaseTask implements Task {
-
-    private final ArrayDeque<Task> tasks;
-    private final ArrayDeque<Task> tasks_none_rings;
-    private final ArrayDeque<Task> tasks_one_ring;
-    private final ArrayDeque<Task> tasks_four_rings;
-
+@TeleOp
+public class StarterStackReset extends LinearOpMode {
+    //    OpenCvInternalCamera webcam;
     OpenCvWebcam webcam;
-    StarterStackCalibration.StarterStackDeterminationPipeline pipeline;
+    StarterStackDeterminationPipeline pipeline;
 
-
-    public StackChoiceTask(PaladinsOpMode opMode, double time, ArrayDeque<Task> tasks, ArrayDeque<Task> tasks_none_rings, ArrayDeque<Task> tasks_one_ring, ArrayDeque<Task> tasks_four_rings) {
-        super(opMode, time);
-        this.tasks = tasks;
-        this.tasks_none_rings = tasks_none_rings;
-        this.tasks_one_ring = tasks_one_ring;
-        this.tasks_four_rings = tasks_four_rings;
-    }
-
+    @SuppressLint("DefaultLocale")
     @Override
-    public void init() {
-        super.init();
+    public void runOpMode() {
 
-        String filename = "StarterStackCalibration.txt";
-        File readFile = AppUtil.getInstance().getSettingsFile(filename);
-        String fileContents = ReadWriteFile.readFile(readFile);
-
-        String[] nums = fileContents.split(",");
-
-        int oneRingThreshold = Integer.parseInt(nums[0]);
-        int fourRingThreshold = Integer.parseInt(nums[1]);
-
-        opMode.telemetry.addLine(String.format("%d, %d", oneRingThreshold, fourRingThreshold));
-
-        int cameraMonitorViewId = opMode.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", opMode.hardwareMap.appContext.getPackageName());
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new StarterStackCalibration.StarterStackDeterminationPipeline(oneRingThreshold, fourRingThreshold);
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        pipeline = new StarterStackDeterminationPipeline(135, 142);
         webcam.setPipeline(pipeline);
+
+        // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
+        // out when the RC activity is in portrait. We do our actual image processing assuming
+        // landscape orientation, though.
+//        webcam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
@@ -69,19 +69,26 @@ public class StackChoiceTask extends BaseTask implements Task {
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
         });
-    }
 
-    @SuppressLint("DefaultLocale")
-    @Override
-    public void run() {
-        if (isFinished()) {
-            if (pipeline.position == StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.FOUR) {
-                tasks.addAll(tasks_four_rings);
-            } else if (pipeline.position == StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.ONE) {
-                tasks.addAll(tasks_one_ring);
-            } else {
-                tasks.addAll(tasks_none_rings);
-            }
+        waitForStart();
+
+        while (opModeIsActive()) {
+            String filename = "StarterStackCalibration.txt";
+            File file = AppUtil.getInstance().getSettingsFile(filename);
+
+            ReadWriteFile.writeFile(file, String.format("%d,%d", 130, 140));
+            String fileContents = ReadWriteFile.readFile(file);
+
+            String[] nums = fileContents.split(",");
+
+            int oneRingThreshold = Integer.parseInt(nums[0]);
+            int fourRingThreshold = Integer.parseInt(nums[1]);
+
+            telemetry.addData("Reset ONE Ring Threshold to", oneRingThreshold);
+            telemetry.addData("Reset FOUR Ring Threshold to", fourRingThreshold);
+
+            // Don't burn CPU cycles busy-looping in this sample
+            sleep(500);
         }
     }
 
@@ -105,7 +112,7 @@ public class StackChoiceTask extends BaseTask implements Task {
         /*
          * The core values which define the location and size of the sample regions
          */
-
+//        final Point REGION1_TOPLEFT_ANCHOR_POINT;
         static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(160, 120);
 
         static final int REGION_WIDTH = 100;
@@ -118,7 +125,6 @@ public class StackChoiceTask extends BaseTask implements Task {
             FOUR_RING_THRESHOLD = fourRingThreshold;
             ONE_RING_THRESHOLD = oneRingThreshold;
         }
-
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
@@ -136,7 +142,7 @@ public class StackChoiceTask extends BaseTask implements Task {
         int avg1;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        protected volatile StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition position = StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.FOUR;
+        volatile RingPosition position = RingPosition.FOUR;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,
@@ -167,13 +173,13 @@ public class StackChoiceTask extends BaseTask implements Task {
                     BLUE, // The color the rectangle is drawn in
                     2); // Thickness of the rectangle lines
 
-            position = StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.FOUR; // Record our analysis
+            position = RingPosition.FOUR; // Record our analysis
             if (avg1 > FOUR_RING_THRESHOLD) {
-                position = StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.FOUR;
+                position = RingPosition.FOUR;
             } else if (avg1 > ONE_RING_THRESHOLD) {
-                position = StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.ONE;
+                position = RingPosition.ONE;
             } else {
-                position = StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.NONE;
+                position = RingPosition.NONE;
             }
 
             Imgproc.rectangle(
@@ -190,5 +196,4 @@ public class StackChoiceTask extends BaseTask implements Task {
             return avg1;
         }
     }
-
 }

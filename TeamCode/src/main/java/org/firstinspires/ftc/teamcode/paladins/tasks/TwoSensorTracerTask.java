@@ -49,21 +49,21 @@ public class TwoSensorTracerTask extends BaseTask implements Task {
         if (rightSensor.green() > greenlimit && leftSensor.green() > greenlimit) {
             this.isFinished=true;
             opMode.telemetry.addData("stopp","both Green");
-            drive.setPower(-0.5,-0.5);
+            drive.setPower(0.5,0.5);
             drive.update();
             return;
 
         }
         if (leftSensor.green() > greenlimit) {
             opMode.telemetry.addData("stopp","leftSensor Green");
-            drive.setPower(-0.2,0.3);
+            drive.setPower(0.2,-0.3);
             drive.update();
             return;
 
         }
         if (rightSensor.green() > greenlimit) {
             opMode.telemetry.addData("stopp","rightSensor Green");
-            drive.setPower(0.3,-0.2);
+            drive.setPower(-0.3,0.2);
             drive.update();
             return;
 
@@ -72,7 +72,7 @@ public class TwoSensorTracerTask extends BaseTask implements Task {
         opMode.telemetry.addData("stopp","keep goingb");
 
 
-        drive.setPower(leftSpeed, rightSpeed);
+        drive.setPower(-leftSpeed, -rightSpeed);
         drive.update();
     }
 

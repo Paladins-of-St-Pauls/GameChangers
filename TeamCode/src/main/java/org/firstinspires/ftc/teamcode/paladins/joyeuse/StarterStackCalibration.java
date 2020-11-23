@@ -23,6 +23,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ReadWriteFile;
@@ -44,7 +45,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
 import java.io.File;
 
 @TeleOp
-public class StarterStack extends LinearOpMode {
+public class StarterStackCalibration extends LinearOpMode {
     //    OpenCvInternalCamera webcam;
     OpenCvWebcam webcam;
     StarterStackDeterminationPipeline pipeline;
@@ -96,10 +97,10 @@ public class StarterStack extends LinearOpMode {
             telemetry.update();
 
             if (gamepad1.a) {
-                ReadWriteFile.writeFile(file, String.format("%d,%d",pipeline.getAnalysis() - 3, fourRingThreshold));
+                ReadWriteFile.writeFile(file, String.format("%d,%d",pipeline.getAnalysis() - 2, fourRingThreshold));
             }
             else if (gamepad1.b) {
-                ReadWriteFile.writeFile(file, String.format("%d,%d",oneRingThreshold,pipeline.getAnalysis() - 3));
+                ReadWriteFile.writeFile(file, String.format("%d,%d",oneRingThreshold,pipeline.getAnalysis() - 2));
             }
 
 
@@ -121,13 +122,15 @@ public class StarterStack extends LinearOpMode {
         /*
          * Some color constants
          */
-        static final Scalar BLUE = new Scalar(0, 0, 255);
+        static final Scalar RED = new Scalar(255, 0, 0);
         static final Scalar GREEN = new Scalar(0, 255, 0);
+        static final Scalar BLUE = new Scalar(0, 0, 255);
 
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(160, 120);
+
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(160,120);
 
         static final int REGION_WIDTH = 100;
         static final int REGION_HEIGHT = 100;
@@ -146,7 +149,6 @@ public class StarterStack extends LinearOpMode {
         Point region1_pointB = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
                 REGION1_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
-
         /*
          * Working variables
          */
@@ -200,8 +202,8 @@ public class StarterStack extends LinearOpMode {
                     input, // Buffer to draw on
                     region1_pointA, // First point which defines the rectangle
                     region1_pointB, // Second point which defines the rectangle
-                    GREEN, // The color the rectangle is drawn in
-                    4); // Negative thickness means solid fill
+                    RED, // The color the rectangle is drawn in
+                    2); // Negative thickness means solid fill
 
             return input;
         }

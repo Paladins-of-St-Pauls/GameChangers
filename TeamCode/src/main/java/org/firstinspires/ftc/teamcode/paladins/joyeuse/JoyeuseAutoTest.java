@@ -26,17 +26,24 @@ public class JoyeuseAutoTest extends PaladinsOpMode {
 
     @Override
     protected void onInit() {
-        //config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
+        config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
-        //drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
+        drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
 
-        tasks_none_rings.add(new MessageTask(this, 1.0, "NONE RINGS"));
-        tasks_none_rings.add(new MessageTask(this, 1.0, "TASK 1"));
-        tasks_one_ring.add(new MessageTask(this, 1.0, "ONE RING"));
-        tasks_one_ring.add(new MessageTask(this, 1.0, "TASK 2"));
-        tasks_four_rings.add(new MessageTask(this, 1.0, "FOUR RINGS"));
-        tasks_four_rings.add(new MessageTask(this, 1.0, "TASK 3"));
-        tasks.add(new StackChoiceTask(this, 2.0, new Point(160, 120), tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));
+//        TASKS FOR NO RINGS
+        tasks_none_rings.add(new MessageTask(this, 1.0, "NO RINGS DETECTED"));
+        tasks_none_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.25, 0.25, config.leftColourSensor, config.rightColourSensor));
+
+//        TASKS ONE RING
+        tasks_one_ring.add(new MessageTask(this, 1.0, "ONE RING DETECTED"));
+        tasks_one_ring.add(new JoyeuseDriveTask(this, 1.0, drive, 0.2, -0.2));
+
+//        TASKS FOUR RINGS
+        tasks_four_rings.add(new MessageTask(this, 1.0, "FOUR RINGS DETECTED"));
+        tasks_four_rings.add(new JoyeuseDriveTask(this, 1.0, drive, -0.2, 0.2));
+
+//        TASKS FOR ANY RING CONFIGURATION
+        tasks.add(new StackChoiceTask(this, 2.0, tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));
     }
 
     @Override

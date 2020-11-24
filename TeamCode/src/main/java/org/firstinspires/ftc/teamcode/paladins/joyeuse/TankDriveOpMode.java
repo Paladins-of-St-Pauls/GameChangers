@@ -12,6 +12,7 @@ public class TankDriveOpMode extends PaladinsOpMode {
     private JoyeuseDrive drive;
     private JoyeuseHarvest harvest;
     private JoyeuseShoot shoot;
+    private JoyeuseGauntlet gauntlet;
     private JoyeuseTankDrive tankDrive;
 
     private int shootMode;
@@ -23,6 +24,7 @@ public class TankDriveOpMode extends PaladinsOpMode {
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
         harvest = new JoyeuseHarvest(this, config.intakeMotor, config.bumpMotor);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
+//        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand);
         tankDrive = new JoyeuseTankDrive(this, gamepad1, drive);
 
         shootMode = 0;
@@ -34,14 +36,9 @@ public class TankDriveOpMode extends PaladinsOpMode {
 
         harvest.setIntakePower(gamepad1.right_trigger);
         harvest.setBumpPower(gamepad1.right_trigger);
-////
-//        if (gamepad1.left_trigger > 0) {
-//            shoot.setServoPower(gamepad1.left_trigger);
-//        } else if (gamepad1.right_trigger > 0) {
-//            shoot.setServoPower(-gamepad1.right_trigger);
-//        } else {
-//            shoot.setServoPower(0);
-//        }
+
+//        gauntlet.setArmPower(gamepad2.left_stick_y);
+//        gauntlet.setHandPower(gamepad2.left_stick_x);
 
         if (gamepad2.y) {
             shootMode = 1;

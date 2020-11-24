@@ -108,8 +108,8 @@ public class StackChoiceTask extends BaseTask implements Task {
 
         static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(160, 120);
 
-        static final int REGION_WIDTH = 100;
-        static final int REGION_HEIGHT = 100;
+        static final int REGION_WIDTH = 75;
+        static final int REGION_HEIGHT = 75;
 
         final int FOUR_RING_THRESHOLD;
         final int ONE_RING_THRESHOLD;

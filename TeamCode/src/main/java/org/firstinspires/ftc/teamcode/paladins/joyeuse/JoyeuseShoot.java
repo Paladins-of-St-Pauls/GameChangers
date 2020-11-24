@@ -21,20 +21,18 @@ public class JoyeuseShoot extends PaladinsComponent {
 
     final private DcMotor leftShooterMotor;
     final private DcMotor rightShooterMotor;
-    final private CRServo shooterServo;
 
     final private PaladinsOpMode opMode;
 
 
 
-    public JoyeuseShoot(PaladinsOpMode opMode, DcMotor leftShooterMotor, DcMotor rightShooterMotor, CRServo shooterServo) {
+    public JoyeuseShoot(PaladinsOpMode opMode, DcMotor leftShooterMotor, DcMotor rightShooterMotor) {
         super(opMode);
 
         this.opMode = opMode;
 
         this.leftShooterMotor = leftShooterMotor;
         this.rightShooterMotor = rightShooterMotor;
-        this.shooterServo = shooterServo;
 
         leftShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -50,10 +48,6 @@ public class JoyeuseShoot extends PaladinsComponent {
     public void setPower(double power) {
             leftShooterMotor.setPower(power);
             rightShooterMotor.setPower(power);
-    }
-
-    public void setServoPower(double power) {
-        shooterServo.setPower(power);
     }
 
 //    public void update() {

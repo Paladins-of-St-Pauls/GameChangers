@@ -33,30 +33,34 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        TASKS FOR NO RINGS
         tasks_none_rings.add(new MessageTask(this, 1.0, "NO RINGS DETECTED"));
 //        Drive to white line
-        tasks_none_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.25, 0.25, config.leftColourSensor, config.rightColourSensor));
+        tasks_none_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.5, 0.5, config.leftColourSensor, config.rightColourSensor));
 //        Release Wobble-goal
+        tasks_none_rings.add(new JoyeuseWGDropTask(this, 1));
 
 //        TASKS ONE RING
         tasks_one_ring.add(new MessageTask(this, 1.0, "ONE RING DETECTED"));
 //        Drive to white line
-        tasks_none_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.25, 0.25, config.leftColourSensor, config.rightColourSensor));
+        tasks_one_ring.add(new TwoSensorTracerTask(this, 10, drive, 0.5, 0.5, config.leftColourSensor, config.rightColourSensor));
 //        Turn on the spot
-        tasks_none_rings.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0));
+        tasks_one_ring.add(new JoyeuseDriveTask(this, 0.5, drive, 0.5, -0.5));
 //        Drive forward
-        tasks_none_rings.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0.5));
+        tasks_one_ring.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0.5));
 //        Turn on the spot
-        tasks_none_rings.add(new JoyeuseDriveTask(this, 1, drive, 0, 0.5));
+        tasks_one_ring.add(new JoyeuseDriveTask(this, 0.5, drive, -0.5, 0.5));
 //        Drive forward
-        tasks_none_rings.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0.5));
+        tasks_one_ring.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0.5));
 //        Release Wobble-goal
+        tasks_none_rings.add(new JoyeuseWGDropTask(this, 1));
+
 
 //        TASKS FOUR RINGS
         tasks_four_rings.add(new MessageTask(this, 1.0, "FOUR RINGS DETECTED"));
 //        Drive to white line
-        tasks_none_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.25, 0.25, config.leftColourSensor, config.rightColourSensor));
+        tasks_four_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.5, 0.5, config.leftColourSensor, config.rightColourSensor));
 //        Drive further
-        tasks_four_rings.add(new JoyeuseDriveTask(this, 3, drive, 0.25, 0.25));
+        tasks_four_rings.add(new JoyeuseDriveTask(this, 3.2, drive, 0.5, 0.5));
 //        Release Wobble-goal
+        tasks_none_rings.add(new JoyeuseWGDropTask(this, 1));
 
 //        TASKS FOR ANY RING CONFIGURATION
         tasks.add(new StackChoiceTask(this, 2.0, tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));

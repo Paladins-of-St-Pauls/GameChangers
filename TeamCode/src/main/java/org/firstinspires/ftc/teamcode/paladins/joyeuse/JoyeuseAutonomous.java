@@ -50,7 +50,7 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        Drive forward
         tasks_one_ring.add(new JoyeuseDriveTask(this, 1, drive, 0.5, 0.5));
 //        Release Wobble-goal
-        tasks_none_rings.add(new JoyeuseWGDropTask(this, 1));
+        tasks_one_ring.add(new JoyeuseWGDropTask(this, 1));
 
 
 //        TASKS FOUR RINGS
@@ -60,7 +60,7 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        Drive further
         tasks_four_rings.add(new JoyeuseDriveTask(this, 3.2, drive, 0.5, 0.5));
 //        Release Wobble-goal
-        tasks_none_rings.add(new JoyeuseWGDropTask(this, 1));
+        tasks_four_rings.add(new JoyeuseWGDropTask(this, 1));
 
 //        TASKS FOR ANY RING CONFIGURATION
         tasks.add(new StackChoiceTask(this, 2.0, tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));

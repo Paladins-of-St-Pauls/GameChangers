@@ -42,8 +42,6 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     // Servo
     public CRServo wgArm;
     public CRServo wgHand;
-    public CRServo shooterServo;
-
 
 //    BNO055IMU imu;
 
@@ -92,7 +90,6 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         bumpMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//        rightShooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMidMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 

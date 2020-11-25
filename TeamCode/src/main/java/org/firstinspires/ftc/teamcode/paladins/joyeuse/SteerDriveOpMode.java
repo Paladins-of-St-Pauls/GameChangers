@@ -1,23 +1,15 @@
 package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-
-import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseConfiguration;
-import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
-import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseShoot;
-
-import java.util.ArrayDeque;
 
 @TeleOp(name = "SteerDrive")
 public class SteerDriveOpMode extends PaladinsOpMode {
     private JoyeuseConfiguration config;
     private JoyeuseDrive drive;
-    private JoyeuseHarvest harvest;
+    private JoyeuseIntake intake;
     private JoyeuseShoot shoot;
     private JoyeuseGauntlet gauntlet;
     private JoyeuseSteerDrive steerDrive;
@@ -29,7 +21,7 @@ public class SteerDriveOpMode extends PaladinsOpMode {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
-        harvest = new JoyeuseHarvest(this, config.intakeMotor, config.bumpMotor);
+        intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
 //        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand);
         steerDrive = new JoyeuseSteerDrive(this, gamepad1, drive);
@@ -41,8 +33,8 @@ public class SteerDriveOpMode extends PaladinsOpMode {
     protected void activeLoop() throws InterruptedException {
         steerDrive.update();
 
-        harvest.setIntakePower(gamepad1.right_trigger);
-        harvest.setBumpPower(gamepad1.right_trigger);
+        intake.setIntakePower(gamepad2.right_trigger);
+        intake.setBumpPower(gamepad2.right_trigger);
 
 //        gauntlet.setArmPower(gamepad2.left_stick_y);
 //        gauntlet.setHandPower(gamepad2.left_stick_x);

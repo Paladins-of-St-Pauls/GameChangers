@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  * Created by Caleb on 30/10/2020.
  */
 
-public class JoyeuseHarvest extends PaladinsComponent {
+public class JoyeuseIntake extends PaladinsComponent {
     private static float[] power_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
     private static float[] steer_curve =
@@ -24,7 +24,7 @@ public class JoyeuseHarvest extends PaladinsComponent {
 
 
 
-    public JoyeuseHarvest(PaladinsOpMode opMode, DcMotor intakeMotor, DcMotor bumpMotor) {
+    public JoyeuseIntake(PaladinsOpMode opMode, DcMotor intakeMotor, DcMotor bumpMotor) {
         super(opMode);
 
         this.opMode = opMode;

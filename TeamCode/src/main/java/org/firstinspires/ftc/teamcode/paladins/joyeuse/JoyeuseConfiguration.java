@@ -42,6 +42,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     // Servo
     public CRServo wgArm;
     public CRServo wgHand;
+    public CRServo wgGripper;
 
 //    BNO055IMU imu;
 
@@ -96,8 +97,9 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         leftColourSensor = hardwareMap.get(ColorSensor.class, "leftColourSensor");
         rightColourSensor = hardwareMap.get(ColorSensor.class, "rightColourSensor");
 
-        wgArm = (CRServo) getHardwareOn("wgArm", hardwareMap.crservo);
-        wgHand = (CRServo) getHardwareOn("wgHand", hardwareMap.crservo);
+//        wgArm = (CRServo) getHardwareOn("wgArm", hardwareMap.crservo);
+//        wgHand = (CRServo) getHardwareOn("wgHand", hardwareMap.crservo);
+//        wgGripper = (CRServo) getHardwareOn("wgGripper", hardwareMap.crservo)
 
 
 //        // Set up the parameters with which we will use our IMU. Note that integration

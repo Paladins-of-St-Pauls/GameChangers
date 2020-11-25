@@ -15,18 +15,20 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 public class JoyeuseGauntlet extends PaladinsComponent {
     final private CRServo wgArm;
     final private CRServo wgHand;
+    final private CRServo wgGripper;
 
     final private PaladinsOpMode opMode;
 
 
 
-    public JoyeuseGauntlet(PaladinsOpMode opMode, CRServo wgArm, CRServo wgHand) {
+    public JoyeuseGauntlet(PaladinsOpMode opMode, CRServo wgArm, CRServo wgHand, CRServo wgGripper) {
         super(opMode);
 
         this.opMode = opMode;
 
         this.wgArm = wgArm;
         this.wgHand = wgHand;
+        this.wgGripper = wgGripper;
     }
 
     /*
@@ -39,5 +41,9 @@ public class JoyeuseGauntlet extends PaladinsComponent {
 
     public void setHandPower(double power) {
         wgHand.setPower(power);
+    }
+
+    public void setGripperPower(double power) {
+        wgGripper.setPower(power);
     }
 }

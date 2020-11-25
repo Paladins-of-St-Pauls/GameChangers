@@ -16,6 +16,10 @@ public class SteerDriveOpMode extends PaladinsOpMode {
 
     private int shootMode;
 
+    private boolean intakeOn;
+    private boolean bumpOn;
+    private boolean intakeReverse;
+
     @Override
     protected void onInit() {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
@@ -23,10 +27,14 @@ public class SteerDriveOpMode extends PaladinsOpMode {
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
         intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
-//        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand);
+//        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgGripper);
         steerDrive = new JoyeuseSteerDrive(this, gamepad1, drive);
 
         shootMode = 0;
+
+        intakeOn = false;
+        bumpOn = false;
+        intakeReverse = false;
     }
 
     @Override
@@ -38,6 +46,7 @@ public class SteerDriveOpMode extends PaladinsOpMode {
 
 //        gauntlet.setArmPower(gamepad2.left_stick_y);
 //        gauntlet.setHandPower(gamepad2.left_stick_x);
+//        gauntlet.setGripperPower(gamepad2.right_stick_x);
 
         if (gamepad2.y) {
             shootMode = 1;
@@ -57,6 +66,20 @@ public class SteerDriveOpMode extends PaladinsOpMode {
             shoot.setPower(-0.2);
         } else {
             shoot.setPower(0);
+        }
+
+        if (gamepad2.dpad_up) {
+            intakeReverse = false;
+        } else if (gamepad2.dpad_down) {
+            intakeReverse = true;
+        } else if (gamepad2.dpad_left) {
+            intakeOn ^= true;
+        } else if (gamepad2.dpad_right) {
+            bumpOn ^= true;
+        }
+
+        if (intakeOn ) {
+
         }
     }
 }

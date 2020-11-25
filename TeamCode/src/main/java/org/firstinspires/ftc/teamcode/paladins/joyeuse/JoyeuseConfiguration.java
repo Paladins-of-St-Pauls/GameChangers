@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.paladins.common.RobotConfiguration;
@@ -31,9 +32,13 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     public DcMotor leftShooterMotor;
     public DcMotor rightShooterMotor;
 
-    //Harvester motors
+    //Intake motors
     public DcMotor intakeMotor;
     public DcMotor bumpMotor;
+
+    //Intake servos
+//    public Servo leftIndexerServo;
+//    public Servo rightIndexerServo
 
     // Colour sensors
     public ColorSensor leftColourSensor;
@@ -87,6 +92,9 @@ public class JoyeuseConfiguration extends RobotConfiguration {
 
         intakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
         bumpMotor = (DcMotor) getHardwareOn("bumpMotor", hardwareMap.dcMotor);
+
+//        leftIndexerServo = (Servo) getHardwareOn("leftIndexerServo", hardwareMap.servo);
+//        rightIndexerServo = (Servo) getHardwareOn("rightHardwareServo,", hardwareMap.servo);
 
         intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         bumpMotor.setDirection(DcMotorSimple.Direction.REVERSE);

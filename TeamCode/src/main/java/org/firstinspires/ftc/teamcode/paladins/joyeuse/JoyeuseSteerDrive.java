@@ -65,8 +65,9 @@ this.drive = drive;
         }
 
         if(gamepad.left_bumper) {
+            float temp = leftPower;
             leftPower = -rightPower;
-            rightPower = -leftPower;
+            rightPower = -temp;
         }
 
         drive.setPower(leftPower, rightPower);

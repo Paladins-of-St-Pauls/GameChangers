@@ -9,7 +9,7 @@ public abstract class BaseTask implements Task {
      */
     public static final double NANOS_IN_SECONDS = 1000000000.0;
     protected double time;
-    protected boolean isFinished = false;
+    protected volatile boolean isFinished = false;
     protected double startTime = 0;
     protected PaladinsOpMode opMode;
 

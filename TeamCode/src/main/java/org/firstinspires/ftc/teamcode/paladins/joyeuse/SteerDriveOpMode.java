@@ -72,22 +72,40 @@ public class SteerDriveOpMode extends PaladinsOpMode {
             intakeReverse = false;
         } else if (gamepad2.dpad_down) {
             intakeReverse = true;
-        } else if (gamepad2.dpad_left) {
-            intakeOn ^= true;
-        } else if (gamepad2.dpad_right) {
-            bumpOn ^= true;
+        }
+        if (gamepad2.dpad_left) {
+            if (intakeOn) {
+                intakeOn = false;
+            } else {
+                intakeOn = true;
+            }
+        }
+        if (gamepad2.dpad_right) {
+            if (bumpOn) {
+                bumpOn = false;
+            } else {
+                bumpOn = true;
+            }
         }
 
-        if (intakeOn && intakeReverse) {
-            intake.setIntakePower(-1.0);
-        } else if (intakeOn) {
+        if (intakeOn) {
             intake.setIntakePower(1.0);
         }
+        if (intakeOn && intakeReverse) {
+            intake.setIntakePower(-1.0);
+        }
+        if (intakeOn == false) {
+            intake.setIntakePower(0.0);
+        }
 
-        if (bumpOn && intakeReverse) {
-            intake.setBumpPower(-1.0);
-        } else if (bumpOn) {
+        if (bumpOn) {
             intake.setBumpPower(1.0);
+        }
+        if (bumpOn && intakeReverse) {
+            intake.setBumpPower(-  1.0);
+        }
+        if(bumpOn == false) {
+            intake.setBumpPower(0.0);
         }
     }
 }

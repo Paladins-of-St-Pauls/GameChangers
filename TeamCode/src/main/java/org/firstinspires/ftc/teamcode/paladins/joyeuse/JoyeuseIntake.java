@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -20,6 +21,9 @@ public class JoyeuseIntake extends PaladinsComponent {
     final private DcMotor intakeMotor;
     final private DcMotor bumpMotor;
 
+//    final private Servo leftIndexerServo;
+//    final private Servo rightIndexerServo;
+
     final private PaladinsOpMode opMode;
 
 
@@ -31,6 +35,9 @@ public class JoyeuseIntake extends PaladinsComponent {
 
         this.intakeMotor = intakeMotor;
         this.bumpMotor = bumpMotor;
+
+//        this.leftIndexerServo = leftIndexerServo;
+//        this.rightIndexerServo = rightIndexerServo;
     }
 
     /*
@@ -44,9 +51,9 @@ public class JoyeuseIntake extends PaladinsComponent {
         bumpMotor.setPower(power);
     }
 
-//    public void update() {
-//        opMode.telemetry.addData("Left Current Pos.", leftShooterMotor.getCurrentPosition());
-//        opMode.telemetry.addData("Right Current Pos.", rightShooterMotor.getCurrentPosition());
+//    public void setIndexerPos(double pos) {
+//        leftIndexerServo.setPosition(pos);
+//        rightIndexerServo.setPosition(pos);
 //    }
 
     /**

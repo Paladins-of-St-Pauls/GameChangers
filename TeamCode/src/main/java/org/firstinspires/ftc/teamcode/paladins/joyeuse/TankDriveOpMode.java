@@ -106,5 +106,11 @@ public class TankDriveOpMode extends PaladinsOpMode {
         if(bumpOn == false) {
             intake.setBumpPower(0.0);
         }
+
+//        if(gamepad2.right_trigger > 0.2) {
+//            intake.setIndexerPos(1);
+//        } else {
+//            intake.setIndexerPos(0);
+//        }
     }
 }

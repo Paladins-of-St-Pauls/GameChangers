@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.paladins.common.RobotConfiguration;
@@ -21,7 +22,7 @@ public class JeffsBotConfiguration extends RobotConfiguration {
     public DcMotor leftMotor;
     public DcMotor rightMotor;
 
-    public CRServo servo;
+    public Servo servo;
 
     BNO055IMU imu;
 
@@ -61,7 +62,8 @@ public class JeffsBotConfiguration extends RobotConfiguration {
         rightMotor = (DcMotor) getHardwareOn("rightMotor", hardwareMap.dcMotor);
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        servo = (CRServo) getHardwareOn("servo", hardwareMap.crservo);
+        servo = (Servo) getHardwareOn("servo", hardwareMap.servo);
+
 
         // Set up the parameters with which we will use our IMU. Note that integration
         // algorithm here just reports accelerations to the logcat log; it doesn't actually

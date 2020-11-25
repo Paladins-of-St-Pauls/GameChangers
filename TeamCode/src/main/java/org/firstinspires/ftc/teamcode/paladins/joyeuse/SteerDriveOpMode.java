@@ -78,8 +78,16 @@ public class SteerDriveOpMode extends PaladinsOpMode {
             bumpOn ^= true;
         }
 
-        if (intakeOn ) {
+        if (intakeOn && intakeReverse) {
+            intake.setIntakePower(-1.0);
+        } else if (intakeOn) {
+            intake.setIntakePower(1.0);
+        }
 
+        if (bumpOn && intakeReverse) {
+            intake.setBumpPower(-1.0);
+        } else if (bumpOn) {
+            intake.setBumpPower(1.0);
         }
     }
 }

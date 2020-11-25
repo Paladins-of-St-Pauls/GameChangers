@@ -15,6 +15,10 @@ public class TankDriveOpMode extends PaladinsOpMode {
 
     private int shootMode;
 
+    private boolean intakeOn;
+    private boolean bumpOn;
+    private boolean intakeReverse;
+
     @Override
     protected void onInit() {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
@@ -26,6 +30,10 @@ public class TankDriveOpMode extends PaladinsOpMode {
         tankDrive = new JoyeuseTankDrive(this, gamepad1, drive);
 
         shootMode = 0;
+
+        intakeOn = false;
+        bumpOn = false;
+        intakeReverse = false;
     }
 
     @Override
@@ -59,5 +67,26 @@ public class TankDriveOpMode extends PaladinsOpMode {
             shoot.setPower(0);
         }
 
+        if (gamepad2.dpad_up) {
+            intakeReverse = false;
+        } else if (gamepad2.dpad_down) {
+            intakeReverse = true;
+        } else if (gamepad2.dpad_left) {
+            intakeOn ^= true;
+        } else if (gamepad2.dpad_right) {
+            bumpOn ^= true;
+        }
+
+        if (intakeOn && intakeReverse) {
+            intake.setIntakePower(-1.0);
+        } else if (intakeOn) {
+            intake.setIntakePower(1.0);
+        }
+
+        if (bumpOn && intakeReverse) {
+            intake.setBumpPower(-1.0);
+        } else if (bumpOn) {
+            intake.setBumpPower(1.0);
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -13,15 +14,15 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  */
 
 public class JoyeuseGauntlet extends PaladinsComponent {
-    final private CRServo wgArm;
-    final private CRServo wgHand;
-    final private CRServo wgGripper;
+    final private Servo wgArm;
+    final private Servo wgHand;
+    final private Servo wgGripper;
 
     final private PaladinsOpMode opMode;
 
 
 
-    public JoyeuseGauntlet(PaladinsOpMode opMode, CRServo wgArm, CRServo wgHand, CRServo wgGripper) {
+    public JoyeuseGauntlet(PaladinsOpMode opMode, Servo wgArm, Servo wgHand, Servo wgGripper) {
         super(opMode);
 
         this.opMode = opMode;
@@ -35,15 +36,15 @@ public class JoyeuseGauntlet extends PaladinsComponent {
      * Update the motor power based on the gamepad state
      */
     @SuppressLint("DefaultLocale")
-    public void setArmPower(double power) {
-        wgArm.setPower(power);
+    public void setArmPos(double pos) {
+        wgArm.setPosition(pos);
     }
 
-    public void setHandPower(double power) {
-        wgHand.setPower(power);
+    public void setHandPos(double pos) {
+        wgHand.setPosition(pos);
     }
 
-    public void setGripperPower(double power) {
-        wgGripper.setPower(power);
+    public void setGripperPos(double pos) {
+        wgGripper.setPosition(pos);
     }
 }

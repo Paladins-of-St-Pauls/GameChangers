@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.paladins.common.GamePadSteerDrive;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 
-//@Disabled
+@Disabled
 @TeleOp(name = "JeffsServoTest")
 public class JeffsServoTest extends PaladinsOpMode {
     private JeffsBotConfiguration config;
@@ -18,13 +18,12 @@ public class JeffsServoTest extends PaladinsOpMode {
 
     @Override
     protected void activeLoop() throws InterruptedException {
-        if (gamepad1.a) {
-            config.servo.setPosition(0.0);
-        }
-        if (gamepad1.b) {
-            config.servo.setPosition(1.0);
+        if(gamepad1.right_trigger > 0.2) {
+            config.servo.setPosition(1);
+        } else {
+            config.servo.setPosition(0);
         }
 
-        telemetry.addData("Servo Posistion", config.servo.getPosition());
+        telemetry.addData("Servo Position", config.servo.getPosition());
     }
 }

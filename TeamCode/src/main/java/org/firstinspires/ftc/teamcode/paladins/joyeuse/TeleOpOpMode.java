@@ -11,8 +11,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
     private JoyeuseIntake intake;
     private JoyeuseShoot shoot;
     private JoyeuseGauntlet gauntlet;
-    private JoyeuseSteerDrive steerDrive;
-    private JoyeuseTankDrive tankDrive;
+    private JoyeuseTriggerSteerDrive steerDrive;
 
     private boolean steerDriveMode;
 
@@ -20,6 +19,9 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
     private boolean intakeOn;
     private boolean bumpOn;
+
+    private boolean arm;
+    private boolean hand;
 
     private boolean gripperClosed;
 
@@ -30,10 +32,8 @@ public class TeleOpOpMode extends PaladinsOpMode {
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
         intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
-//        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgGripper);
-        steerDrive = new JoyeuseSteerDrive(this, gamepad1, drive);
-
-        steerDriveMode = false;
+        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgGripper);
+        steerDrive = new JoyeuseTriggerSteerDrive(this, gamepad1, drive);
 
         shooterOn = false;
 
@@ -47,65 +47,65 @@ public class TeleOpOpMode extends PaladinsOpMode {
     protected void activeLoop() throws InterruptedException {
 
 //        DRIVER (GAMEPAD) 1 CONTROLS
+        steerDrive.update();
 
-        boolean was1A = false;
-        boolean was1DpadUp = false;
-        boolean was1DpadLeft = false;
-        boolean was1DpadRight = false;
+//        if (gamepad1.dpad_up && !was1DpadUp) {
+//            shooterOn ^= true;
+//        }
 
-        if (gamepad1.a && !was1A) {
-            steerDriveMode ^= true;
-        }
-
-        if (steerDriveMode) {
-            telemetry.addLine("You are currently operating in STEER DRIVE | Driver, press A to change.");
-            steerDrive.update();
-        } else {
-            telemetry.addLine("You are currently operating in TANK DRIVE | Driver, press A to change.");
-            tankDrive.update();
-        }
-
-        if (gamepad1.dpad_up && !was1DpadUp) {
-            shooterOn ^= true;
-        }
-
-        if (shooterOn) {
-            shoot.setPower(1.0);
-        } else {
-            shoot.setPower(0);
-        }
-
-        if (gamepad1.dpad_left && !was1DpadLeft) {
-            intakeOn ^= true;
-        }
-
-        if (gamepad1.dpad_right && !was1DpadRight) {
-            bumpOn ^= true;
-        }
-
-        if (intakeOn) {
-            intake.setIntakePower(1.0);
-        } else {
-            intake.setIntakePower(0);
-        }
-
-        if (bumpOn) {
-            intake.setBumpPower(1.0);
-        } else {
-            intake.setBumpPower(0);
-        }
-
-        was1A = gamepad1.a;
-        was1DpadUp = gamepad1.dpad_up;
-        was1DpadLeft = gamepad1.dpad_left;
-        was1DpadRight = gamepad1.dpad_right;
+//        if (shooterOn) {
+//            shoot.setPower(1.0);
+//        } else {
+//            shoot.setPower(0);
+//        }
+//
+//        if (gamepad1.dpad_left && !was1DpadLeft) {
+//            intakeOn ^= true;
+//        }
+//
+//        if (gamepad1.dpad_right && !was1DpadRight) {
+//            bumpOn ^= true;
+//        }
+//
+//        if (intakeOn) {
+//            intake.setIntakePower(1.0);
+//        } else {
+//            intake.setIntakePower(0);
+//        }
+//
+//        if (bumpOn) {
+//            intake.setBumpPower(1.0);
+//        } else {
+//            intake.setBumpPower(0);
+//        }
 
 //        DRIVER (GAMEPAD) 2 CONTROLS
 
-        boolean was2DpadLeft = false;
-        boolean was2DpadRight = false;
+        boolean was2X = false;
 
-//        if (gamepad2.dpad_left && !was2DpadLeft) {
+        if(gamepad2.x && !was2X) {
+            arm ^= true;
+        }
+
+        if(arm) {
+            gauntlet.setArmPos(0.5);
+        } else {
+            gauntlet.setArmPos(1.0);
+        }
+
+        was2X = gamepad2.x;
+
+//        gauntlet.setArmPos(gamepad2.left_stick_y);
+
+
+//        config.wgArm.setPosition(gamepad2.left_trigger);
+        telemetry.addData("Position", config.wgArm.getPosition());
+
+
+//        boolean was2DpadLeft = false;
+//        boolean was2DpadRight = false;
+
+//        if (gamepad2.dpad_left && !was2DpadLeft) z
 //            gripperClosed = true;
 //        }
 //
@@ -118,9 +118,9 @@ public class TeleOpOpMode extends PaladinsOpMode {
 //        } else {
 //            gauntlet.setGripperPos(0);
 //        }
-
-        was2DpadLeft = gamepad2.dpad_left;
-        was2DpadRight = gamepad2.dpad_right;
+//
+//        was2DpadLeft = gamepad2.dpad_left;
+//        was2DpadRight = gamepad2.dpad_right;
 
 
     }

@@ -15,6 +15,8 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
     private boolean steerDriveMode;
 
+    private boolean intakeReverse;
+
     private boolean shooterOn;
 
     private boolean intakeOn;
@@ -81,7 +83,39 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
 //        DRIVER (GAMEPAD) 2 CONTROLS
 
+        boolean was2DpadUp = false;
+        boolean was2DpadDown = false;
+        boolean was2A = false;
         boolean was2X = false;
+
+        if(gamepad2.dpad_up && !gamepad2.dpad_down && !was2DpadUp) {
+            intakeReverse = false;
+        }
+
+        if(gamepad2.dpad_down && !gamepad2.dpad_up && !was2DpadDown) {
+            intakeReverse = true;
+        }
+
+        if(intakeReverse) {
+            telemetry.addLine("Intake Mode: REVERSE");
+        } else {
+            telemetry.addLine("Intake Mode: FORWARD");
+        }
+
+        if(gamepad2.a && !was2A) {
+            shooterOn ^= true;
+        }
+
+        if(shooterOn) {
+            if(intakeReverse) {
+                shoot.setPower(-1.0);
+            } else {
+                shoot.setPower(1.0);
+            }
+        } else {
+            shoot.setPower(0);
+        }
+
 
         if(gamepad2.x && !was2X) {
             arm ^= true;
@@ -93,6 +127,9 @@ public class TeleOpOpMode extends PaladinsOpMode {
             gauntlet.setArmPos(1.0);
         }
 
+
+        was2DpadUp = gamepad2.dpad_up;
+        was2DpadDown = gamepad2.dpad_down;
         was2X = gamepad2.x;
 
 //        gauntlet.setArmPos(gamepad2.left_stick_y);

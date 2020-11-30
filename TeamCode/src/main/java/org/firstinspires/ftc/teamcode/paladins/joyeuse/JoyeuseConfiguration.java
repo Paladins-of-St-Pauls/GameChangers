@@ -108,8 +108,8 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         rightColourSensor = hardwareMap.get(ColorSensor.class, "rightColourSensor");
 
         wgArm = (Servo) getHardwareOn("wgArm", hardwareMap.servo);
-//        wgHand = (Servo) getHardwareOn("wgHand", hardwareMap.servo);
-//        wgGripper = (Servo) getHardwareOn("wgGripper", hardwareMap.servo)
+        wgHand = (Servo) getHardwareOn("wgHand", hardwareMap.servo);
+//        wgGripper = (Servo) getHardwareOn("wgGripper", hardwareMap.servo);
 
 
 //        // Set up the parameters with which we will use our IMU. Note that integration

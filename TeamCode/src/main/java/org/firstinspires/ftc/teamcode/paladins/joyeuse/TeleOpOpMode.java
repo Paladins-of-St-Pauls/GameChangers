@@ -87,6 +87,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
         boolean was2DpadDown = false;
         boolean was2A = false;
         boolean was2X = false;
+        boolean was2Y = false;
 
         if(gamepad2.dpad_up && !gamepad2.dpad_down && !was2DpadUp) {
             intakeReverse = false;
@@ -127,16 +128,28 @@ public class TeleOpOpMode extends PaladinsOpMode {
             gauntlet.setArmPos(1.0);
         }
 
+        if(gamepad2.y && !was2Y) {
+            hand ^= true;
+        }
+
+        if(hand) {
+            gauntlet.setHandPos(0);
+        } else {
+            gauntlet.setHandPos(1.0);
+        }
+
 
         was2DpadUp = gamepad2.dpad_up;
         was2DpadDown = gamepad2.dpad_down;
         was2X = gamepad2.x;
+        was2Y = gamepad2.y;
 
 //        gauntlet.setArmPos(gamepad2.left_stick_y);
 
 
 //        config.wgArm.setPosition(gamepad2.left_trigger);
-        telemetry.addData("Position", config.wgArm.getPosition());
+        telemetry.addData("Arm Position", config.wgArm.getPosition());
+        telemetry.addData("Hand Position", config.wgHand.getPosition());
 
 
 //        boolean was2DpadLeft = false;

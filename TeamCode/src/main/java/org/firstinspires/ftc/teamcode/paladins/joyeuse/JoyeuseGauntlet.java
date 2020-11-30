@@ -44,7 +44,7 @@ public class JoyeuseGauntlet extends PaladinsComponent {
         wgHand.setPosition(pos);
     }
 
-    public void setGripperPos(double pos) {
-        wgGripper.setPosition(pos);
-    }
+//    public void setGripperPos(double pos) {
+//        wgGripper.setPosition(pos);
+//    }
 }

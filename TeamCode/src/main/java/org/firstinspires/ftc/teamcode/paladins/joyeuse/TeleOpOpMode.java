@@ -19,8 +19,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
     private boolean shooterOn;
 
-    private boolean intakeOn;
-    private boolean bumpOn;
+    private boolean harvesterOn;
 
     private boolean arm;
     private boolean hand;
@@ -39,8 +38,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
         shooterOn = false;
 
-        intakeOn = false;
-        bumpOn = false;
+        harvesterOn = false;
 
         gripperClosed = false;
     }
@@ -86,6 +84,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
         boolean was2DpadUp = false;
         boolean was2DpadDown = false;
         boolean was2A = false;
+        boolean was2B = false;
         boolean was2X = false;
         boolean was2Y = false;
 
@@ -104,6 +103,10 @@ public class TeleOpOpMode extends PaladinsOpMode {
         }
 
         if(gamepad2.a && !was2A) {
+            harvesterOn ^= true;
+        }
+
+        if(gamepad2.b && !was2B) {
             shooterOn ^= true;
         }
 
@@ -117,6 +120,18 @@ public class TeleOpOpMode extends PaladinsOpMode {
             shoot.setPower(0);
         }
 
+        if(harvesterOn) {
+            if(intakeReverse) {
+                intake.setIntakePower(-1.0);
+                intake.setBumpPower(-1.0);
+            } else {
+                intake.setIntakePower(1.0);
+                intake.setBumpPower(1.0);
+            }
+        } else {
+            intake.setIntakePower(0);
+            intake.setBumpPower(0);
+        }
 
         if(gamepad2.x && !was2X) {
             arm ^= true;
@@ -141,6 +156,8 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
         was2DpadUp = gamepad2.dpad_up;
         was2DpadDown = gamepad2.dpad_down;
+        was2A = gamepad2.a;
+        was2B = gamepad2.b;
         was2X = gamepad2.x;
         was2Y = gamepad2.y;
 

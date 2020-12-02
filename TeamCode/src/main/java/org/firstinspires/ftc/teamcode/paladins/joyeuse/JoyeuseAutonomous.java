@@ -29,7 +29,7 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        Drive to white line
         tasks_none_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.5, 0.5, config.leftColourSensor, config.rightColourSensor));
 //        Release Wobble-goal
-        tasks_one_ring.add(new JoyeuseWGReleaseTask(this, 1, config.wgArm, config.wgHand));
+        tasks_none_rings.add(new JoyeuseWGReleaseTask(this, 1, config.wgArm, config.wgHand));
 
 //        TASKS ONE RING
         tasks_one_ring.add(new MessageTask(this, 1.0, "ONE RING DETECTED"));
@@ -54,7 +54,7 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        Drive further
         tasks_four_rings.add(new JoyeuseDriveTask(this, 2.5, drive, 0.5, 0.5));
 //        Release Wobble-goal
-        tasks_one_ring.add(new JoyeuseWGReleaseTask(this, 1, config.wgArm, config.wgHand));
+        tasks_four_rings.add(new JoyeuseWGReleaseTask(this, 1, config.wgArm, config.wgHand));
 
 //        TASKS FOR ANY RING CONFIGURATION
         tasks.add(new StackChoiceTask(this, 2.0, tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));

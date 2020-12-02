@@ -17,6 +17,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
     private boolean arm;
     private boolean hand;
+    private boolean hook;
 
     private boolean shooterOn;
 
@@ -34,7 +35,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
         intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor, config.conveyorServo);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
-        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgGripper);
+        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgHook);
         steerDrive = new JoyeuseTriggerSteerDrive(this, gamepad1, drive);
 
         shooterOn = false;
@@ -42,8 +43,6 @@ public class TeleOpOpMode extends PaladinsOpMode {
         intakeOn = false;
         bumpOn = false;
         conveyorOn = false;
-
-        gripperClosed = false;
     }
 
     @Override
@@ -52,35 +51,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
 //        DRIVER (GAMEPAD) 1 CONTROLS
         steerDrive.update();
 
-//        if (gamepad1.dpad_up && !was1DpadUp) {
-//            shooterOn ^= true;
-//        }
 
-//        if (shooterOn) {
-//            shoot.setPower(1.0);
-//        } else {
-//            shoot.setPower(0);
-//        }
-//
-//        if (gamepad1.dpad_left && !was1DpadLeft) {
-//            intakeOn ^= true;
-//        }
-//
-//        if (gamepad1.dpad_right && !was1DpadRight) {
-//            bumpOn ^= true;
-//        }
-//
-//        if (intakeOn) {
-//            intake.setIntakePower(1.0);
-//        } else {
-//            intake.setIntakePower(0);
-//        }
-//
-//        if (bumpOn) {
-//            intake.setBumpPower(1.0);
-//        } else {
-//            intake.setBumpPower(0);
-//        }
 
 //        DRIVER (GAMEPAD) 2 CONTROLS
 
@@ -92,6 +63,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
         boolean was2B = false;
         boolean was2X = false;
         boolean was2Y = false;
+        boolean was2LeftBumper = false;
 
         if(gamepad2.dpad_up && !gamepad2.dpad_down && !was2DpadUp) {
             intakeReverse = false;
@@ -183,6 +155,16 @@ public class TeleOpOpMode extends PaladinsOpMode {
             gauntlet.setHandPos(1.0);
         }
 
+        if(gamepad2.left_bumper && !was2LeftBumper) {
+            hook ^= true;
+        }
+
+        if(hook) {
+            gauntlet.setHookPos(0);
+        } else {
+            gauntlet.setHookPos(1.0);
+        }
+
 
         was2DpadUp = gamepad2.dpad_up;
         was2DpadDown = gamepad2.dpad_down;
@@ -192,6 +174,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
         was2B = gamepad2.b;
         was2X = gamepad2.x;
         was2Y = gamepad2.y;
+        was2LeftBumper = gamepad2.left_bumper;
 
 //        gauntlet.setArmPos(gamepad2.left_stick_y);
 

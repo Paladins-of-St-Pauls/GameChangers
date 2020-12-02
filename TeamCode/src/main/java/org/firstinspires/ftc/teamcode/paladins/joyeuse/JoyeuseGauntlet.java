@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
@@ -16,20 +14,20 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 public class JoyeuseGauntlet extends PaladinsComponent {
     final private Servo wgArm;
     final private Servo wgHand;
-    final private Servo wgGripper;
+    final private Servo wgHook;
 
     final private PaladinsOpMode opMode;
 
 
 
-    public JoyeuseGauntlet(PaladinsOpMode opMode, Servo wgArm, Servo wgHand, Servo wgGripper) {
+    public JoyeuseGauntlet(PaladinsOpMode opMode, Servo wgArm, Servo wgHand, Servo wgHook) {
         super(opMode);
 
         this.opMode = opMode;
 
         this.wgArm = wgArm;
         this.wgHand = wgHand;
-        this.wgGripper = wgGripper;
+        this.wgHook = wgHook;
     }
 
     /*
@@ -44,7 +42,7 @@ public class JoyeuseGauntlet extends PaladinsComponent {
         wgHand.setPosition(pos);
     }
 
-//    public void setGripperPos(double pos) {
-//        wgGripper.setPosition(pos);
-//    }
+    public void setHookPos(double pos) {
+        wgHook.setPosition(pos);
+    }
 }

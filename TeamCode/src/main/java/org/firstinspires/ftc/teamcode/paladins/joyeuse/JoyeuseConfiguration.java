@@ -48,7 +48,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     // Servo
     public Servo wgArm;
     public Servo wgHand;
-    public Servo wgGripper;
+    public Servo wgHook;
 
 //    BNO055IMU imu;
 
@@ -109,7 +109,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
 
         wgArm = (Servo) getHardwareOn("wgArm", hardwareMap.servo);
         wgHand = (Servo) getHardwareOn("wgHand", hardwareMap.servo);
-//        wgGripper = (Servo) getHardwareOn("wgGripper", hardwareMap.servo);
+        wgHook = (Servo) getHardwareOn("wgHook", hardwareMap.servo);
 
 
 //        // Set up the parameters with which we will use our IMU. Note that integration

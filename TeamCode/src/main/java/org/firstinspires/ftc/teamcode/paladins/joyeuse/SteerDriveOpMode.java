@@ -25,7 +25,7 @@ public class SteerDriveOpMode extends PaladinsOpMode {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
-        intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor);
+        intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor, config.conveyorServo);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
 //        gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgGripper);
         steerDrive = new JoyeuseSteerDrive(this, gamepad1, drive);

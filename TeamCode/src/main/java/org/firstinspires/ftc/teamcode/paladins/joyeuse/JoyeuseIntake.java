@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -20,6 +21,7 @@ public class JoyeuseIntake extends PaladinsComponent {
 
     final private DcMotor intakeMotor;
     final private DcMotor bumpMotor;
+    final private CRServo conveyorServo;
 
 //    final private Servo leftIndexerServo;
 //    final private Servo rightIndexerServo;
@@ -28,13 +30,15 @@ public class JoyeuseIntake extends PaladinsComponent {
 
 
 
-    public JoyeuseIntake(PaladinsOpMode opMode, DcMotor intakeMotor, DcMotor bumpMotor) {
+    public JoyeuseIntake(PaladinsOpMode opMode, DcMotor intakeMotor, DcMotor bumpMotor, CRServo conveyorServo) {
         super(opMode);
 
         this.opMode = opMode;
 
         this.intakeMotor = intakeMotor;
         this.bumpMotor = bumpMotor;
+
+        this.conveyorServo = conveyorServo;
 
 //        this.leftIndexerServo = leftIndexerServo;
 //        this.rightIndexerServo = rightIndexerServo;
@@ -49,6 +53,9 @@ public class JoyeuseIntake extends PaladinsComponent {
     }
     public void setBumpPower(double power) {
         bumpMotor.setPower(power);
+    }
+    public void setConveyorServoPower(double power) {
+        conveyorServo.setPower(power);
     }
 
 //    public void setIndexerPos(double pos) {

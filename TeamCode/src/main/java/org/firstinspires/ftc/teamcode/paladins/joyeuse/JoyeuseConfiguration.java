@@ -94,7 +94,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         intakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
         bumpMotor = (DcMotor) getHardwareOn("bumpMotor", hardwareMap.dcMotor);
 
-//        conveyorServo = (CRServo) getHardwareOn("conveyorServo", hardwareMap.crservo);
+        conveyorServo = (CRServo) getHardwareOn("conveyorServo", hardwareMap.crservo);
 //        leftIndexerServo = (Servo) getHardwareOn("leftIndexerServo", hardwareMap.servo);
 //        rightIndexerServo = (Servo) getHardwareOn("rightHardwareServo,", hardwareMap.servo);
 

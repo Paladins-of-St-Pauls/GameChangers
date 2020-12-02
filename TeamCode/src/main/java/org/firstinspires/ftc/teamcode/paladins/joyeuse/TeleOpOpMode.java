@@ -122,11 +122,11 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
         if(harvesterOn) {
             if(intakeReverse) {
-                intake.setIntakePower(-1.0);
-                intake.setBumpPower(-1.0);
-            } else {
                 intake.setIntakePower(1.0);
                 intake.setBumpPower(1.0);
+            } else {
+                intake.setIntakePower(-1.0);
+                intake.setBumpPower(-1.0);
             }
         } else {
             intake.setIntakePower(0);

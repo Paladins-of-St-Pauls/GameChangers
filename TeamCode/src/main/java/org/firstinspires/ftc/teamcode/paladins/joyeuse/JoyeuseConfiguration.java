@@ -38,8 +38,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
 
     //Intake servos
     public CRServo conveyorServo;
-    public Servo leftIndexerServo;
-    public Servo rightIndexerServo;
+    public Servo indexerServo;
 
     // Colour sensors
     public ColorSensor leftColourSensor;
@@ -95,8 +94,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         bumpMotor = (DcMotor) getHardwareOn("bumpMotor", hardwareMap.dcMotor);
 
         conveyorServo = (CRServo) getHardwareOn("conveyorServo", hardwareMap.crservo);
-//        leftIndexerServo = (Servo) getHardwareOn("leftIndexerServo", hardwareMap.servo);
-//        rightIndexerServo = (Servo) getHardwareOn("rightHardwareServo,", hardwareMap.servo);
+        indexerServo = (Servo) getHardwareOn("indexerServo", hardwareMap.servo);
 
         intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         bumpMotor.setDirection(DcMotorSimple.Direction.REVERSE);

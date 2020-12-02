@@ -21,19 +21,19 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
     private boolean shooterOn;
 
+    private boolean indexer;
+
     private boolean intakeOn;
     private boolean bumpOn;
 
     private boolean conveyorOn;
-
-    private boolean gripperClosed;
 
     @Override
     protected void onInit() {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
-        intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor, config.conveyorServo);
+        intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor, config.conveyorServo, config.indexerServo);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
         gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgHook);
         steerDrive = new JoyeuseTriggerSteerDrive(this, gamepad1, drive);
@@ -51,7 +51,16 @@ public class TeleOpOpMode extends PaladinsOpMode {
 //        DRIVER (GAMEPAD) 1 CONTROLS
         steerDrive.update();
 
-
+        boolean was1A = false;
+        if(gamepad1.a && !was1A) {
+            indexer ^= true;
+        }
+        if(indexer) {
+            intake.setIndexerPos(0);
+        } else {
+            intake.setIndexerPos(1.0);
+        }
+        was1A = gamepad2.a;
 
 //        DRIVER (GAMEPAD) 2 CONTROLS
 
@@ -127,12 +136,12 @@ public class TeleOpOpMode extends PaladinsOpMode {
 
         if(conveyorOn) {
             if(intakeReverse) {
-                intake.setConveyorServoPower(1.0);
+                intake.setConveyorPower(1.0);
             } else {
-                intake.setConveyorServoPower(-1.0);
+                intake.setConveyorPower(-1.0);
             }
         } else {
-            intake.setConveyorServoPower(0);
+            intake.setConveyorPower(0);
         }
 
         if(gamepad2.dpad_left && !was2DpadLeft) {
@@ -165,7 +174,6 @@ public class TeleOpOpMode extends PaladinsOpMode {
             gauntlet.setHookPos(1.0);
         }
 
-
         was2DpadUp = gamepad2.dpad_up;
         was2DpadDown = gamepad2.dpad_down;
         was2DpadLeft = gamepad2.dpad_left;
@@ -176,12 +184,9 @@ public class TeleOpOpMode extends PaladinsOpMode {
         was2Y = gamepad2.y;
         was2LeftBumper = gamepad2.left_bumper;
 
-//        gauntlet.setArmPos(gamepad2.left_stick_y);
-
-
-//        config.wgArm.setPosition(gamepad2.left_trigger);
         telemetry.addData("Arm Position", config.wgArm.getPosition());
         telemetry.addData("Hand Position", config.wgHand.getPosition());
+        telemetry.addData("Hook Position", config.wgHook.getPosition());
 
     }
 }

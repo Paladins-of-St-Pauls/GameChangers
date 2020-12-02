@@ -22,15 +22,13 @@ public class JoyeuseIntake extends PaladinsComponent {
     final private DcMotor intakeMotor;
     final private DcMotor bumpMotor;
     final private CRServo conveyorServo;
-
-//    final private Servo leftIndexerServo;
-//    final private Servo rightIndexerServo;
+    final private Servo indexerServo;
 
     final private PaladinsOpMode opMode;
 
 
 
-    public JoyeuseIntake(PaladinsOpMode opMode, DcMotor intakeMotor, DcMotor bumpMotor, CRServo conveyorServo) {
+    public JoyeuseIntake(PaladinsOpMode opMode, DcMotor intakeMotor, DcMotor bumpMotor, CRServo conveyorServo, Servo indexerServo) {
         super(opMode);
 
         this.opMode = opMode;
@@ -40,8 +38,7 @@ public class JoyeuseIntake extends PaladinsComponent {
 
         this.conveyorServo = conveyorServo;
 
-//        this.leftIndexerServo = leftIndexerServo;
-//        this.rightIndexerServo = rightIndexerServo;
+        this.indexerServo = indexerServo;
     }
 
     /*
@@ -54,9 +51,13 @@ public class JoyeuseIntake extends PaladinsComponent {
     public void setBumpPower(double power) {
         bumpMotor.setPower(power);
     }
-    public void setConveyorServoPower(double power) {
+    public void setConveyorPower(double power) {
         conveyorServo.setPower(power);
     }
+    public void setIndexerPos(double pos) {
+        indexerServo.setPosition(pos);
+    }
+
 
 //    public void setIndexerPos(double pos) {
 //        leftIndexerServo.setPosition(pos);

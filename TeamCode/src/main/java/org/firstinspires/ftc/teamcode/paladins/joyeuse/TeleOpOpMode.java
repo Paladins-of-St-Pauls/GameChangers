@@ -19,14 +19,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
     private boolean hand;
     private boolean hook;
 
-    private boolean shooterOn;
-
     private boolean indexer;
-
-    private boolean intakeOn;
-    private boolean bumpOn;
-
-    private boolean conveyorOn;
 
     @Override
     protected void onInit() {
@@ -37,12 +30,6 @@ public class TeleOpOpMode extends PaladinsOpMode {
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
         gauntlet = new JoyeuseGauntlet(this, config.wgArm, config.wgHand, config.wgHook);
         steerDrive = new JoyeuseTriggerSteerDrive(this, gamepad1, drive);
-
-        shooterOn = false;
-
-        intakeOn = false;
-        bumpOn = false;
-        conveyorOn = false;
     }
 
     @Override
@@ -88,60 +75,14 @@ public class TeleOpOpMode extends PaladinsOpMode {
             telemetry.addLine("Intake Mode: FORWARD");
         }
 
-        if(gamepad2.y && !was2Y) {
-            intakeOn ^= true;
-        }
+        intake.setIntakePower(gamepad2.right_trigger);
+        intake.setBumpPower(gamepad2.right_trigger);
+        intake.setConveyorPower(gamepad2.right_trigger);
 
-        if(gamepad2.b && !was2B) {
-            bumpOn ^= true;
-        }
-
-        if(gamepad2.a && !was2A) {
-            conveyorOn ^= true;
-        }
-
-        if(gamepad2.x && !was2X) {
-            shooterOn ^= true;
-        }
-
-        if(shooterOn) {
-            if(intakeReverse) {
-                shoot.setPower(-1.0);
-            } else {
-                shoot.setPower(1.0);
-            }
+        if(gamepad2.right_bumper) {
+            shoot.setPower(1.0);
         } else {
             shoot.setPower(0);
-        }
-
-        if(intakeOn) {
-            if(intakeReverse) {
-                intake.setIntakePower(1.0);
-            } else {
-                intake.setIntakePower(-1.0);
-            }
-        } else {
-            intake.setIntakePower(0);
-        }
-
-        if(bumpOn) {
-            if(intakeReverse) {
-                intake.setBumpPower(1.0);
-            } else {
-                intake.setBumpPower(-1.0);
-            }
-        } else {
-            intake.setBumpPower(0);
-        }
-
-        if(conveyorOn) {
-            if(intakeReverse) {
-                intake.setConveyorPower(1.0);
-            } else {
-                intake.setConveyorPower(-1.0);
-            }
-        } else {
-            intake.setConveyorPower(0);
         }
 
         if(gamepad2.dpad_left && !was2DpadLeft) {

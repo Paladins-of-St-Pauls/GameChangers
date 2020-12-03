@@ -13,13 +13,9 @@ public class TeleOpOpMode extends PaladinsOpMode {
     private JoyeuseGauntlet gauntlet;
     private JoyeuseTriggerSteerDrive steerDrive;
 
-    private boolean intakeReverse;
-
     private boolean arm;
     private boolean hand;
     private boolean hook;
-
-    private boolean indexer;
 
     @Override
     protected void onInit() {
@@ -38,92 +34,57 @@ public class TeleOpOpMode extends PaladinsOpMode {
 //        DRIVER (GAMEPAD) 1 CONTROLS
         steerDrive.update();
 
-        boolean was1A = false;
-        if(gamepad1.a && !was1A) {
-            indexer ^= true;
-        }
-        if(indexer) {
-            intake.setIndexerPos(0);
+        if(gamepad1.a) {
+            intake.setIndexerPos(0.12);
         } else {
-            intake.setIndexerPos(1.0);
+            intake.setIndexerPos(0.25);
         }
-        was1A = gamepad2.a;
 
 //        DRIVER (GAMEPAD) 2 CONTROLS
 
-        boolean was2DpadUp = false;
-        boolean was2DpadDown = false;
-        boolean was2DpadLeft = false;
-        boolean was2DpadRight = false;
-        boolean was2A = false;
-        boolean was2B = false;
-        boolean was2X = false;
-        boolean was2Y = false;
-        boolean was2LeftBumper = false;
 
-        if(gamepad2.dpad_up && !gamepad2.dpad_down && !was2DpadUp) {
-            intakeReverse = false;
-        }
-
-        if(gamepad2.dpad_down && !gamepad2.dpad_up && !was2DpadDown) {
-            intakeReverse = true;
-        }
-
-        if(intakeReverse) {
-            telemetry.addLine("Intake Mode: REVERSE");
+        if(gamepad2.left_trigger > 0) {
+            intake.setIntakePower(gamepad2.left_trigger);
+            intake.setBumpPower(gamepad2.left_trigger);
+            intake.setConveyorPower(gamepad2.left_trigger);
         } else {
-            telemetry.addLine("Intake Mode: FORWARD");
+            intake.setIntakePower(-gamepad2.right_trigger);
+            intake.setBumpPower(-gamepad2.right_trigger);
+            intake.setConveyorPower(-gamepad2.right_trigger);
         }
 
-        intake.setIntakePower(gamepad2.right_trigger);
-        intake.setBumpPower(gamepad2.right_trigger);
-        intake.setConveyorPower(gamepad2.right_trigger);
-
-        if(gamepad2.right_bumper) {
+        if(gamepad2.left_bumper) {
+            shoot.setPower(-1.0);
+        } else if(gamepad2.right_bumper) {
             shoot.setPower(1.0);
         } else {
             shoot.setPower(0);
         }
 
-        if(gamepad2.dpad_left && !was2DpadLeft) {
-            arm ^= true;
+        if(gamepad2.dpad_up) {
+            gauntlet.setArmPos(0);
         }
 
-        if(arm) {
+        if(gamepad2.dpad_down) {
             gauntlet.setArmPos(0.5);
-        } else {
+        }
+
+        if(gamepad2.dpad_left) {
+            gauntlet.setArmPos(0);
+        }
+
+        if(gamepad2.dpad_right) {
             gauntlet.setArmPos(1.0);
         }
 
-        if(gamepad2.dpad_right && !was2DpadRight) {
-            hand ^= true;
-        }
-
-        if(hand) {
-            gauntlet.setHandPos(0);
-        } else {
-            gauntlet.setHandPos(1.0);
-        }
-
-        if(gamepad2.left_bumper && !was2LeftBumper) {
-            hook ^= true;
-        }
-
-        if(hook) {
+        if(gamepad2.x) {
             gauntlet.setHookPos(0);
-        } else {
-            gauntlet.setHookPos(1.0);
         }
 
-        was2DpadUp = gamepad2.dpad_up;
-        was2DpadDown = gamepad2.dpad_down;
-        was2DpadLeft = gamepad2.dpad_left;
-        was2DpadRight = gamepad2.dpad_right;
-        was2A = gamepad2.a;
-        was2B = gamepad2.b;
-        was2X = gamepad2.x;
-        was2Y = gamepad2.y;
-        was2LeftBumper = gamepad2.left_bumper;
+        if(gamepad2.b) {
+            gauntlet.setHookPos(1.0);
+
+        }
 
         telemetry.addData("Arm Position", config.wgArm.getPosition());
         telemetry.addData("Hand Position", config.wgHand.getPosition());

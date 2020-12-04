@@ -105,6 +105,9 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         leftColourSensor = hardwareMap.get(ColorSensor.class, "leftColourSensor");
         rightColourSensor = hardwareMap.get(ColorSensor.class, "rightColourSensor");
 
+        leftColourSensor.enableLed(false);
+        rightColourSensor.enableLed(false);
+
         wgArm = (Servo) getHardwareOn("wgArm", hardwareMap.servo);
         wgHand = (Servo) getHardwareOn("wgHand", hardwareMap.servo);
         wgHook = (Servo) getHardwareOn("wgHook", hardwareMap.servo);

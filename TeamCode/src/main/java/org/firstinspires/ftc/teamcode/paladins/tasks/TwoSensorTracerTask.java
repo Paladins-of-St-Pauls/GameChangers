@@ -22,8 +22,6 @@ public class TwoSensorTracerTask extends BaseTask implements Task {
         this.rightSpeed = rightSpeed;
         this.leftSensor = leftSensor;
         this.rightSensor = rightSensor;
-
-
     }
 
     @Override
@@ -40,9 +38,15 @@ public class TwoSensorTracerTask extends BaseTask implements Task {
             opMode.telemetry.addData("stopp","isFinished");
             drive.setPower(0,0);
             drive.update();
-            return;
 
+            leftSensor.enableLed(false);
+            rightSensor.enableLed(false);
+            return;
         }
+
+
+        leftSensor.enableLed(true);
+        rightSensor.enableLed(true);
 
         //if (true) return;
 

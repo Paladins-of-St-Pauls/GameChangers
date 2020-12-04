@@ -34,11 +34,13 @@ public class JoyeuseShoot extends PaladinsComponent {
         this.leftShooterMotor = leftShooterMotor;
         this.rightShooterMotor = rightShooterMotor;
 
-        leftShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        leftShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        leftShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        rightShooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//
+//        leftShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        rightShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftShooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightShooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     /*

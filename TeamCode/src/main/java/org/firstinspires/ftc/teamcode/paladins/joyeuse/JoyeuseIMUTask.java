@@ -35,19 +35,25 @@ public class JoyeuseIMUTask extends BaseTask implements Task {
         imu.startAccelerationIntegration(new Position(), new Velocity(), 50);
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         drive.setPower(speed, -speed);
+        drive.update();
     }
 
     @Override
     public void run() {
         if (isFinished()) {
             drive.setPower(0.0, 0.0);
+            drive.update();
             imu.stopAccelerationIntegration();
             return;
         }
 
         Orientation currentAngles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        if (currentAngles.firstAngle > angles.firstAngle + angle) {
+
+        opMode.telemetry.addData("Original Angle", angles.firstAngle);
+        opMode.telemetry.addData("Current Angle", currentAngles.firstAngle);
+        if (currentAngles.firstAngle > (angles.firstAngle + angle)) {
             drive.setPower(0.0, 0.0);
+            drive.update();
             isFinished = true;
         }
     }

@@ -35,9 +35,12 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        Spin up the shooters
         tasks_none_rings.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 1.0));
 //        Shoot 3 rings
-        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 1, intake));
-        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 1, intake));
-        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 1, intake));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
 //        Kill shooters
         tasks_none_rings.add(new JoyeuseSetShooterTask(this, 0.1, shoot, 0));
 
@@ -57,9 +60,12 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        Spin up the shooters
         tasks_one_ring.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 1.0));
 //        Shoot 3 rings
-        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 1, intake));
-        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 1, intake));
-        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 1, intake));
+        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_one_ring.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
 //        Turn on the spot
         tasks_one_ring.add(new JoyeuseDriveTask(this, 0.5, drive, 0.5, -0.5));
 //        Drive forward
@@ -78,9 +84,12 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 //        Spin up the shooters
         tasks_four_rings.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 1.0));
 //        Shoot 3 rings
-        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 1, intake));
-        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 1, intake));
-        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 1, intake));
+        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_four_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
 //        Drive further
         tasks_four_rings.add(new JoyeuseDriveTask(this, 2.5, drive, 0.5, 0.5));
 //        Release Wobble-goal

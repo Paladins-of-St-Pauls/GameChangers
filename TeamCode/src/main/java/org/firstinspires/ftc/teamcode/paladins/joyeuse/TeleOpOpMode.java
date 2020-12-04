@@ -70,11 +70,11 @@ public class TeleOpOpMode extends PaladinsOpMode {
         }
 
         if(gamepad2.dpad_left) {
-            gauntlet.setArmPos(0);
+            gauntlet.setHandPos(0);
         }
 
         if(gamepad2.dpad_right) {
-            gauntlet.setArmPos(1.0);
+            gauntlet.setHandPos(1.0);
         }
 
         if(gamepad2.x) {

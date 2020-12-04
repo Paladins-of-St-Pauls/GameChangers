@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
@@ -97,6 +99,9 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 
 //        TASKS FOR ANY RING CONFIGURATION
         tasks.add(new StackChoiceTask(this, 2.0, tasks, tasks_none_rings, tasks_one_ring, tasks_four_rings));
+
+        config.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+
     }
 
     @Override

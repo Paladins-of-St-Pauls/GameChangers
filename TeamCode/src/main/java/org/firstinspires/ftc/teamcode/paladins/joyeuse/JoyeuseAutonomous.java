@@ -36,9 +36,9 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
         tasks_none_rings.add(new JoyeuseDriveTask(this, 1, drive, 0.5, -0.5));
         tasks_none_rings.add(new JoyeuseDriveTask(this, 0.1, drive, 0, 0));
 //        Shoot three rings
-        //        Spin up the shooters
+//        Spin up the shooters
         tasks_none_rings.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 0.8));
-//        Shoot 3 ringsv
+//        Shoot 3 rings
         tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
         tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
         tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));

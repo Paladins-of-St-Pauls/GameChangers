@@ -7,10 +7,12 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 public class JoyeuseIndexerShootTask extends BaseTask implements Task {
 
     private final JoyeuseIntake intake;
+    private double indexerPosition;
 
-    public JoyeuseIndexerShootTask(PaladinsOpMode opMode, double time, JoyeuseIntake intake) {
+    public JoyeuseIndexerShootTask(PaladinsOpMode opMode, double time, JoyeuseIntake intake, double indexerPosition) {
         super(opMode, time);
         this.intake = intake;
+        this.indexerPosition = indexerPosition;
     }
 
     @Override
@@ -21,9 +23,8 @@ public class JoyeuseIndexerShootTask extends BaseTask implements Task {
     @Override
     public void run() {
         if (isFinished()) {
-            intake.setIndexerPos(0.25);
             return;
         }
-        intake.setIndexerPos(0.12);
+        intake.setIndexerPos(indexerPosition);
     }
 }

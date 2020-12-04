@@ -49,7 +49,7 @@ public class JoyeuseConfiguration extends RobotConfiguration {
     public Servo wgHand;
     public Servo wgHook;
 
-//    BNO055IMU imu;
+    BNO055IMU imu;
 
     public double countsPerMotorRev = 288;
     public double driveGearReduction = 72.0 / 90.0; // 72 Teeth -> 90 Teeth

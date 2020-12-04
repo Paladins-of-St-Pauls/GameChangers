@@ -54,9 +54,9 @@ public class TeleOpOpMode extends PaladinsOpMode {
         }
 
         if(gamepad2.left_bumper) {
-            shoot.setPower(-1.0);
+            shoot.setPower(-0.8);
         } else if(gamepad2.right_bumper) {
-            shoot.setPower(1.0);
+            shoot.setPower(0.8);
         } else {
             shoot.setPower(0);
         }

@@ -32,11 +32,17 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
 
 //        TASKS FOR NO RINGS
         tasks_none_rings.add(new MessageTask(this, 1.0, "NO RINGS DETECTED"));
-        tasks_none_rings.add(new JoyeuseDriveTask(this, 1.2, drive, 0.8, 0.8));
-        tasks_none_rings.add(new JoyeuseDriveTask(this, 0.8, drive, 0.6, -0.6));
-//        Spin up the shooters
-        tasks_none_rings.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 1.0));
-//        Shoot 3 rings
+        tasks_none_rings.add(new JoyeuseDriveTask(this, 1.2, drive, 0.5, 0.5));
+        tasks_none_rings.add(new JoyeuseDriveTask(this, 1, drive, 0.5, -0.5));
+        tasks_none_rings.add(new JoyeuseDriveTask(this, 0.1, drive, 0, 0));
+//        Shoot three rings
+        //        Spin up the shooters
+        tasks_none_rings.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 0.8));
+//        Shoot 3 ringsv
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
         tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
         tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
         tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
@@ -45,6 +51,7 @@ public class JoyeuseAutonomous extends PaladinsOpMode {
         tasks_none_rings.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
 //        Kill shooters
         tasks_none_rings.add(new JoyeuseSetShooterTask(this, 0.1, shoot, 0));
+
 
 ////        Drive to white line
 //        tasks_none_rings.add(new TwoSensorTracerTask(this, 10, drive, 0.2, 0.2, config.leftColourSensor, config.rightColourSensor));

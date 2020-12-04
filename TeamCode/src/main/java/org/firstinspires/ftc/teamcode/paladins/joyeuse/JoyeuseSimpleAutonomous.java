@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.TwoSensorTracerTask;
 
 import java.util.ArrayDeque;
 
-@Autonomous(name = "JoyeuseAutonomous")
+@Autonomous(name = "JoyeuseSimpleAutonomous")
 public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
     private JoyeuseConfiguration config;
     private JoyeuseDrive drive;
@@ -34,21 +34,21 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
 //        Spin up the shooters
         tasks.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 0.8));
 //        Shoot the rings
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.12));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
 //        Kill shooters
         tasks.add(new JoyeuseSetShooterTask(this, 0.1, shoot, 0));
 
 //        Drive to white line
-        tasks.add(new TwoSensorTracerTask(this, 10, drive, -0.2, -0.2, config.leftColourSensor, config.rightColourSensor));
+        tasks.add(new TwoSensorTracerTask(this, 4, drive, -0.2, -0.2, config.leftColourSensor, config.rightColourSensor));
     }
 
     @Override

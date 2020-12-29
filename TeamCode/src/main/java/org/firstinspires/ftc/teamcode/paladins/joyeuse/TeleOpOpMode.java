@@ -35,7 +35,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
         steerDrive.update();
 
         if(gamepad1.a) {
-            intake.setIndexerPos(0.12);
+            intake.setIndexerPos(0.05);
         } else {
             intake.setIndexerPos(0.25);
         }
@@ -62,7 +62,7 @@ public class TeleOpOpMode extends PaladinsOpMode {
         }
 
         if(gamepad2.dpad_up) {
-            gauntlet.setArmPos(0);
+            gauntlet.setArmPos(1);
         }
 
         if(gamepad2.dpad_down) {

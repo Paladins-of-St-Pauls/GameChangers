@@ -2,10 +2,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 import org.firstinspires.ftc.teamcode.paladins.tasks.TwoSensorTracerTask;
 
@@ -27,6 +24,8 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
         intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor, config.conveyorServo, config.indexerServo);
 
+        tasks.add(new JoyeuseWGTask(this, 1, config.wgArm, config.wgHook, false));
+
 //        Drive forward
         tasks.add(new JoyeuseDriveTask(this, 1.2, drive, -0.5, -0.5));
         tasks.add(new JoyeuseDriveTask(this, 0.1, drive, 0, 0));
@@ -44,11 +43,25 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
         tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
 //        Kill shooters
         tasks.add(new JoyeuseSetShooterTask(this, 0.1, shoot, 0));
 
 //        Drive to white line
         tasks.add(new TwoSensorTracerTask(this, 4, drive, -0.2, -0.2, config.leftColourSensor, config.rightColourSensor));
+
+        tasks.add(new JoyeuseDriveTask(this, 0.8, drive, -0.5, 0.5));
+        tasks.add(new JoyeuseDriveTask(this, 0.1, drive, 0, 0));
+        tasks.add(new JoyeuseWGTask(this, 1, config.wgArm, config.wgHook, true));
     }
 
     @Override

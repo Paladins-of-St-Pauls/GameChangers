@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.paladins.jeffs;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -22,7 +23,7 @@ public class JeffsBotConfiguration extends RobotConfiguration {
     public DcMotor leftMotor;
     public DcMotor rightMotor;
 
-    public Servo servo;
+    public ColorSensor colourSensor;
 
     BNO055IMU imu;
 
@@ -62,7 +63,9 @@ public class JeffsBotConfiguration extends RobotConfiguration {
         rightMotor = (DcMotor) getHardwareOn("rightMotor", hardwareMap.dcMotor);
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        servo = (Servo) getHardwareOn("servo", hardwareMap.servo);
+        colourSensor = hardwareMap.get(ColorSensor.class, "colourSensor");
+
+        colourSensor.enableLed(false);
 
 
         // Set up the parameters with which we will use our IMU. Note that integration

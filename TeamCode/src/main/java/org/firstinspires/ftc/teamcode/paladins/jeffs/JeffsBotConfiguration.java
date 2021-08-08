@@ -32,7 +32,7 @@ public class JeffsBotConfiguration extends RobotConfiguration {
     public double wheelDiameterCm = 9.0;
 
     public double countsPerCm = (countsPerMotorRev * driveGearReduction) / (wheelDiameterCm * Math.PI);
-
+    public Servo servo;
     /**
      * Factory method for this class
      *

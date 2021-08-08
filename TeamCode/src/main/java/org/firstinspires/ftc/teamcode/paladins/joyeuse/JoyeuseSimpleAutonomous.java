@@ -16,6 +16,8 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
     private JoyeuseIntake intake;
     private ArrayDeque<Task> tasks = new ArrayDeque<>();
 
+    private int ServoHoldTime = 1;
+
     @Override
     protected void onInit() {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
@@ -27,32 +29,18 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
         tasks.add(new JoyeuseWGTask(this, 1, config.wgArm, config.wgHook, false));
 
 //        Drive forward
-        tasks.add(new JoyeuseDriveTask(this, 1.2, drive, -0.5, -0.5));
+        tasks.add(new JoyeuseDriveTask(this, 2, drive, -0.5, -0.5));
         tasks.add(new JoyeuseDriveTask(this, 0.1, drive, 0, 0));
 //        Shoot three rings
 //        Spin up the shooters
-        tasks.add(new JoyeuseSetShooterTask(this, 1.5, shoot, 0.8));
+        tasks.add(new JoyeuseSetShooterTask(this, 3, shoot, 0.8));
 //        Shoot the rings
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.05));
-        tasks.add(new JoyeuseIndexerShootTask(this, 0.5, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, ServoHoldTime, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, ServoHoldTime, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, ServoHoldTime, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, ServoHoldTime, intake, 0.25));
+        tasks.add(new JoyeuseIndexerShootTask(this, ServoHoldTime, intake, 0.05));
+        tasks.add(new JoyeuseIndexerShootTask(this, ServoHoldTime, intake, 0.25));
 //        Kill shooters
         tasks.add(new JoyeuseSetShooterTask(this, 0.1, shoot, 0));
 

@@ -58,6 +58,7 @@ public class StarterStackCalibration extends LinearOpMode {
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new StarterStackDeterminationPipeline(135, 142);
         webcam.setPipeline(pipeline);
+        int thresholdSize = 5;
 
         // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
         // out when the RC activity is in portrait. We do our actual image processing assuming
@@ -88,19 +89,27 @@ public class StarterStackCalibration extends LinearOpMode {
             int fourRingThreshold = Integer.parseInt(nums[1]);
 
             telemetry.addData("Current Live Analysis", pipeline.getAnalysis());
-            telemetry.addData("Current Live Prediction", pipeline.position);
+//            telemetry.addData("Current Live Prediction", pipeline.position);
+            telemetry.addData("Threshold Size", thresholdSize);
             telemetry.addData("Stored ONE Ring Threshold", oneRingThreshold);
             telemetry.addData("Stored FOUR Ring Threshold", fourRingThreshold);
             telemetry.addLine("To update calibration data, use the gamepad buttons:");
             telemetry.addLine("A - Update ONE Ring Threshold (ONE Ring is in Target)");
             telemetry.addLine("B - Update FOUR Ring Threshold (FOUR Rings are in Target)");
+            telemetry.addLine("DPAD UP/DOWN - Change Threshold Size");
             telemetry.update();
 
             if (gamepad1.a) {
-                ReadWriteFile.writeFile(file, String.format("%d,%d",pipeline.getAnalysis() - 2, fourRingThreshold));
+                ReadWriteFile.writeFile(file, String.format("%d,%d",pipeline.getAnalysis() - thresholdSize, fourRingThreshold));
             }
             else if (gamepad1.b) {
-                ReadWriteFile.writeFile(file, String.format("%d,%d",oneRingThreshold,pipeline.getAnalysis() - 2));
+                ReadWriteFile.writeFile(file, String.format("%d,%d",oneRingThreshold,pipeline.getAnalysis() - thresholdSize));
+            }
+
+            if(gamepad1.dpad_up) {
+                thresholdSize++;
+            } else if (gamepad1.dpad_down) {
+                thresholdSize = thresholdSize - 1;
             }
 
 

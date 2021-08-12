@@ -75,6 +75,7 @@ public class StackChoiceTask extends BaseTask implements Task {
     @Override
     public void run() {
         if (isFinished()) {
+            opMode.telemetry.addData("Position", pipeline.position);
             if (pipeline.position == StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.FOUR) {
                 tasks.addAll(tasks_four_rings);
             } else if (pipeline.position == StarterStackCalibration.StarterStackDeterminationPipeline.RingPosition.ONE) {

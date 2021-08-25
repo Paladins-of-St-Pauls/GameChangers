@@ -17,6 +17,8 @@ public class TeleOpOpMode extends PaladinsOpMode {
     private boolean hand;
     private boolean hook;
 
+    private String message = "Hi - This is a message";
+
     @Override
     protected void onInit() {
         config = JoyeuseConfiguration.newConfig(hardwareMap, telemetry);
@@ -84,6 +86,10 @@ public class TeleOpOpMode extends PaladinsOpMode {
         if(gamepad2.b) {
             gauntlet.setHookPos(1.0);
 
+        }
+
+        if(gamepad1.y) {
+            telemetry.addLine(message);
         }
 
         telemetry.addData("Arm Position", config.wgArm.getPosition());

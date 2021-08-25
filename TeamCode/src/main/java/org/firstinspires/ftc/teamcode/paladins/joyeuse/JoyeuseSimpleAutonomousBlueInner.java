@@ -2,10 +2,13 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.paladins.common.ButtonControl;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 @Autonomous(name = "JoyeuseSimpleAutonomousBlueInner")
 public class JoyeuseSimpleAutonomousBlueInner extends PaladinsOpMode {
@@ -24,6 +27,26 @@ public class JoyeuseSimpleAutonomousBlueInner extends PaladinsOpMode {
         drive = new JoyeuseDrive(this, config.leftMidMotor, config.leftBackMotor, config.rightMidMotor, config.rightBackMotor);
         shoot = new JoyeuseShoot(this, config.leftShooterMotor, config.rightShooterMotor);
         intake = new JoyeuseIntake(this, config.intakeMotor, config.bumpMotor, config.conveyorServo, config.indexerServo);
+
+        HashMap<ButtonControl, String> buttonMap = new HashMap<>();
+
+        buttonMap.put(ButtonControl.Y, "Blue Outer");
+        buttonMap.put(ButtonControl.X, "Blue Inner");
+        buttonMap.put(ButtonControl.A, "Red Outer");
+        buttonMap.put(ButtonControl.B, "Red Inner");
+
+        ButtonControl selectedButton = ButtonControl.X;
+
+        for (Map.Entry<ButtonControl, String> es: buttonMap.entrySet()) {
+            System.out.printf("%s: %s%n", es.getKey().name(), es.getValue());
+            telemetry.addLine(String.format("%s: %s", es.getKey().name(), es.getValue()));
+            if(ButtonControl.isSelected(gamepad1, es.getKey())) {
+                selectedButton = es.getKey();
+            }
+        }
+
+        telemetry.addLine(String.format("%s was selected: Running %s", selectedButton.name(), buttonMap.get(selectedButton)));
+        telemetry.update();
 
         tasks.add(new JoyeuseWGTask(this, 1, config.wgArm, config.wgHook, false));
 

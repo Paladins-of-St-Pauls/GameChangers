@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.paladins.common.ButtonControl;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
+import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
 import java.util.ArrayDeque;
@@ -49,7 +50,7 @@ public class JoyeuseSimpleAutonomousBlueInner extends PaladinsOpMode {
             }
         }
 
-        telemetry.addLine(String.format("%s was selected: Running %s", selectedButton.name(), buttonMap.get(selectedButton)));
+        telemetry.addLine(String.format("Default is: %s, %s", selectedButton.name(), buttonMap.get(selectedButton)));
         telemetry.update();
 
 
@@ -73,6 +74,29 @@ public class JoyeuseSimpleAutonomousBlueInner extends PaladinsOpMode {
         telemetry.update();
 
         telemetry.setAutoClear(autoClearState);
+
+
+        telemetry.addLine(String.format("Loading tasks for %s", buttonMap.get(selectedButton)));
+
+
+        switch(selectedButton) {
+            case Y:
+                // Tasks can go here
+                tasks.add(new MessageTask(this, 1.0, "Running Y"));
+                break;
+            case X:
+                // Tasks can go here
+                tasks.add(new MessageTask(this, 1.0, "Running X"));
+                break;
+            case A:
+                // Tasks can go here
+                tasks.add(new MessageTask(this, 1.0, "Running A"));
+                break;
+            case B:
+                // Tasks can go here
+                tasks.add(new MessageTask(this, 1.0, "Running B"));
+                break;
+        }
 
         tasks.add(new JoyeuseWGTask(this, 1, config.wgArm, config.wgHook, false));
 

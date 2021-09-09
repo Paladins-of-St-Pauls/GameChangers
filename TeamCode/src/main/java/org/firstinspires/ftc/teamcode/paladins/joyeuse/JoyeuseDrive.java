@@ -84,6 +84,25 @@ public class JoyeuseDrive extends PaladinsComponent {
         rightBackPower = right;
     }
 
+    public void setEncoder(boolean encoder) {
+        if (encoder) {
+            leftMidMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightMidMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        } else {
+            leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        }
+    }
+
     /*
      * Update the motor power based on the gamepad state
      */
@@ -145,5 +164,22 @@ public class JoyeuseDrive extends PaladinsComponent {
 
     public boolean isFinished() {
         return !(leftMidMotor.isBusy() || leftBackMotor.isBusy() || rightMidMotor.isBusy() || rightBackMotor.isBusy());
+    }
+
+    public boolean targetPositionReached() {
+        return !(leftMidMotor.isBusy() || rightMidMotor.isBusy());
+    }
+
+    public void setTargetPosition(double leftDistance, double rightDistance) {
+
+        int newLeftTarget;
+        int newRightTarget;
+        newLeftTarget = leftMidMotor.getCurrentPosition() + (int) leftDistance;
+        newRightTarget =  rightMidMotor.getCurrentPosition() + (int) rightDistance;
+        leftMidMotor.setTargetPosition(newLeftTarget);
+        rightMidMotor.setTargetPosition(newRightTarget);
+
+        leftMidMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMidMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }

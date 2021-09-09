@@ -35,6 +35,7 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
         buttonMap.put(ButtonControl.X, "Blue Inner");
         buttonMap.put(ButtonControl.A, "Red Outer");
         buttonMap.put(ButtonControl.B, "Red Inner");
+        buttonMap.put(ButtonControl.RIGHT_BUMPER, "Test");
 
         ButtonControl selectedButton = ButtonControl.X;
 
@@ -80,6 +81,13 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
 
         telemetry.addLine(String.format("Loading tasks for %s", buttonMap.get(selectedButton)));
         switch (selectedButton) {
+            case RIGHT_BUMPER:
+                tasks.add(new JoyeuseDriveEncoderTask(this, 1, drive, 500, 500));
+                tasks.add(new JoyeuseDriveTask(this, 2, drive, 0, 0));
+                tasks.add(new JoyeuseDriveEncoderTask(this, 1, drive, -500, -500));
+
+                break;
+
             case Y:
                 // Tasks can go here
                 tasks.add(new MessageTask(this, 1.0, "Running Y"));

@@ -30,8 +30,7 @@ public class JoyeuseDriveTask extends BaseTask implements Task {
             drive.update();
             return;
         }
-        drive.setPower(-leftSpeed, -rightSpeed);
-        drive.update();
+
     }
 
 }

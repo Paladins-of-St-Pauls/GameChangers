@@ -112,6 +112,11 @@ public class JoyeuseConfiguration extends RobotConfiguration {
         wgHand = (Servo) getHardwareOn("wgHand", hardwareMap.servo);
         wgHook = (Servo) getHardwareOn("wgHook", hardwareMap.servo);
 
+        leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         // Set up the parameters with which we will use our IMU. Note that integration
         // algorithm here just reports accelerations to the logcat log; it doesn't actually

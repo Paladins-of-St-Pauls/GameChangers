@@ -82,9 +82,12 @@ public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
         telemetry.addLine(String.format("Loading tasks for %s", buttonMap.get(selectedButton)));
         switch (selectedButton) {
             case RIGHT_BUMPER:
-                tasks.add(new JoyeuseDriveEncoderTask(this, 1, drive, 500, 500));
-                tasks.add(new JoyeuseDriveTask(this, 2, drive, 0, 0));
-                tasks.add(new JoyeuseDriveEncoderTask(this, 1, drive, -500, -500));
+//                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, 1000, 1000, 0.3, 0.3));
+//                tasks.add(new JoyeuseDriveTask(this, 2, drive, 0, 0));
+//                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, -1000, -1000, 0.3, 0.3));
+                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, 1000, 500, 0.3, 0.15));
+                tasks.add(new JoyeuseDriveTask(this, 1, drive, 0, 0));
+                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, -1000, -500, 0.3, 0.15));
 
                 break;
 

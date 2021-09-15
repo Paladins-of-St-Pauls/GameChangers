@@ -92,14 +92,20 @@ public class JoyeuseDrive extends PaladinsComponent {
             leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            leftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+//            leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//            rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         } else {
             leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            leftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+//            leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//            rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
     }
 
@@ -114,7 +120,9 @@ public class JoyeuseDrive extends PaladinsComponent {
         rightMidMotor.setPower((rightMidPower));
         rightBackMotor.setPower((rightBackPower));
 
-//        getOpMode().telemetry.addLine(String.format("%d, %d", leftMidMotor.getCurrentPosition(), rightMidMotor.getCurrentPosition()));
+
+
+        getOpMode().telemetry.addLine(String.format("%d, %d", leftMidMotor.getCurrentPosition(), rightMidMotor.getCurrentPosition()));
     }
 
     /**
@@ -178,8 +186,12 @@ public class JoyeuseDrive extends PaladinsComponent {
         newRightTarget =  rightMidMotor.getCurrentPosition() + (int) rightDistance;
         leftMidMotor.setTargetPosition(newLeftTarget);
         rightMidMotor.setTargetPosition(newRightTarget);
+        leftBackMotor.setTargetPosition(newLeftTarget);
+        rightBackMotor.setTargetPosition(newRightTarget);
 
         leftMidMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightMidMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBackMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBackMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }

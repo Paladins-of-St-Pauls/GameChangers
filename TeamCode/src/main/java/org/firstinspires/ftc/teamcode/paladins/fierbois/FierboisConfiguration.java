@@ -1,13 +1,10 @@
-package org.firstinspires.ftc.teamcode.paladins.mecanum;
+package org.firstinspires.ftc.teamcode.paladins.fierbois;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.paladins.common.RobotConfiguration;
@@ -18,15 +15,14 @@ import org.firstinspires.ftc.teamcode.paladins.common.RobotConfiguration;
  * It is also assumed that the device names in the 'init()' method below are the same as the devices
  * named on the activated configuration on the robot.
  */
-public class MecanumConfiguration extends RobotConfiguration {
-    // Left motors
-    public DcMotor leftMidMotor;
-    public DcMotor leftBackMotor;
+public class FierboisConfiguration extends RobotConfiguration {
+    // Front motors
+    public DcMotor frontLeftMotor;
+    public DcMotor frontRightMotor;
 
-    // Right motors
-    public DcMotor rightMidMotor;
-    public DcMotor rightBackMotor;
-
+    // Back motors
+    public DcMotor backLeftMotor;
+    public DcMotor backRightMotor;
 
     BNO055IMU imu;
 
@@ -43,8 +39,8 @@ public class MecanumConfiguration extends RobotConfiguration {
      * @param telemetry
      * @return
      */
-    public static MecanumConfiguration newConfig(HardwareMap hardwareMap, Telemetry telemetry) {
-        MecanumConfiguration config = new MecanumConfiguration();
+    public static FierboisConfiguration newConfig(HardwareMap hardwareMap, Telemetry telemetry) {
+        FierboisConfiguration config = new FierboisConfiguration();
         config.init(hardwareMap, telemetry);
         return config;
     }
@@ -60,22 +56,20 @@ public class MecanumConfiguration extends RobotConfiguration {
 
         setTelemetry(telemetry);
 
-        leftMidMotor = (DcMotor) getHardwareOn("leftMidMotor", hardwareMap.dcMotor);
-        leftBackMotor = (DcMotor) getHardwareOn("leftBackMotor", hardwareMap.dcMotor);
+        frontLeftMotor = (DcMotor) getHardwareOn("frontLeftMotor", hardwareMap.dcMotor);
+        frontRightMotor = (DcMotor) getHardwareOn("frontRightMotor", hardwareMap.dcMotor);
 
-        rightMidMotor = (DcMotor) getHardwareOn("rightMidMotor", hardwareMap.dcMotor);
-        rightBackMotor = (DcMotor) getHardwareOn("rightBackMotor", hardwareMap.dcMotor);
+        backLeftMotor = (DcMotor) getHardwareOn("backLeftMotor", hardwareMap.dcMotor);
+        backRightMotor = (DcMotor) getHardwareOn("backRightMotor", hardwareMap.dcMotor);
 
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        rightMidMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-
-        leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//        leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//        rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         // Set up the parameters with which we will use our IMU. Note that integration
         // algorithm here just reports accelerations to the logcat log; it doesn't actually

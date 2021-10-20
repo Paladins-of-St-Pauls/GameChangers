@@ -44,6 +44,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.io.File;
 
+@Disabled
 @TeleOp
 public class StarterStackCalibration extends LinearOpMode {
     //    OpenCvInternalCamera webcam;

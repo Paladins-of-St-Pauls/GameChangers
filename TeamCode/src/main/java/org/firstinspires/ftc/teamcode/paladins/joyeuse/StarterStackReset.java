@@ -23,6 +23,7 @@ package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ReadWriteFile;
@@ -43,6 +44,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.io.File;
 
+@Disabled
 @TeleOp
 public class StarterStackReset extends LinearOpMode {
     //    OpenCvInternalCamera webcam;

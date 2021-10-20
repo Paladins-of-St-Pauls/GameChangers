@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 
+@Disabled
 @TeleOp(name = "SteerDrive")
 public class SteerDriveOpMode extends PaladinsOpMode {
     private JoyeuseConfiguration config;

@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.paladins.mecanum;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 
+@Disabled
 @TeleOp(name = "SkyDrive")
 public class SkyDriveOpMode extends PaladinsOpMode {
     private SkystoneConfiguration config;

@@ -55,8 +55,8 @@ public class DurandalConfiguration extends RobotConfiguration {
 
         setTelemetry(telemetry);
 
-        leftMotor = (DcMotor) getHardwareOn("leftMidMotor", hardwareMap.dcMotor);
-        rightMotor = (DcMotor) getHardwareOn("leftBackMotor", hardwareMap.dcMotor);
+        leftMotor = (DcMotor) getHardwareOn("leftMotor", hardwareMap.dcMotor);
+        rightMotor = (DcMotor) getHardwareOn("rightMotor", hardwareMap.dcMotor);
 
 
 

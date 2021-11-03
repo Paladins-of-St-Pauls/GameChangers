@@ -55,8 +55,6 @@ public class GamePadMomentaryMotor extends PaladinsComponent {
      * Update motors with latest gamepad state
      */
     public void update() {
-        // Only toggle when the button state changes from false to true, ie when the
-        // button is pressed down (and not when the button comes back up)
         boolean pressed = buttonPressed(gamepad, buttonControl);
         if (pressed) {
             motor.setPower(motorPower);
@@ -66,7 +64,6 @@ public class GamePadMomentaryMotor extends PaladinsComponent {
         } else {
             motor.setPower(0.0);
         }
-
 
     }
 

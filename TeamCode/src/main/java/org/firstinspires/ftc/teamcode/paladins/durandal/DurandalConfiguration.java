@@ -24,6 +24,8 @@ public class DurandalConfiguration extends RobotConfiguration {
     public DcMotor rightMotor;
     public DcMotor rightSpinnerMotor;
     public DcMotor leftSpinnerMotor;
+    public CRServo leftHarvester;
+    public CRServo rightHarvester;
 
     BNO055IMU imu;
 
@@ -61,6 +63,8 @@ public class DurandalConfiguration extends RobotConfiguration {
         rightMotor = (DcMotor) getHardwareOn("rightMotor", hardwareMap.dcMotor);
         rightSpinnerMotor = (DcMotor) getHardwareOn("rightSpinnerMotor", hardwareMap.dcMotor);
         leftSpinnerMotor = (DcMotor) getHardwareOn("leftSpinnerMotor", hardwareMap.dcMotor);
+        leftHarvester = (CRServo) getHardwareOn("leftHarvester", hardwareMap.crservo);
+        rightHarvester = (CRServo) getHardwareOn("rightHarvester", hardwareMap.crservo);
 
 
 

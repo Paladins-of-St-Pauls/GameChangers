@@ -27,8 +27,8 @@ public class DurandalTankDriveOpMode extends PaladinsOpMode {
         tankDrive = new DurandalTankDrive(this, gamepad1, drive);
         leftSpinner = new GamePadMomentaryMotor(this, gamepad1, config.leftSpinnerMotor, ButtonControl.LEFT_BUMPER, 0.5f);
         rightSpinner = new GamePadMomentaryMotor(this, gamepad1, config.rightSpinnerMotor, ButtonControl.RIGHT_BUMPER, 0.5f);
-        rightHarvester = new JoystickMomentaryServo(this, gamepad1, config.rightHarvester, ButtonControl.A,0.5f, JoystickControl.RIGHT_TRIGGER);
-        leftHarvester = new JoystickMomentaryServo(this, gamepad1, config.leftHarvester, ButtonControl.B,0.5f, JoystickControl.LEFT_TRIGGER);
+        rightHarvester = new JoystickMomentaryServo(this, gamepad1, config.rightHarvester, ButtonControl.A,-0.25f, ButtonControl.X,0.25f);
+        leftHarvester = new JoystickMomentaryServo(this, gamepad1, config.leftHarvester, ButtonControl.B,0.25f, ButtonControl.Y, -0.25f);
 
     }
 

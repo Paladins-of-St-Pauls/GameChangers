@@ -16,7 +16,8 @@ public enum ButtonControl {
     LEFT_BUMPER,
     RIGHT_BUMPER,
     LEFT_STICK_BUTTON,
-    RIGHT_STICK_BUTTON;
+    RIGHT_STICK_BUTTON,
+    NONE;
 
     public static boolean isSelected(Gamepad gamepad, ButtonControl buttonControl) {
         boolean buttonPressed = false;
@@ -71,6 +72,9 @@ public enum ButtonControl {
                 break;
             case RIGHT_STICK_BUTTON:
                 buttonPressed = gamepad.right_stick_button;
+                break;
+            case NONE:
+                buttonPressed = false;
                 break;
         }
 

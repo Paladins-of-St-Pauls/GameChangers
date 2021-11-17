@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
  * Created by Shaun on 2/07/2017.
  */
 
-public class DurandalTankDrive extends PaladinsComponent {
+public class DurandalSteerDrive extends PaladinsComponent {
 
     private static float[] power_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
@@ -22,8 +22,10 @@ public class DurandalTankDrive extends PaladinsComponent {
     final private Gamepad gamepad;
     final private Telemetry.Item leftPowerItem;
     final private Telemetry.Item rightPowerItem;
+    final private Telemetry.Item steerPowerItem;
+    final private Telemetry.Item rawPowerItem;
 
-    public DurandalTankDrive(PaladinsOpMode opMode, Gamepad gamepad, DurandalDrive drive) {
+    public DurandalSteerDrive(PaladinsOpMode opMode, Gamepad gamepad, DurandalDrive drive) {
         super(opMode);
 this.drive = drive;
         this.gamepad = gamepad;
@@ -32,6 +34,10 @@ this.drive = drive;
         leftPowerItem.setRetained(true);
         rightPowerItem = getOpMode().telemetry.addData("Right power", "%.2f", 0.0f);
         rightPowerItem.setRetained(true);
+        steerPowerItem = getOpMode().telemetry.addData("steer power", "%.2f", 0.0f);
+        steerPowerItem.setRetained(true);
+        rawPowerItem = getOpMode().telemetry.addData("raw power", "%.2f", 0.0f);
+        rawPowerItem.setRetained(true);
     }
 
     /*
@@ -41,38 +47,36 @@ this.drive = drive;
 
 //        float scalePower = scaleTriggerPower(gamepad.left_trigger - gamepad.right_trigger);
         float scalePower = scaleTriggerPower(gamepad.left_stick_y);
-//
-//        float steer = scaleSteerPower(gamepad.right_stick_x);
+
+        float steer = scaleSteerPower(-gamepad.right_stick_x);
         float leftPower;
         float rightPower;
-        leftPower = scaleTriggerPower(gamepad.left_stick_y);
-        rightPower = scaleTriggerPower(gamepad.right_stick_y);
-
-//        if (scalePower == 0.0f) {
-//            leftPower = steer;
-//            rightPower = -steer;
-//        } else {
-//            leftPower = scalePower * ((steer < 0) ? 1.0f + steer : 1.0f);
-//            rightPower = scalePower * ((steer > 0) ? 1.0f - steer : 1.0f);
-//        }
+        if (scalePower == 0.0f) {
+            leftPower = steer;
+            rightPower = -steer;
+        } else {
+            leftPower = scalePower * ((steer < 0) ? 1.0f - steer : 1.0f);
+            rightPower = scalePower * ((steer > 0) ? 1.0f + steer : 1.0f);
+        }
 
         if(gamepad.right_bumper) {
             leftPower = leftPower / 2.0f;
             rightPower = rightPower / 2.0f;
         }
-//
+
         if(gamepad.left_bumper) {
             float temp = leftPower;
             leftPower = -rightPower;
             rightPower = -temp;
         }
 
-//        drive.setPower(0, 0);
         drive.setPower(leftPower, rightPower);
         drive.update();
 
         leftPowerItem.setValue("%.2f", leftPower);
         rightPowerItem.setValue("%.2f", rightPower);
+        steerPowerItem.setValue("%.2f", steer);
+        rawPowerItem.setValue("%.2f", scalePower);
     }
 
     /**

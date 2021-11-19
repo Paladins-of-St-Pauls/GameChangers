@@ -1,21 +1,23 @@
-package org.firstinspires.ftc.teamcode.paladins.joyeuse;
+package org.firstinspires.ftc.teamcode.paladins.durandal;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
+import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDrive;
 import org.firstinspires.ftc.teamcode.paladins.tasks.BaseTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
-public class JoyeuseDriveTask extends BaseTask implements Task {
+public class DurandalDriveTask extends BaseTask implements Task {
 
-    private final JoyeuseDrive drive;
+    private final org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDrive drive;
     private final double leftSpeed;
     private final double rightSpeed;
 
-    public JoyeuseDriveTask(PaladinsOpMode opMode, double time, JoyeuseDrive drive, double leftSpeed, double rightSpeed) {
+    public DurandalDriveTask(PaladinsOpMode opMode, double time, DurandalDrive drive, double leftSpeed, double rightSpeed) {
         super(opMode, time);
         this.drive = drive;
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;
     }
+
     @Override
     public void init() {
         super.init();
@@ -23,6 +25,8 @@ public class JoyeuseDriveTask extends BaseTask implements Task {
 
     @Override
     public void run() {
+        drive.setPower(leftSpeed, rightSpeed);
+        drive.update();
         if (isFinished()) {
             drive.setPower(0, 0);
             drive.update();

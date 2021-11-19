@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 
 
 @TeleOp(name = "DurandalTankDrive")
-public class DurandalTankDriveOpMode extends PaladinsOpMode {
+public class  DurandalTankDriveOpMode extends PaladinsOpMode {
     private DurandalConfiguration config;
     private DurandalDrive drive;
     private DurandalTankDrive tankDrive;

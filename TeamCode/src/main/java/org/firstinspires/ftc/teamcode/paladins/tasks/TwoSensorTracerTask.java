@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.paladins.tasks;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.common.TankDrive;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
 
 public class TwoSensorTracerTask extends BaseTask implements Task {

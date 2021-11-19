@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.Range;
 

@@ -66,6 +66,7 @@ public class DurandalConfiguration extends RobotConfiguration {
         leftHarvester = (CRServo) getHardwareOn("leftHarvester", hardwareMap.crservo);
         rightHarvester = (CRServo) getHardwareOn("rightHarvester", hardwareMap.crservo);
 
+        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         // Set up the parameters with which we will use our IMU. Note that integration

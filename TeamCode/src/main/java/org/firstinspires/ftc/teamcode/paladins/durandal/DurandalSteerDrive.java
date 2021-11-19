@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
+import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDrive;
 
 /**
  * Created by Shaun on 2/07/2017.

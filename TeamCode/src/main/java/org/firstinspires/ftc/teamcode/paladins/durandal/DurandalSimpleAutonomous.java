@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDriveEncoderTask;
 import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDriveTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
+import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -82,11 +83,12 @@ public class DurandalSimpleAutonomous extends PaladinsOpMode {
         telemetry.addLine(String.format("Loading tasks for %s", buttonMap.get(selectedButton)));
         switch (selectedButton) {
             case RIGHT_BUMPER:
-//                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, 1000, 1000, 0.3, 0.3));
+//                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 1000, 500, 0.3, 0.3));
 //                tasks.add(new JoyeuseDriveTask(this, 2, drive, 0, 0));
 //                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, -1000, -1000, 0.3, 0.3));
 //                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, 1000, 500, 0.3, 0.15));
-                tasks.add(new DurandalDriveTask(this, 1, drive, 1, 1));
+                tasks.add(new DurandalDriveTask(this, 2, drive, -0.8, -0.8));
+//                tasks.add(new DurandalSpinnerTask(this, 1, config.spinnerMotor, 1));
 //                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, -1000, -500, 0.3, 0.15));
 
                 break;
@@ -95,13 +97,16 @@ public class DurandalSimpleAutonomous extends PaladinsOpMode {
                 // Tasks can go here
                 tasks.add(new MessageTask(this, 1.0, "Running Y"));
                 //        READ BARCODE
-                tasks.add(new DurandalDriveTask(this, 1, drive, 0.8, 0.8));
-                //         OPERARE SPINNER
-                tasks.add(new DurandalDriveTask(this, 1, drive, 0.5, -0.5));
-                tasks.add(new DurandalDriveTask(this, 2, drive, 0.8, 0.8));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 700, 700, 0.5, 0.5));
+                tasks.add(new DurandalSpinnerTask(this, 2, config.spinnerMotor, 1));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 900, -900, 1, 1));
+                tasks.add(new WaitTask(this, 0.5));
+                tasks.add(new DurandalDriveTask(this, 1, drive, -0.2, -0.2));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 1500, 1500, 0.5, 0.5));
                 //          LIFT TO APPROPRIATE LEVEL
                 //          DEPOSIT CARGO
                 //          LOWER LIFT
+                tasks.add(new DurandalDriveTask(this, 0.5, drive, 0.2, -0.2));
                 tasks.add(new DurandalDriveTask(this, 2, drive, 1, 1));
                 tasks.add(new DurandalDriveTask(this, 0.5, drive, 0.5, -0.5));
                 break;

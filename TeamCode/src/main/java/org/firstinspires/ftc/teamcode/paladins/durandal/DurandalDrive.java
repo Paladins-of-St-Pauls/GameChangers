@@ -69,8 +69,8 @@ public class DurandalDrive extends PaladinsComponent {
 
 
     public void setPower(double left, double right) {
-        leftPower = left;
-        rightPower = right;
+        leftPower = -left;
+        rightPower = -right;
 
     }
 

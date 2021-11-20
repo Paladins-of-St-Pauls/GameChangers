@@ -22,8 +22,7 @@ public class DurandalConfiguration extends RobotConfiguration {
     //  motors
     public DcMotor leftMotor;
     public DcMotor rightMotor;
-    public DcMotor rightSpinnerMotor;
-    public DcMotor leftSpinnerMotor;
+    public DcMotor spinnerMotor;
     public CRServo leftHarvester;
     public CRServo rightHarvester;
 
@@ -61,8 +60,7 @@ public class DurandalConfiguration extends RobotConfiguration {
 
         leftMotor = (DcMotor) getHardwareOn("leftMotor", hardwareMap.dcMotor);
         rightMotor = (DcMotor) getHardwareOn("rightMotor", hardwareMap.dcMotor);
-        rightSpinnerMotor = (DcMotor) getHardwareOn("rightSpinnerMotor", hardwareMap.dcMotor);
-        leftSpinnerMotor = (DcMotor) getHardwareOn("leftSpinnerMotor", hardwareMap.dcMotor);
+        spinnerMotor = (DcMotor) getHardwareOn("spinnerMotor", hardwareMap.dcMotor);
         leftHarvester = (CRServo) getHardwareOn("leftHarvester", hardwareMap.crservo);
         rightHarvester = (CRServo) getHardwareOn("rightHarvester", hardwareMap.crservo);
 

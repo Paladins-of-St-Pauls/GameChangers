@@ -68,7 +68,7 @@ this.drive = drive;
         }
 
 //        drive.setPower(0, 0);
-        drive.setPower(leftPower, rightPower);
+        drive.setPower(-leftPower, -rightPower);
         drive.update();
 
         leftPowerItem.setValue("%.2f", leftPower);

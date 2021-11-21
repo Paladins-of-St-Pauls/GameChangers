@@ -16,11 +16,13 @@ public class DurandalDriveTask extends BaseTask implements Task {
         this.drive = drive;
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;
+        drive.setEncoder(false);
     }
 
     @Override
     public void init() {
         super.init();
+        drive.setEncoder(false);
     }
 
     @Override

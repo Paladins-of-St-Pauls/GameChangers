@@ -14,6 +14,8 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
     private DurandalConfiguration config;
     private DurandalDrive drive;
     private DurandalTankDrive tankDrive;
+    private DurandalLift lift;
+    private DurandalHarvester harvester;
     private GamePadMomentaryMotor spinner;
     private JoystickMomentaryServo rightHarvester;
     private JoystickMomentaryServo leftHarvester;
@@ -24,19 +26,33 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
 
         drive = new DurandalDrive(this, config.leftMotor, config.rightMotor);
         tankDrive = new DurandalTankDrive(this, gamepad1, drive);
-        spinner = new GamePadMomentaryMotor(this, gamepad1, config.spinnerMotor, ButtonControl.LEFT_BUMPER, 0.5f);
-        rightHarvester = new JoystickMomentaryServo(this, gamepad1, config.rightHarvester, ButtonControl.A,-0.25f, ButtonControl.X,0.25f);
-        leftHarvester = new JoystickMomentaryServo(this, gamepad1, config.leftHarvester, ButtonControl.B,0.25f, ButtonControl.Y, -0.25f);
-
+        spinner = new GamePadMomentaryMotor(this, gamepad2, config.spinnerMotor, ButtonControl.Y, 0.5f);
+        lift = new DurandalLift(this, config.liftMotor);
+        harvester = new DurandalHarvester(this, config.leftHarvester, config.rightHarvester);
     }
 
     @Override
     protected void activeLoop() throws InterruptedException {
         tankDrive.update();
         spinner.update();
-        leftHarvester.update();
-        rightHarvester.update();
 
+        if (gamepad2.a) {
+            lift.setPower((gamepad2.right_trigger-gamepad2.left_trigger));
+        } else {
+            lift.setPower((gamepad2.right_trigger-gamepad2.left_trigger)/2);
+        }
+
+        lift.update();
+
+        if(gamepad2.left_bumper) {
+            harvester.setPower(-1.0);
+        } else if (gamepad2.right_bumper) {
+            harvester.setPower(0.5);
+        } else {
+            harvester.setPower(0);
+        }
+
+        harvester.update();
 
     }
 }

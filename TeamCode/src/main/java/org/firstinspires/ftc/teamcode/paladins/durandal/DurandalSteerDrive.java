@@ -59,7 +59,7 @@ this.drive = drive;
             rightPower = scalePower * ((steer > 0) ? 1.0f + steer : 1.0f);
         }
 
-        if(gamepad.right_bumper) {
+        if(!gamepad.right_bumper) {
             leftPower = leftPower / 2.0f;
             rightPower = rightPower / 2.0f;
         }
@@ -70,7 +70,7 @@ this.drive = drive;
             rightPower = -temp;
         }
 
-        drive.setPower(leftPower, rightPower);
+        drive.setPower(-leftPower, -rightPower);
         drive.update();
 
         leftPowerItem.setValue("%.2f", leftPower);

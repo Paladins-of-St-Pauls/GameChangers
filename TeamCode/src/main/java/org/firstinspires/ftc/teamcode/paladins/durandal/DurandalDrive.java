@@ -74,6 +74,16 @@ public class DurandalDrive extends PaladinsComponent {
 
     }
 
+    public void setToBrake() {
+        leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public void setToFloat() {
+        leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+    }
+
     public void setEncoder(boolean encoder) {
         if (encoder) {
             leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

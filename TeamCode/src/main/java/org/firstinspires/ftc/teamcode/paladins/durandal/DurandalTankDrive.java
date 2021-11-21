@@ -56,11 +56,11 @@ this.drive = drive;
 //            rightPower = scalePower * ((steer > 0) ? 1.0f - steer : 1.0f);
 //        }
 
-        if(gamepad.right_bumper) {
+        if(!gamepad.right_bumper) {
             leftPower = leftPower / 2.0f;
             rightPower = rightPower / 2.0f;
         }
-//
+////
         if(gamepad.left_bumper) {
             float temp = leftPower;
             leftPower = -rightPower;

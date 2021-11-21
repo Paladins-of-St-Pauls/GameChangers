@@ -16,8 +16,8 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
 
-@Autonomous(name = "DurandalSimpleAutonomous")
-public class DurandalSimpleAutonomous extends PaladinsOpMode {
+@Autonomous(name = "DurandalAutonomous")
+public class DurandalAutonomous extends PaladinsOpMode {
     private DurandalConfiguration config;
     private DurandalDrive drive;
     private ArrayDeque<Task> tasks = new ArrayDeque<>();
@@ -74,30 +74,24 @@ public class DurandalSimpleAutonomous extends PaladinsOpMode {
         }
 
         telemetry.addLine(String.format("%s was selected: Running %s", selectedButton.name(), buttonMap.get(selectedButton)));
-        telemetry.addLine("IF THIS SELECTION IS NOT DESIRABLE, QUIT THE OPMODE AND CHOOSE AGAIN");
+        telemetry.addLine("IF THIS SELECTION IS INCORRECT, QUIT THE OPMODE AND CHOOSE RESELECT");
         telemetry.update();
 
         telemetry.setAutoClear(autoClearState);
 
 
-        telemetry.addLine(String.format("Loading tasks for %s", buttonMap.get(selectedButton)));
+        telemetry.addLine(String.format("Loading tasks for %s", selectedButton.name()));
         switch (selectedButton) {
-            case RIGHT_BUMPER:
-//                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 1000, 500, 0.3, 0.3));
-//                tasks.add(new JoyeuseDriveTask(this, 2, drive, 0, 0));
-//                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, -1000, -1000, 0.3, 0.3));
-//                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, 1000, 500, 0.3, 0.15));
-                tasks.add(new DurandalDriveTask(this, 2, drive, -0.8, -0.8));
-//                tasks.add(new DurandalSpinnerTask(this, 1, config.spinnerMotor, 1));
-//                tasks.add(new JoyeuseDriveEncoderTask(this, 5, drive, -1000, -500, 0.3, 0.15));
-
+            case RIGHT_BUMPER: // TEST
+//                tasks.add(new DurandalDriveTask(this, 2, drive, 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 1000, 1000, 0.25, 0.25));
                 break;
 
+
             case Y: // Red #1
-                // Tasks can go here
-                tasks.add(new MessageTask(this, 1.0, "Running Y"));
                 //        READ BARCODE
-                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 700, 700, 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 700, 700, 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 350, 350, 0.5, 0.5));
                 tasks.add(new DurandalSpinnerTask(this, 2, config.spinnerMotor, 1));
                 tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 900, -900, 1, 1));
                 tasks.add(new WaitTask(this, 0.5));
@@ -111,23 +105,35 @@ public class DurandalSimpleAutonomous extends PaladinsOpMode {
                 tasks.add(new DurandalDriveTask(this, 0.5, drive, 0.5, -0.5));
                 break;
             case X:
-                // Tasks can go here
-                tasks.add(new MessageTask(this, 1.0, "Running X"));
                 //        Drive forward
                 tasks.add(new DurandalDriveTask(this, 1.8, drive, -0.5, -0.5));
                 tasks.add(new DurandalDriveTask(this, 0.1, drive, 0, 0));
-
                 break;
-            case B:
-                // Tasks can go here
-                tasks.add(new MessageTask(this, 1.0, "Running A"));
+            case B: // Blue #1
                 //        Drive forward
-                tasks.add(new DurandalDriveTask(this, 1.8, drive, -0.5, -0.5));
-                tasks.add(new DurandalDriveTask(this, 0.1, drive, 0, 0));
+//                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 200, 200, 0.5, 0.5));
+//                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 450, -450, 0.25, 0.25));
+//                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 1000, 1000, 0.5, 0.5));
+//                tasks.add(new DurandalSpinnerTask(this, 3, config.spinnerMotor, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, (402*(Math.PI/2))-30, 1, 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 350, 350, 0.5, 0.5));
+                tasks.add(new DurandalSpinnerTask(this, 3, config.spinnerMotor, 0.4));
+                tasks.add(new DurandalDriveTask(this, 1, drive, 1, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, -1270, -1270, 0.75, 0.75));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -(402*(Math.PI/4)), (402*(Math.PI/4)), 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 200, 200, 0.5, 0.5));
+                // Deposit Preload
+                tasks.add(new WaitTask(this, 2));
+
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, -200, -200, 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -(402*(Math.PI/4)), (402*(Math.PI/4)), 0.5, 0.5));
+                tasks.add(new WaitTask(this, 0.5));
+                tasks.add(new DurandalDriveTask(this, 2, drive, 1, 1));
+
+//                tasks.add(new DurandalDriveTask(this, 1.8, drive, -0.5, -0.5));
+//                tasks.add(new DurandalDriveTask(this, 0.1, drive, 0, 0));
                 break;
             case A:
-                // Tasks can go here
-                tasks.add(new MessageTask(this, 1.0, "Running B"));
                 //        Drive forward
                 tasks.add(new DurandalDriveTask(this, 1.8, drive, -0.5, -0.5));
                 tasks.add(new DurandalDriveTask(this, 0.1, drive, 0, 0));

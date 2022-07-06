@@ -85,6 +85,8 @@ public class DurandalAutonomous extends PaladinsOpMode {
             case RIGHT_BUMPER: // TEST
 //                tasks.add(new DurandalDriveTask(this, 2, drive, 0.5, 0.5));
                 tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 1000, 1000, 0.25, 0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 350, -350, 0.25,0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, -350, 350, 0.25, 0.25));
                 break;
 
 

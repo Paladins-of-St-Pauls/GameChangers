@@ -36,7 +36,8 @@ public class  DurandalAutonomous extends PaladinsOpMode {
         buttonMap.put(ButtonControl.X, "Red #2");
         buttonMap.put(ButtonControl.B, "Blue #1");
         buttonMap.put(ButtonControl.A, "Blue #2");
-        buttonMap.put(ButtonControl.LEFT_BUMPER, "Test");
+        buttonMap.put(ButtonControl.LEFT_BUMPER, "Test Blue");
+        buttonMap.put(ButtonControl.RIGHT_BUMPER, "Test Red");
 
         ButtonControl selectedButton = ButtonControl.X;
 
@@ -82,8 +83,7 @@ public class  DurandalAutonomous extends PaladinsOpMode {
 
         telemetry.addLine(String.format("Loading tasks for %s", selectedButton.name()));
         switch (selectedButton) {
-            case LEFT_BUMPER: // TEST
-//                tasks.add(new DurandalDriveTask(this, 2, drive, 0.5, 0.5));
+            case LEFT_BUMPER: // TEST BLUE
                 tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -560, -560, -0.25, -0.25));
                 tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 0, -50, 0.25,-0.25));
                 tasks.add(new DurandalSpinnerTask(this, 2, config.spinnerMotor, -1));
@@ -91,12 +91,29 @@ public class  DurandalAutonomous extends PaladinsOpMode {
                 tasks.add(new DurandalDriveEncoderTask(this, 8, drive, 1310, 1310, 0.5, 0.5));
                 tasks.add(new DurandalDriveEncoderTask(this, 5, drive, (402*(Math.PI/4)), -(402*(Math.PI/4)), 0.25, 0.25));
                 tasks.add(new DurandalDriveEncoderTask(this, 8, drive, 380, 380, 0.25, 0.25));
+                //          LIFT TO APPROPRIATE LEVEL
+                //          DEPOSIT CARGO
+                //          LOWER LIFT
                 tasks.add(new DurandalDriveEncoderTask(this, 8, drive, -380, -380, -0.25, -0.25));
                 tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -(402*(Math.PI/4)), (402*(Math.PI/4)), 0.25, 0.25));
                 tasks.add(new DurandalDriveTask(this, 3, drive, 0.5, 0.5));
-
                 break;
 
+            case RIGHT_BUMPER: // TEST RED
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -560, -560, -0.25, -0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, -50, 0, -0.25,0.25));
+                tasks.add(new DurandalSpinnerTask(this, 2, config.spinnerMotor, 1));
+                tasks.add(new DurandalDriveTask(this, 1, drive, 0.2, 0.2));
+                tasks.add(new DurandalDriveEncoderTask(this, 8, drive, 1310, 1310, 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -(402*(Math.PI/4)), (402*(Math.PI/4)), 0.25, 0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 8, drive, 380, 380, 0.25, 0.25));
+                //          LIFT TO APPROPRIATE LEVEL
+                //          DEPOSIT CARGO
+                //          LOWER LIFT
+                tasks.add(new DurandalDriveEncoderTask(this, 8, drive, -380, -380, -0.25, -0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, (402*(Math.PI/4)), -(402*(Math.PI/4)), 0.25, 0.25));
+                tasks.add(new DurandalDriveTask(this, 3, drive, 0.5, 0.5));
+                break;
 
             case Y: // Red #1
                 //        READ BARCODE

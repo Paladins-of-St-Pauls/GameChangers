@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Autonomous(name = "DurandalAutonomous")
-public class DurandalAutonomous extends PaladinsOpMode {
+public class  DurandalAutonomous extends PaladinsOpMode {
     private DurandalConfiguration config;
     private DurandalDrive drive;
     private ArrayDeque<Task> tasks = new ArrayDeque<>();
@@ -36,7 +36,7 @@ public class DurandalAutonomous extends PaladinsOpMode {
         buttonMap.put(ButtonControl.X, "Red #2");
         buttonMap.put(ButtonControl.B, "Blue #1");
         buttonMap.put(ButtonControl.A, "Blue #2");
-        buttonMap.put(ButtonControl.RIGHT_BUMPER, "Test");
+        buttonMap.put(ButtonControl.LEFT_BUMPER, "Test");
 
         ButtonControl selectedButton = ButtonControl.X;
 
@@ -82,11 +82,19 @@ public class DurandalAutonomous extends PaladinsOpMode {
 
         telemetry.addLine(String.format("Loading tasks for %s", selectedButton.name()));
         switch (selectedButton) {
-            case RIGHT_BUMPER: // TEST
+            case LEFT_BUMPER: // TEST
 //                tasks.add(new DurandalDriveTask(this, 2, drive, 0.5, 0.5));
-                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, 1000, 1000, 0.25, 0.25));
-                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 350, -350, 0.25,0.25));
-                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, -350, 350, 0.25, 0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -560, -560, -0.25, -0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 3, drive, 0, -50, 0.25,-0.25));
+                tasks.add(new DurandalSpinnerTask(this, 2, config.spinnerMotor, -1));
+                tasks.add(new DurandalDriveTask(this, 1, drive, -0.2, -0.2));
+                tasks.add(new DurandalDriveEncoderTask(this, 8, drive, 1310, 1310, 0.5, 0.5));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, (402*(Math.PI/4)), -(402*(Math.PI/4)), 0.25, 0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 8, drive, 380, 380, 0.25, 0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 8, drive, -380, -380, -0.25, -0.25));
+                tasks.add(new DurandalDriveEncoderTask(this, 5, drive, -(402*(Math.PI/4)), (402*(Math.PI/4)), 0.25, 0.25));
+                tasks.add(new DurandalDriveTask(this, 3, drive, 0.5, 0.5));
+
                 break;
 
 
@@ -136,9 +144,10 @@ public class DurandalAutonomous extends PaladinsOpMode {
 //                tasks.add(new DurandalDriveTask(this, 0.1, drive, 0, 0));
                 break;
             case A:
-                //        Drive forward
+                //Testing
                 tasks.add(new DurandalDriveTask(this, 1.8, drive, -0.5, -0.5));
                 tasks.add(new DurandalDriveTask(this, 0.1, drive, 0, 0));
+                tasks.add(new DurandalDriveTask(this, 0.1, drive, 0, 1));
                 break;
         }
 

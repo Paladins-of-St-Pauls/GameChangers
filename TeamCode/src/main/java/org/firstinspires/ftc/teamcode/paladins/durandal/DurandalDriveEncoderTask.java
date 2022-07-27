@@ -19,7 +19,7 @@ public class DurandalDriveEncoderTask extends BaseTask implements Task {
 //        This is for the GoBilda motor with 537.7 ticks/rev.
         double ticks_per_rev = 537.7;
         double wheel_diameter = 120;
-        double magic_factor = (2000.0/1475.0)*(100.0/99.0);
+        double magic_factor = (2000.0/1475.0)*(100.0/99.0)*(2400.0/2350.0);
 
         this.leftDistance = (-leftMM*ticks_per_rev/(wheel_diameter*Math.PI))*magic_factor;
         this.rightDistance = (-rightMM*ticks_per_rev/(wheel_diameter*Math.PI))*magic_factor;

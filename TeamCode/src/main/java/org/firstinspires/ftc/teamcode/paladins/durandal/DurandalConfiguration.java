@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.paladins.common.RobotConfiguration;
@@ -26,6 +27,7 @@ public class DurandalConfiguration extends RobotConfiguration {
     public DcMotor liftMotor;
     public DcMotor leftHarvester;
     public DcMotor rightHarvester;
+    public TouchSensor liftSwitch;
 
     BNO055IMU imu;
 
@@ -65,6 +67,7 @@ public class DurandalConfiguration extends RobotConfiguration {
         liftMotor = (DcMotor) getHardwareOn("liftMotor", hardwareMap.dcMotor);
         leftHarvester = (DcMotor) getHardwareOn("leftHarvester", hardwareMap.dcMotor);
         rightHarvester = (DcMotor) getHardwareOn("rightHarvester", hardwareMap.dcMotor);
+        liftSwitch = (TouchSensor) getHardwareOn("liftSwitch", hardwareMap.touchSensor);
 
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftHarvester.setDirection(DcMotorSimple.Direction.REVERSE);

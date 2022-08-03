@@ -26,7 +26,7 @@ public class DurandalSteerDriveOpMode extends PaladinsOpMode {
         drive = new DurandalDrive(this, config.leftMotor, config.rightMotor);
         steerDrive = new DurandalSteerDrive(this, gamepad1, drive);
         spinner = new GamePadMomentaryMotor(this, gamepad2, config.spinnerMotor, ButtonControl.Y, 0.5f);
-        lift = new DurandalLift(this, config.liftMotor);
+        lift = new DurandalLift(this, config.liftMotor, config.liftSwitch);
         harvester = new DurandalHarvester(this, config.leftHarvester, config.rightHarvester);
     }
 

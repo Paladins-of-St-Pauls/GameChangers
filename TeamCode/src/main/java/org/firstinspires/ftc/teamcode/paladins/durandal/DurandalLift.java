@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.paladins.durandal;
 import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -16,8 +18,10 @@ public class DurandalLift extends PaladinsComponent {
             {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
     private static float[] steer_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
+    private static int[] lift_positions = {0, 200, 400, 600, 800, 900};
 
     final private DcMotor liftMotor;
+    final private TouchSensor liftSwitch;
 
 
 //    final private Gamepad gamepad;
@@ -27,18 +31,33 @@ public class DurandalLift extends PaladinsComponent {
 
     private double liftPower;
 
+    private int liftIndex = 0;
+
+
 
 
 //    private double leftCm;
 //    private double rightCm;
 //    private double countsPerCm;
 
-    public DurandalLift(PaladinsOpMode opMode, DcMotor liftMotor) {
+    public DurandalLift(PaladinsOpMode opMode, DcMotor liftMotor, TouchSensor liftSwitch) {
         super(opMode);
+
+        this.liftSwitch = liftSwitch;
 
         this.liftMotor = liftMotor;
 
+        liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        liftMotor.setTargetPosition(0);
+
+
 
         liftPower = 0;
 
@@ -53,7 +72,21 @@ public class DurandalLift extends PaladinsComponent {
 //        this(opMode, leftMidMotor, leftBackMotor, rightMidMotor, rightBackMotor);
 //    }
 
+    public void liftUp() {
+        liftIndex ++;
+        if(liftIndex > lift_positions.length -1) {
+            liftIndex = lift_positions.length -1;
+        }
+        liftMotor.setTargetPosition(lift_positions[liftIndex]);
+    }
 
+    public void liftDown() {
+        liftIndex --;
+        if(liftIndex < 0) {
+            liftIndex = 0;
+        }
+        liftMotor.setTargetPosition(lift_positions[liftIndex]);
+    }
 
     public void setPower(double power) {
         liftPower = power;
@@ -65,7 +98,10 @@ public class DurandalLift extends PaladinsComponent {
      */
     @SuppressLint("DefaultLocale")
     public void update() {
+        getOpMode().telemetry.addLine(String.format("pos: %d",liftMotor.getCurrentPosition()));
         liftMotor.setPower((liftPower));
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
     }
 
     /**

@@ -20,6 +20,10 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
     private JoystickMomentaryServo rightHarvester;
     private JoystickMomentaryServo leftHarvester;
 
+    private boolean a_pressed = false;
+    private boolean b_pressed = false;
+
+
     @Override
     protected void onInit() {
         config = DurandalConfiguration.newConfig(hardwareMap, telemetry);
@@ -27,7 +31,7 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
         drive = new DurandalDrive(this, config.leftMotor, config.rightMotor);
         tankDrive = new DurandalTankDrive(this, gamepad1, drive);
         spinner = new GamePadMomentaryMotor(this, gamepad2, config.spinnerMotor, ButtonControl.Y, 0.5f);
-        lift = new DurandalLift(this, config.liftMotor);
+        lift = new DurandalLift(this, config.liftMotor, config.liftSwitch);
         harvester = new DurandalHarvester(this, config.leftHarvester, config.rightHarvester);
     }
 
@@ -36,11 +40,17 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
         tankDrive.update();
         spinner.update();
 
-        if (gamepad2.a) {
-            lift.setPower((gamepad2.right_trigger-gamepad2.left_trigger));
-        } else {
-            lift.setPower((gamepad2.right_trigger-gamepad2.left_trigger)/2);
+
+
+        lift.setPower(.2);
+        if (a_pressed && !gamepad2.a) {
+            lift.liftUp();
+        } else if (b_pressed && !gamepad2.b) {
+            lift.liftDown();
         }
+
+        a_pressed = gamepad2.a;
+        b_pressed = gamepad2.b;
 
         lift.update();
 

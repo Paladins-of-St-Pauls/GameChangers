@@ -53,10 +53,10 @@ public class DurandalSteerDriveOpMode extends PaladinsOpMode {
 
         harvester.update();
         if(config.liftSwitch.isPressed()) {
-            telemetry.addLine("Pressed");
+            telemetry.addLine("Switch Down");
 
         } else {
-            telemetry.addLine("not pressed");
+            telemetry.addLine("Switch Up");
         }
 
 

@@ -20,8 +20,8 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
     private JoystickMomentaryServo rightHarvester;
     private JoystickMomentaryServo leftHarvester;
 
-    private boolean a_pressed = false;
-    private boolean b_pressed = false;
+    private boolean up_pressed = false;
+    private boolean down_pressed = false;
 
 
     @Override
@@ -43,14 +43,14 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
 
 
         lift.setPower(.2);
-        if (a_pressed && !gamepad2.a) {
+        if (up_pressed && !gamepad2.dpad_up) {
             lift.liftUp();
-        } else if (b_pressed && !gamepad2.b) {
+        } else if (down_pressed && !gamepad2.dpad_down) {
             lift.liftDown();
         }
 
-        a_pressed = gamepad2.a;
-        b_pressed = gamepad2.b;
+        up_pressed = gamepad2.dpad_up;
+        down_pressed = gamepad2.dpad_down;
 
         lift.update();
 
@@ -60,6 +60,13 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
             harvester.setPower(0.5);
         } else {
             harvester.setPower(0);
+        }
+
+        if(config.liftSwitch.isPressed()) {
+            telemetry.addLine("Switch Down");
+
+        } else {
+            telemetry.addLine("Switch Up");
         }
 
         harvester.update();

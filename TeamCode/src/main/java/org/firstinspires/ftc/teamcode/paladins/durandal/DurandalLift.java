@@ -18,7 +18,7 @@ public class DurandalLift extends PaladinsComponent {
             {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
     private static float[] steer_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
-    private static int[] lift_positions = {0, 200, 400, 600, 800, 900};
+    private static int[] lift_positions = {0, 100, 300, 500, 700};
 
     final private DcMotor liftMotor;
     final private TouchSensor liftSwitch;
@@ -88,6 +88,11 @@ public class DurandalLift extends PaladinsComponent {
         liftMotor.setTargetPosition(lift_positions[liftIndex]);
     }
 
+    private void liftReset() {
+        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+    }
+
     public void setPower(double power) {
         liftPower = power;
 
@@ -99,8 +104,14 @@ public class DurandalLift extends PaladinsComponent {
     @SuppressLint("DefaultLocale")
     public void update() {
         getOpMode().telemetry.addLine(String.format("pos: %d",liftMotor.getCurrentPosition()));
-        liftMotor.setPower((liftPower));
-        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        if(liftIndex == 0 && liftSwitch.isPressed()) {
+            liftReset();
+        }
+        else {
+            liftMotor.setPower((liftPower));
+            liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
 
     }
 

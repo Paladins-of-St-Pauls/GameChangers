@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
+import org.tensorflow.lite.support.image.TensorImage;
 
 /**
  * Created by Shaun on 2/07/2017.
@@ -18,7 +19,7 @@ public class DurandalLift extends PaladinsComponent {
             {0.00f, 0.2f, 0.25f, 0.3f, 0.5f, 0.7f, 0.8f, 1.0f};
     private static float[] steer_curve =
             {0.00f, 0.2f, 0.25f, 0.3f, 0.35f, 0.4f, 0.5f, 1.0f};
-    private static int[] lift_positions = {0, 100, 300, 500, 700};
+    private static int[] lift_positions = {0, 100, 300, 500, 600};
 
     final private DcMotor liftMotor;
     final private TouchSensor liftSwitch;

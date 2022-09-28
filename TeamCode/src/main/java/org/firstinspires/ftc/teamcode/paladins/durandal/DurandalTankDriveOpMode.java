@@ -42,7 +42,7 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
 
 
 
-        lift.setPower(.2);
+        lift.setPower(1);
         if (up_pressed && !gamepad2.dpad_up) {
             lift.liftUp();
         } else if (down_pressed && !gamepad2.dpad_down) {

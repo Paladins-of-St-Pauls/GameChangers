@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.paladins.common.RobotConfiguration;
@@ -23,6 +24,10 @@ public class FierboisConfiguration extends RobotConfiguration {
     // Back motors
     public DcMotor backLeftMotor;
     public DcMotor backRightMotor;
+
+    // Lift Motor
+    public DcMotor liftMotor;
+    public TouchSensor liftSwitch;
 
     BNO055IMU imu;
 
@@ -61,6 +66,9 @@ public class FierboisConfiguration extends RobotConfiguration {
 
         backLeftMotor = (DcMotor) getHardwareOn("backLeftMotor", hardwareMap.dcMotor);
         backRightMotor = (DcMotor) getHardwareOn("backRightMotor", hardwareMap.dcMotor);
+
+        liftMotor = (DcMotor) getHardwareOn("liftMotor", hardwareMap.dcMotor);
+
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);

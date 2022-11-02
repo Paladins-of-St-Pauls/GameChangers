@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.paladins.fierbois;
+package org.firstinspires.ftc.teamcode.paladins.cortana;
 
 import static java.lang.Boolean.TRUE;
 
@@ -8,17 +8,17 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
 
 @TeleOp(name = "FierboisMechanumDrive")
-public class FierboisOpMode extends PaladinsOpMode {
-    private FierboisConfiguration config;
+public class CortanaOpMode extends PaladinsOpMode {
+    private CortanaConfiguration config;
     private NormalisedMecanumDrive drive;
-    private FierboisLift lift;
+    private CortanaLift lift;
 
     @Override
     protected void onInit() {
-        config = FierboisConfiguration.newConfig(hardwareMap, telemetry);
+        config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
-        lift = new FierboisLift(this, config.liftMotor, config.liftSwitch);
+        lift = new CortanaLift(this, config.liftMotor, config.liftSwitch);
     }
 
     @Override

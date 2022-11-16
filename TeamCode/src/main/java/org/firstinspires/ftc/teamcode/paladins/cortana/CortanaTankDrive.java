@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseTankDrive;
 
-@TeleOp(name = "FierboisTankDrive")
+@TeleOp(name = "CortanaTankDrive")
 public class CortanaTankDrive extends PaladinsOpMode {
     private CortanaConfiguration config;
     private JoyeuseDrive drive;

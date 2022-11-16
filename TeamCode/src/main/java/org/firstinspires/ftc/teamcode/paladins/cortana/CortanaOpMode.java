@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
 
-@TeleOp(name = "FierboisMechanumDrive")
+@TeleOp(name = "CortanaMechanumDrive")
 public class CortanaOpMode extends PaladinsOpMode {
     private CortanaConfiguration config;
     private NormalisedMecanumDrive drive;

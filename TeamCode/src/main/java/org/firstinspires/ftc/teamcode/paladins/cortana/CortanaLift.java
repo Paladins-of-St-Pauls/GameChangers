@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
@@ -16,9 +17,9 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 public class CortanaLift extends PaladinsComponent {
 
     private static int[] lift_positions = {0, 400, 800, 1000,};
-
     final private DcMotor liftMotor;
     final private TouchSensor liftSwitch;
+    final private Servo liftClamp;
 
 
 //    final private Gamepad gamepad;
@@ -37,12 +38,14 @@ public class CortanaLift extends PaladinsComponent {
 //    private double rightCm;
 //    private double countsPerCm;
 
-    public CortanaLift(PaladinsOpMode opMode, DcMotor liftMotor, TouchSensor liftSwitch) {
+    public CortanaLift(PaladinsOpMode opMode, DcMotor liftMotor, TouchSensor liftSwitch, Servo liftClamp) {
         super(opMode);
 
         this.liftSwitch = liftSwitch;
 
         this.liftMotor = liftMotor;
+
+        this.liftClamp = liftClamp;
 
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 

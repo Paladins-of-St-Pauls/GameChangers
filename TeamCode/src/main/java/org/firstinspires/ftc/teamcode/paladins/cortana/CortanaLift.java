@@ -47,30 +47,19 @@ public class CortanaLift extends PaladinsComponent {
 
         this.liftClamp = liftClamp;
 
+        // Init Lift Motor
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         liftMotor.setTargetPosition(0);
-
-
-
         liftPower = 0;
 
-
-//        leftPowerItem = getOpMode().telemetry.addData("Left power", "%.2f", 0.0f);
-//        leftPowerItem.setRetained(true);
-//        rightPowerItem = getOpMode().telemetry.addData("Right power", "%.2f", 0.0f);
-//        rightPowerItem.setRetained(true);
+        // Init Lift Clamp
+        liftClamp.setPosition(0);
+        liftClamp.scaleRange(1, 5);
     }
 
-//    public JoyeuseDrive(PaladinsOpMode opMode, Gamepad gamepad, DcMotor leftMidMotor, DcMotor rightMidMotor) {
-//        this(opMode, leftMidMotor, leftBackMotor, rightMidMotor, rightBackMotor);
-//    }
 
     public void liftUp() {
         liftIndex ++;
@@ -92,7 +81,13 @@ public class CortanaLift extends PaladinsComponent {
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
+    public void liftClampOpen() {
+        liftClamp.setPosition(5);
+    }
 
+    public void liftClampClose() {
+        liftClamp.setPosition(1);
+    }
     public void setPower(double power) {
         liftPower = power;
 

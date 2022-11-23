@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -28,6 +29,7 @@ public class CortanaConfiguration extends RobotConfiguration {
     // Lift Motor
     public DcMotor liftMotor;
     public TouchSensor liftSwitch;
+    public Servo liftClamp;
 
     BNO055IMU imu;
 
@@ -68,6 +70,7 @@ public class CortanaConfiguration extends RobotConfiguration {
         backRightMotor = (DcMotor) getHardwareOn("backRightMotor", hardwareMap.dcMotor);
 
         liftMotor = (DcMotor) getHardwareOn("liftMotor", hardwareMap.dcMotor);
+        liftClamp = (Servo) getHardwareOn("iftClamp", hardwareMap.servo);
 
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);

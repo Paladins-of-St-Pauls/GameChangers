@@ -70,7 +70,7 @@ public class CortanaConfiguration extends RobotConfiguration {
         backRightMotor = (DcMotor) getHardwareOn("backRightMotor", hardwareMap.dcMotor);
 
         liftMotor = (DcMotor) getHardwareOn("liftMotor", hardwareMap.dcMotor);
-        liftClamp = (Servo) getHardwareOn("iftClamp", hardwareMap.servo);
+        liftClamp = (Servo) getHardwareOn("liftClamp", hardwareMap.servo);
 
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);

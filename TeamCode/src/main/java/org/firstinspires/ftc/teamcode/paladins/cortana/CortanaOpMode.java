@@ -18,7 +18,7 @@ public class CortanaOpMode extends PaladinsOpMode {
         config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
-        lift = new CortanaLift(this, config.liftMotor, config.liftSwitch, config.liftClamp);
+        lift = new CortanaLift(this, config.liftMotor, config.liftClamp);
     }
 
     @Override

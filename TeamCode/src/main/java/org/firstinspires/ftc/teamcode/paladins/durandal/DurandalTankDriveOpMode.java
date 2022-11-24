@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.ButtonControl;
 import org.firstinspires.ftc.teamcode.paladins.common.GamePadMomentaryMotor;
+import org.firstinspires.ftc.teamcode.paladins.common.GamePadToggleMotorWithRevers;
 import org.firstinspires.ftc.teamcode.paladins.common.JoystickControl;
 import org.firstinspires.ftc.teamcode.paladins.common.JoystickMomentaryServo;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -15,10 +16,8 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
     private DurandalDrive drive;
     private DurandalTankDrive tankDrive;
     private DurandalLift lift;
-    private DurandalHarvester harvester;
     private GamePadMomentaryMotor spinner;
-    private JoystickMomentaryServo rightHarvester;
-    private JoystickMomentaryServo leftHarvester;
+    private GamePadToggleMotorWithRevers harvester;
 
     private boolean up_pressed = false;
     private boolean down_pressed = false;
@@ -27,12 +26,11 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
     @Override
     protected void onInit() {
         config = DurandalConfiguration.newConfig(hardwareMap, telemetry);
-
+        harvester= new GamePadToggleMotorWithRevers(this, gamepad2,config.harvester, ButtonControl.A, ButtonControl.B, 0.5f, true);
         drive = new DurandalDrive(this, config.leftMotor, config.rightMotor);
         tankDrive = new DurandalTankDrive(this, gamepad1, drive);
         spinner = new GamePadMomentaryMotor(this, gamepad2, config.spinnerMotor, ButtonControl.Y, 0.5f);
         lift = new DurandalLift(this, config.liftMotor, config.liftSwitch);
-        harvester = new DurandalHarvester(this, config.leftHarvester, config.rightHarvester);
     }
 
     @Override
@@ -53,14 +51,14 @@ public class  DurandalTankDriveOpMode extends PaladinsOpMode {
         down_pressed = gamepad2.dpad_down;
 
         lift.update();
-
-        if(gamepad2.left_bumper) {
-            harvester.setPower(-1.0);
-        } else if (gamepad2.right_bumper) {
-            harvester.setPower(0.5);
-        } else {
-            harvester.setPower(0);
-        }
+//
+//        if(gamepad1.left_bumper) {
+//            harvester.setPower(-1.0);
+//        } else if (gamepad1.right_bumper) {
+//            harvester.setPower(0.5);
+//        } else {
+//            harvester.setPower(0);
+//        }
 
         if(config.liftSwitch.isPressed()) {
             telemetry.addLine("Switch Down");

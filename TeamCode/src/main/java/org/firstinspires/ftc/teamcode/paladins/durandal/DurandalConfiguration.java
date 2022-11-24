@@ -25,8 +25,7 @@ public class DurandalConfiguration extends RobotConfiguration {
     public DcMotor rightMotor;
     public DcMotor spinnerMotor;
     public DcMotor liftMotor;
-    public DcMotor leftHarvester;
-    public DcMotor rightHarvester;
+    public DcMotor harvester;
     public TouchSensor liftSwitch;
 
     BNO055IMU imu;
@@ -65,12 +64,10 @@ public class DurandalConfiguration extends RobotConfiguration {
         rightMotor = (DcMotor) getHardwareOn("rightMotor", hardwareMap.dcMotor);
         spinnerMotor = (DcMotor) getHardwareOn("spinnerMotor", hardwareMap.dcMotor);
         liftMotor = (DcMotor) getHardwareOn("liftMotor", hardwareMap.dcMotor);
-        leftHarvester = (DcMotor) getHardwareOn("leftHarvester", hardwareMap.dcMotor);
-        rightHarvester = (DcMotor) getHardwareOn("rightHarvester", hardwareMap.dcMotor);
+        harvester = (DcMotor) getHardwareOn("harvester", hardwareMap.dcMotor);
         liftSwitch = (TouchSensor) getHardwareOn("liftSwitch", hardwareMap.touchSensor);
 
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftHarvester.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         // Set up the parameters with which we will use our IMU. Note that integration

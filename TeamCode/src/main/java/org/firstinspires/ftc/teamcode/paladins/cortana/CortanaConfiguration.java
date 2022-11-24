@@ -28,7 +28,6 @@ public class CortanaConfiguration extends RobotConfiguration {
 
     // Lift Motor
     public DcMotor liftMotor;
-    public TouchSensor liftSwitch;
     public Servo liftClamp;
 
     BNO055IMU imu;

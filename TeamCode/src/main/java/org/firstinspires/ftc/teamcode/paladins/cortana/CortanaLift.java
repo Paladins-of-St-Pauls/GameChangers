@@ -15,10 +15,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  */
 
 public class CortanaLift extends PaladinsComponent {
-
-    private static int[] lift_positions = {0, 400, 800, 1000,};
     final private DcMotor liftMotor;
-    final private TouchSensor liftSwitch;
     final private Servo liftClamp;
 
 
@@ -29,7 +26,6 @@ public class CortanaLift extends PaladinsComponent {
 
     private double liftPower;
 
-    private int liftIndex = 0;
 
 
 
@@ -38,54 +34,35 @@ public class CortanaLift extends PaladinsComponent {
 //    private double rightCm;
 //    private double countsPerCm;
 
-    public CortanaLift(PaladinsOpMode opMode, DcMotor liftMotor, TouchSensor liftSwitch, Servo liftClamp) {
+    public CortanaLift(PaladinsOpMode opMode, DcMotor liftMotor, Servo liftClamp) {
         super(opMode);
 
-        this.liftSwitch = liftSwitch;
-
         this.liftMotor = liftMotor;
-
         this.liftClamp = liftClamp;
 
         // Init Lift Motor
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        liftMotor.setTargetPosition(0);
         liftPower = 0;
 
         // Init Lift Clamp
         liftClamp.setPosition(0);
-        liftClamp.scaleRange(1, 5);
+        liftClamp.scaleRange(0, 1);
     }
 
 
     public void liftUp() {
-        liftIndex ++;
-        if(liftIndex > lift_positions.length -1) {
-            liftIndex = lift_positions.length -1;
-        }
-        liftMotor.setTargetPosition(lift_positions[liftIndex]);
+        liftPower = 1;
     }
 
     public void liftDown() {
-        liftIndex --;
-        if(liftIndex < 0) {
-            liftIndex = 0;
-        }
-        liftMotor.setTargetPosition(lift_positions[liftIndex]);
-    }
-
-    private void liftReset() {
-        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
+        liftPower = -1;
     }
     public void liftClampOpen() {
-        liftClamp.setPosition(5);
+        liftClamp.setPosition(0);
     }
     public void liftClampClose() {
-        liftClamp.setPosition(1);
+        liftClamp.setPosition(0.7);
     }
     public void setPower(double power) {
         liftPower = power;
@@ -97,16 +74,9 @@ public class CortanaLift extends PaladinsComponent {
      */
     @SuppressLint("DefaultLocale")
     public void update() {
-        getOpMode().telemetry.addLine(String.format("pos: %d",liftMotor.getCurrentPosition()));
-
-        if(liftIndex == 0 && liftSwitch.isPressed()) {
-            liftReset();
-        }
-        else {
-            liftMotor.setPower((liftPower));
-            liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        }
-
+        getOpMode().telemetry.addLine(String.format("lift pow: %f",liftMotor.getPower()));
+        liftMotor.setPower((liftPower));
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     /**

@@ -58,6 +58,9 @@ public class CortanaLift extends PaladinsComponent {
     public void liftDown() {
         liftPower = -1;
     }
+    public void liftBrake() {
+        liftPower = 0;
+    }
     public void liftClampOpen() {
         liftClamp.setPosition(0);
     }
@@ -76,7 +79,6 @@ public class CortanaLift extends PaladinsComponent {
     public void update() {
         getOpMode().telemetry.addLine(String.format("lift pow: %f",liftMotor.getPower()));
         liftMotor.setPower((liftPower));
-        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     /**

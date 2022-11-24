@@ -179,7 +179,7 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
             @Override
             public void onOpened()
             {
-                camera.startStreaming(1280,720, OpenCvCameraRotation.UPRIGHT);
+                camera.startStreaming(1920,1080, OpenCvCameraRotation.UPRIGHT);
             }
 
 //            @Override
@@ -285,32 +285,32 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
              */
 
             // e.g.
-            if(tagOfInterest.pose.x <= 20 && IS_BLUE == TRUE)
+            if(tagOfInterest.id == 111 && IS_BLUE == TRUE)
             {
                 tasks.add(new CortanaDriveTask(this, 1, drive, -1, 1,1,-1));
                 tasks.add(new CortanaDriveTask(this, 1, drive, 1,1,1,1));
             }
-            else if(tagOfInterest.pose.x >= 20 && tagOfInterest.pose.x <= 50 && IS_BLUE == TRUE)
+            else if(tagOfInterest.id == 222 && IS_BLUE == TRUE)
             {
                 tasks.add(new CortanaDriveTask(this, 1, drive, -1, 1,1,-1));
                 tasks.add(new CortanaDriveTask(this, 2, drive, 1,1,1,1));
             }
-            else if(tagOfInterest.pose.x >= 50 && IS_BLUE == TRUE)
+            else if(tagOfInterest.id == 333 && IS_BLUE == TRUE)
             {
                 tasks.add(new CortanaDriveTask(this, 1, drive, -1, 1,1,-1));
                 tasks.add(new CortanaDriveTask(this, 3, drive, 1,1,1,1));
             }
-            if(tagOfInterest.pose.x <= 20 && IS_BLUE == FALSE)
+            if(tagOfInterest.id == 111 && IS_BLUE == FALSE)
             {
                 tasks.add(new CortanaDriveTask(this, 1, drive, 1, -1,-1,1));
                 tasks.add(new CortanaDriveTask(this, 1, drive, 1,1,1,1));
             }
-            else if(tagOfInterest.pose.x >= 20 && tagOfInterest.pose.x <= 50 && IS_BLUE == FALSE)
+            else if(tagOfInterest.id == 222 && IS_BLUE == FALSE)
             {
                 tasks.add(new CortanaDriveTask(this, 1, drive, 1, -1,-1,1));
                 tasks.add(new CortanaDriveTask(this, 2, drive, 1,1,1,1));
             }
-            else if(tagOfInterest.pose.x >= 50 && IS_BLUE == FALSE)
+            else if(tagOfInterest.id == 333 && IS_BLUE == FALSE)
             {
                 tasks.add(new CortanaDriveTask(this, 1, drive, 1, -1,-1,1));
                 tasks.add(new CortanaDriveTask(this, 3, drive, 1,1,1,1));

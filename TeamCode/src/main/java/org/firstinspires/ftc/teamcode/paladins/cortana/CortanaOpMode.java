@@ -49,7 +49,10 @@ public class CortanaOpMode extends PaladinsOpMode {
 
         } else if (gamepad1.dpad_down) {
             lift.liftDown();
+        } else {
+            lift.liftBrake();
         }
+
         if (gamepad1.dpad_left) {
             lift.liftClampOpen();
         }

@@ -71,6 +71,11 @@ public class StarterStackCalibration extends LinearOpMode {
             public void onOpened() {
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
+
+            @Override
+            public void onError(int errorCode) {
+
+            }
         });
 
         waitForStart();

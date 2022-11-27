@@ -17,6 +17,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 public class CortanaLift extends PaladinsComponent {
     final private DcMotor liftMotor;
     final private Servo liftClamp;
+    final private TouchSensor liftSensor;
 
 
 //    final private Gamepad gamepad;
@@ -34,9 +35,10 @@ public class CortanaLift extends PaladinsComponent {
 //    private double rightCm;
 //    private double countsPerCm;
 
-    public CortanaLift(PaladinsOpMode opMode, DcMotor liftMotor, Servo liftClamp) {
+    public CortanaLift(PaladinsOpMode opMode, DcMotor liftMotor, Servo liftClamp, TouchSensor liftSensor) {
         super(opMode);
 
+        this.liftSensor = liftSensor;
         this.liftMotor = liftMotor;
         this.liftClamp = liftClamp;
 
@@ -78,7 +80,11 @@ public class CortanaLift extends PaladinsComponent {
     @SuppressLint("DefaultLocale")
     public void update() {
         getOpMode().telemetry.addLine(String.format("lift pow: %f",liftMotor.getPower()));
-        liftMotor.setPower((liftPower));
+        if (liftSensor.isPressed()) {
+            liftMotor.setPower(0);
+        } else {
+            liftMotor.setPower((liftPower));
+        }
     }
 
     public boolean isFinished() {

@@ -18,7 +18,7 @@ public class CortanaOpMode extends PaladinsOpMode {
         config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
 
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
-        lift = new CortanaLift(this, config.liftMotor, config.liftClamp);
+        lift = new CortanaLift(this, config.liftMotor, config.liftClamp, config.liftSensor);
     }
 
     @Override
@@ -47,9 +47,9 @@ public class CortanaOpMode extends PaladinsOpMode {
         if (gamepad1.dpad_up) {
             lift.liftUp();
 
-        } else if (gamepad1.dpad_down) {
+        } else if (gamepad1.dpad_down && !config.liftSensor.isPressed()) {
             lift.liftDown();
-        } else {
+        } else{
             lift.liftBrake();
         }
 

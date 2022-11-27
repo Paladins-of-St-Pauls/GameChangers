@@ -68,6 +68,11 @@ public class StackChoiceTask extends BaseTask implements Task {
             public void onOpened() {
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
+
+            @Override
+            public void onError(int errorCode) {
+
+            }
         });
     }
 

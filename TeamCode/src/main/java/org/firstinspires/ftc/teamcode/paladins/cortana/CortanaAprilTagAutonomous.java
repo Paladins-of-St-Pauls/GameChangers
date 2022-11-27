@@ -125,8 +125,8 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
                 camera.startStreaming(1920,1080, OpenCvCameraRotation.UPRIGHT);
             }
 
-//            @Override
-//            public void onError(int errorCode) {}
+            @Override
+            public void onError(int errorCode) {}
         });
 
         TAGS_OF_INTEREST.put(111,1);

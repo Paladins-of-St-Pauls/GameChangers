@@ -91,21 +91,22 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
     protected void onInit() {
         config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
         drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor);
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
-                camera.startStreaming(1920,1080, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened() {
+                camera.startStreaming(1920, 1080, OpenCvCameraRotation.UPRIGHT);
             }
 
-//            @Override
-//            public void onError(int errorCode) {}
+            @Override
+            public void onError(int errorCode) {
+
+            }
         });
 
         TAGS_OF_INTEREST.put(111,1);

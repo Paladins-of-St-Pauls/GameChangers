@@ -29,6 +29,7 @@ public class CortanaConfiguration extends RobotConfiguration {
     // Lift Motor
     public DcMotor liftMotor;
     public Servo liftClamp;
+    public TouchSensor liftSensor;
 
     BNO055IMU imu;
 
@@ -70,6 +71,7 @@ public class CortanaConfiguration extends RobotConfiguration {
 
         liftMotor = (DcMotor) getHardwareOn("liftMotor", hardwareMap.dcMotor);
         liftClamp = (Servo) getHardwareOn("liftClamp", hardwareMap.servo);
+        liftSensor = (TouchSensor) getHardwareOn("liftSensor", hardwareMap.touchSensor);
 
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);

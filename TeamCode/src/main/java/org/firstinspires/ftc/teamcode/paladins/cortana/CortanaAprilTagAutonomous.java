@@ -78,7 +78,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 
-@Autonomous
+@Autonomous(name="OpenCV tasks")
 public class CortanaAprilTagAutonomous extends PaladinsOpMode
 {
     OpenCvCamera camera;
@@ -111,6 +111,27 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
 
     @Override
     protected void onInit() {
+        config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
+        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor);
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
+
+        camera.setPipeline(aprilTagDetectionPipeline);
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        {
+            @Override
+            public void onOpened()
+            {
+                camera.startStreaming(1920,1080, OpenCvCameraRotation.UPRIGHT);
+            }
+
+//            @Override
+//            public void onError(int errorCode) {}
+        });
+
+        telemetry.setMsTransmissionInterval(50);
+
         HashMap<ButtonControl, String> buttonMap = new HashMap<>();
         buttonMap.put(ButtonControl.LEFT_BUMPER, "Blue");
         buttonMap.put(ButtonControl.RIGHT_BUMPER, "Red");
@@ -153,130 +174,37 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
                 IS_BLUE = FALSE;
                 break;
         }
-    }
 
-    @Override
-    protected void activeLoop() throws InterruptedException {
-
-    }
-
-    @Override
-    public void runOpMode()
-    {
         TAGS_OF_INTEREST.put(111,1);
         TAGS_OF_INTEREST.put(222,2);
         TAGS_OF_INTEREST.put(333,3);
 
-        config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
-        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor);
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
-
-        camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
-            @Override
-            public void onOpened()
-            {
-                camera.startStreaming(1920,1080, OpenCvCameraRotation.UPRIGHT);
-            }
-
-//            @Override
-//            public void onError(int errorCode) {}
-        });
-
-        telemetry.setMsTransmissionInterval(50);
-
-        /*
-         * The INIT-loop:
-         * This REPLACES waitForStart!
-         */
-        while (!isStarted() && !isStopRequested())
-        {
+        int count=0;
+        while (tagOfInterest == null && !isStarted() && !isStopRequested()) {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
-
-            if(currentDetections.size() != 0)
-            {
-                boolean tagFound = false;
-
-                for(AprilTagDetection tag : currentDetections)
-                {
-                    if(TAGS_OF_INTEREST.containsKey(tag.id))
-                    {
+            if (currentDetections.size() != 0) {
+                for (AprilTagDetection tag : currentDetections) {
+                    if (TAGS_OF_INTEREST.containsKey(tag.id)) {
                         tagOfInterest = tag;
-                        tagFound = true;
-                        break;
-                    }
-                    else
-                    {
                         telemetry.addLine(String.format("Tag id: %d", tag.id));
+                        break;
+
+                    } else {
+                        telemetry.addLine(String.format("Unrecognised Tag id: %d", tag.id));
                     }
                 }
-
-                if(tagFound)
-                {
-                    telemetry.addLine(String.format("Tag %d is in sight!\n\nLocation data:",TAGS_OF_INTEREST.get(tagOfInterest.id)));
-                    tagToTelemetry(tagOfInterest);
-                }
-                else
-                {
-                    telemetry.addLine("Don't see tag of interest :(");
-
-                    if(tagOfInterest == null)
-                    {
-                        telemetry.addLine("(The tag has never been seen)");
-                    }
-                    else
-                    {
-                        telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
-                        tagToTelemetry(tagOfInterest);
-                    }
-                }
-
+            } else {
+                telemetry.addLine(String.format("No detections: %d", count));
             }
-            else
-            {
-                telemetry.addLine("Don't see tag of interest :(");
-
-                if(tagOfInterest == null)
-                {
-                    telemetry.addLine("(The tag has never been seen)");
-                }
-                else
-                {
-                    telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
-                    tagToTelemetry(tagOfInterest);
-                }
-
-            }
-
+            count++;
             telemetry.update();
             sleep(20);
-        }
-
-        /*
-         * The START command just came in: now work off the latest snapshot acquired
-         * during the init loop.
-         */
-
-        /* Update the telemetry */
-        if(tagOfInterest != null)
-        {
-            telemetry.addLine("Tag snapshot:\n");
-            tagToTelemetry(tagOfInterest);
-            telemetry.update();
-        }
-        else
-        {
-            telemetry.addLine("No tag snapshot available, it was never sighted during the init loop :(");
-            telemetry.update();
         }
 
         /* Actually do something useful */
         if(tagOfInterest == null)
         {
-        tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
+            tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
         }
         else
         {
@@ -316,16 +244,29 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
                 tasks.add(new CortanaDriveTask(this, 3, drive, 1,1,1,1));
             }
         }
+
     }
 
-    void tagToTelemetry(AprilTagDetection detection)
-    {
-        telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
-        telemetry.addLine(String.format("Translation X: %.0f mm", detection.pose.x*1000));
-        telemetry.addLine(String.format("Translation Y: %.0f mm", detection.pose.y*1000));
-        telemetry.addLine(String.format("Translation Z: %.0f mm", detection.pose.z*1000));
-        telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", Math.toDegrees(detection.pose.yaw)));
-        telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
-        telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
+    @Override
+    protected void activeLoop() throws InterruptedException {
+        Task currentTask = tasks.peekFirst();
+        if (currentTask == null) {
+            return;
+        }
+        currentTask.run();
+        if (currentTask.isFinished()) {
+            tasks.removeFirst();
+
+        }
+        if (tasks.isEmpty()) {
+            config.backLeftMotor.setPower(0);
+            config.backRightMotor.setPower(0);
+            config.frontLeftMotor.setPower(0);
+            config.frontRightMotor.setPower(0);
+            config.liftMotor.setPower(0);
+        }
     }
+
+
+
 }

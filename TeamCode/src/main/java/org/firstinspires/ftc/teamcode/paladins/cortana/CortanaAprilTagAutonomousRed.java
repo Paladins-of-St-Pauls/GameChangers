@@ -48,6 +48,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
+import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -90,7 +91,7 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
     @Override
     protected void onInit() {
         config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
-        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor);
+        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, config.liftMotor);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -138,7 +139,7 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
         /* Actually do something useful */
         if(tagOfInterest == null)
         {
-            tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
+            tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1,0));
         }
         else
         {
@@ -149,18 +150,19 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
             // e.g.
             if(tagOfInterest.id == 111)
             {
-                tasks.add(new CortanaDriveTask(this, 1, drive, 1, -1,-1,1));
-                tasks.add(new CortanaDriveTask(this, 1, drive, 1,1,1,1));
+                tasks.add(new CortanaDriveTask(this, 1, drive, 0.75, -0.75,-0.75,0.75,0));
+                tasks.add(new WaitTask(this, 0.5));
+                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5,0));
             }
             else if(tagOfInterest.id == 222)
             {
-                tasks.add(new CortanaDriveTask(this, 1, drive, 1, -1,-1,1));
-                tasks.add(new CortanaDriveTask(this, 2, drive, 1,1,1,1));
+                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5,0));
             }
             else if(tagOfInterest.id == 333)
             {
-                tasks.add(new CortanaDriveTask(this, 1, drive, 1, -1,-1,1));
-                tasks.add(new CortanaDriveTask(this, 3, drive, 1,1,1,1));
+                tasks.add(new CortanaDriveTask(this, 0.5, drive, -0.75, 0.75,0.75,-0.75,0));
+                tasks.add(new WaitTask(this, 0.5));
+                tasks.add(new CortanaDriveTask(this, 0.5, drive, -0.5,-0.5,-0.5,-0.5,0));
             }
         }
 

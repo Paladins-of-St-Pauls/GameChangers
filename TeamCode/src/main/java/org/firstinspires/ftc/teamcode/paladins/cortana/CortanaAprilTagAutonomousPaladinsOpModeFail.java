@@ -44,24 +44,13 @@ package org.firstinspires.ftc.teamcode.paladins.cortana;
 // robotcore
 
 import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.paladins.common.ButtonControl;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
-import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 @Autonomous(name="No OpenCV")
 public class CortanaAprilTagAutonomousPaladinsOpModeFail extends PaladinsOpMode
@@ -79,7 +68,7 @@ public class CortanaAprilTagAutonomousPaladinsOpModeFail extends PaladinsOpMode
     @Override
     protected void onInit() {
         config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
-        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor);
+        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, config.liftMotor);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
 //
 //        HashMap<ButtonControl, String> buttonMap = new HashMap<>();
@@ -125,8 +114,8 @@ public class CortanaAprilTagAutonomousPaladinsOpModeFail extends PaladinsOpMode
 //                break;
 //        }
 
-        tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
-        tasks.add(new CortanaDriveTask(this, 2, drive, 1,1,1,1));
+        tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1,0));
+        tasks.add(new CortanaDriveTask(this, 2, drive, 1,1,1,1,0));
 
     }
 
@@ -142,7 +131,7 @@ public class CortanaAprilTagAutonomousPaladinsOpModeFail extends PaladinsOpMode
 
         }
         if (tasks.isEmpty()) {
-            drive.setPower(0, 0,0, 0);
+            drive.setPower(0, 0,0, 0, 0);
             drive.update();
         }
     }

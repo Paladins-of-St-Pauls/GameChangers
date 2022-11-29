@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.paladins.cortana;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDrive;
 import org.firstinspires.ftc.teamcode.paladins.tasks.BaseTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
@@ -12,14 +11,16 @@ public class CortanaDriveTask extends BaseTask implements Task {
     private final double frontRightSpeed;
     private final double backLeftSpeed;
     private final double backRightSpeed;
+    private final double liftSpeed;
 
-    public CortanaDriveTask(PaladinsOpMode opMode, double time, CortanaDrive drive, double frontLeftSpeed, double frontRightSpeed, double backLeftSpeed, double backRightSpeed) {
+    public CortanaDriveTask(PaladinsOpMode opMode, double time, CortanaDrive drive, double frontLeftSpeed, double frontRightSpeed, double backLeftSpeed, double backRightSpeed, double liftSpeed) {
         super(opMode, time);
         this.drive = drive;
         this.frontLeftSpeed = frontLeftSpeed;
         this.frontRightSpeed = frontRightSpeed;
         this.backLeftSpeed = backLeftSpeed;
         this.backRightSpeed = backRightSpeed;
+        this.liftSpeed = liftSpeed;
 
         drive.setEncoder(false);
     }
@@ -32,10 +33,10 @@ public class CortanaDriveTask extends BaseTask implements Task {
 
     @Override
     public void run() {
-        drive.setPower(frontLeftSpeed, frontRightSpeed, backLeftSpeed, backRightSpeed);
+        drive.setPower(frontLeftSpeed, frontRightSpeed, backLeftSpeed, backRightSpeed, liftSpeed);
         drive.update();
         if (isFinished()) {
-            drive.setPower(0, 0, 0,0);
+            drive.setPower(0, 0, 0,0, 0);
             drive.update();
             return;
         }

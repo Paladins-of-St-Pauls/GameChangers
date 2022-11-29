@@ -16,28 +16,32 @@ public class CortanaDrive extends PaladinsComponent {
     final private DcMotor backRightMotor;
     final private DcMotor frontRightMotor;
     final private DcMotor frontLeftMotor;
+    final private DcMotor liftMotor;
 
     private double frontLeftPower;
     private double frontRightPower;
     private double backLeftPower;
     private double backRightPower;
+    private double liftPower;
 
 
-    public CortanaDrive(PaladinsOpMode opMode, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor) {
+    public CortanaDrive(PaladinsOpMode opMode, DcMotor backLeftMotor, DcMotor backRightMotor, DcMotor frontLeftMotor, DcMotor frontRightMotor, DcMotor liftMotor) {
         super(opMode);
 
         this.backLeftMotor = backLeftMotor;
         this.backRightMotor = backRightMotor;
         this.frontLeftMotor = frontLeftMotor;
         this.frontRightMotor = frontRightMotor;
+        this.liftMotor = liftMotor;
 
         frontLeftPower = 0;
         frontRightPower = 0;
         backLeftPower = 0;
         backRightPower = 0;
+        liftPower = 0;
     }
 
-    public void setPower(double frontLeft, double frontRight, double backLeft, double backRight) {
+    public void setPower(double frontLeft, double frontRight, double backLeft, double backRight, double liftSpeed) {
         frontRightPower = -frontRight;
         frontLeftPower = -frontLeft;
         backRightPower = -backRight;
@@ -85,14 +89,15 @@ public class CortanaDrive extends PaladinsComponent {
         frontRightMotor.setPower((frontRightPower));
         backLeftMotor.setPower((backLeftPower));
         backRightMotor.setPower((backRightPower));
+        liftMotor.setPower((liftPower));
     }
 
     public boolean isFinished() {
-        return !(frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy());
+        return !(frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy() || liftMotor.isBusy());
     }
 
     public boolean targetPositionReached() {
-        return (!frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy());
+        return (!frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy() || liftMotor.isBusy());
     }
 
     public void setTargetPosition(double backLeftDistance, double backRightDistance, double frontLeftDistance, double frontRightDistance) {

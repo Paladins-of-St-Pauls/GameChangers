@@ -111,7 +111,7 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
     @Override
     protected void onInit() {
         config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
-        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, config.liftMotor);
+        drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -158,7 +158,7 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
         /* Actually do something useful */
         if(tagOfInterest == null)
         {
-            tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1,0));
+            tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
         }
         else
         {
@@ -169,19 +169,19 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
             // e.g.
             if(tagOfInterest.id == 111)
             {
-                tasks.add(new CortanaDriveTask(this, 1.2, drive, 0.5, -0.5,-0.5,0.5,0));
+                tasks.add(new CortanaDriveTask(this, 1.2, drive, 0.5, -0.5,-0.5,0.5));
                 tasks.add(new WaitTask(this, 0.5));
-                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5,0));
+                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
             else if(tagOfInterest.id == 222)
             {
-                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5,0));
+                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
             else if(tagOfInterest.id == 333)
             {
-                tasks.add(new CortanaDriveTask(this, 1.2, drive, -0.5, 0.5,0.5,-0.5,0));
+                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.5, 0.5,0.5,-0.5));
                 tasks.add(new WaitTask(this, 0.5));
-                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5,0));
+                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
         }
 
@@ -203,7 +203,7 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
             config.backRightMotor.setPower(0);
             config.frontLeftMotor.setPower(0);
             config.frontRightMotor.setPower(0);
-            config.liftMotor.setPower(0);
+
         }
     }
 

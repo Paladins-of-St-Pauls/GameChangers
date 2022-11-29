@@ -11,16 +11,15 @@ public class CortanaDriveTask extends BaseTask implements Task {
     private final double frontRightSpeed;
     private final double backLeftSpeed;
     private final double backRightSpeed;
-    private final double liftSpeed;
 
-    public CortanaDriveTask(PaladinsOpMode opMode, double time, CortanaDrive drive, double frontLeftSpeed, double frontRightSpeed, double backLeftSpeed, double backRightSpeed, double liftSpeed) {
+    public CortanaDriveTask(PaladinsOpMode opMode, double time, CortanaDrive drive, double frontLeftSpeed, double frontRightSpeed, double backLeftSpeed, double backRightSpeed) {
         super(opMode, time);
         this.drive = drive;
         this.frontLeftSpeed = frontLeftSpeed;
         this.frontRightSpeed = frontRightSpeed;
         this.backLeftSpeed = backLeftSpeed;
         this.backRightSpeed = backRightSpeed;
-        this.liftSpeed = liftSpeed;
+
 
         drive.setEncoder(false);
     }
@@ -33,10 +32,10 @@ public class CortanaDriveTask extends BaseTask implements Task {
 
     @Override
     public void run() {
-        drive.setPower(frontLeftSpeed, frontRightSpeed, backLeftSpeed, backRightSpeed, liftSpeed);
+        drive.setPower(frontLeftSpeed, frontRightSpeed, backLeftSpeed, backRightSpeed);
         drive.update();
         if (isFinished()) {
-            drive.setPower(0, 0, 0,0, 0);
+            drive.setPower(0, 0, 0,0);
             drive.update();
             return;
         }

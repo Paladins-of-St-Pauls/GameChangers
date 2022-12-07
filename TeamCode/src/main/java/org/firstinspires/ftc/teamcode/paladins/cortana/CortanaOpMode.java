@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.paladins.cortana;
 
 import static java.lang.Boolean.TRUE;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -12,6 +13,9 @@ public class CortanaOpMode extends PaladinsOpMode {
     private CortanaConfiguration config;
     private NormalisedMecanumDrive drive;
     private CortanaLift lift;
+    private boolean up_pressed = false;
+    private boolean down_pressed = false;
+
 
     @Override
     protected void onInit() {
@@ -19,6 +23,7 @@ public class CortanaOpMode extends PaladinsOpMode {
 
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
         lift = new CortanaLift(this, config.liftMotor, config.liftClamp, config.liftSensor);
+
     }
 
     @Override
@@ -30,28 +35,35 @@ public class CortanaOpMode extends PaladinsOpMode {
 
 
 
+
         if (Math.abs(gamepad1.right_stick_x) > Math.abs(gamepad1.right_trigger)) {
             xx = gamepad1.right_stick_x;
         } else {
             if (Math.abs(gamepad1.right_trigger) > 0) {
-                yy = -gamepad1.right_trigger;
+                yy = -gamepad1.right_trigger/2;
             } else {
-                yy = gamepad1.left_trigger;
+                yy = gamepad1.left_trigger/2;
             }
         }
 
-        if (!gamepad1.b) {
-            xx = xx/2;
-            yy = yy/2;
+        if (gamepad1.b) {
+            xx = xx/3;
+            yy = yy/3;
         }
-        if (gamepad1.dpad_up) {
-            lift.liftUp();
+        if (gamepad2.a) {
+            xx = xx*2;
+            yy = yy*2;
+        }
 
-        } else if (gamepad1.dpad_down && !config.liftSensor.isPressed()) {
+        lift.setPower(0.5);
+        if (up_pressed && !gamepad2.dpad_up) {
+            lift.liftUp();
+        } else if (down_pressed && !gamepad2.dpad_down) {
             lift.liftDown();
-        } else{
-            lift.liftBrake();
         }
+
+        up_pressed = gamepad2.dpad_up;
+        down_pressed = gamepad2.dpad_down;
 
         if (gamepad1.dpad_left) {
             lift.liftClampOpen();
@@ -60,11 +72,10 @@ public class CortanaOpMode extends PaladinsOpMode {
             lift.liftClampClose();
         }
             drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x);
+            lift.setPower(1);
             drive.update();
             lift.update();
 
-//        DRIVER (GAMEPAD) 1 CONTROLS
-//        drive.update();
 
 
     }

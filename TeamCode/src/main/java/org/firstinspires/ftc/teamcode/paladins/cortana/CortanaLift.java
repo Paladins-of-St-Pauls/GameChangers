@@ -9,21 +9,20 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsComponent;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.tensorflow.lite.support.image.TensorImage;
 
 /**
  * Created by Shaun on 2/07/2017.
  */
 
 public class CortanaLift extends PaladinsComponent {
-    public static int[] lift_positions = {0, 2000, 4000, 5600 };
-
+    public static int[] lift_positions = {0, 150, 250, 350, 450, 550, 600, 2100, 4000, 5700 };
+    final private PaladinsOpMode opMode;
     final DcMotor liftMotor;
-    final private TouchSensor liftSensor;
-    final private Servo liftClamp;
+    final TouchSensor liftSensor;
+    final Servo liftClamp;
 
 
-    private double liftPower;
+    double liftPower;
 
     private int liftIndex = 0;
 
@@ -31,12 +30,12 @@ public class CortanaLift extends PaladinsComponent {
 
     public CortanaLift(PaladinsOpMode opMode, DcMotor liftMotor, Servo liftClamp, TouchSensor liftSensor) {
         super(opMode);
-
+        this.opMode = opMode;
         this.liftSensor = liftSensor;
         this.liftClamp = liftClamp;
         this.liftMotor = liftMotor;
 
-        liftClamp.setPosition(0);
+        liftClamp.setPosition(0.2);
         liftClamp.scaleRange(0, 1);
 
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -49,20 +48,9 @@ public class CortanaLift extends PaladinsComponent {
 
         liftMotor.setTargetPosition(0);
 
-
-
         liftPower = 0;
 
-
-//        leftPowerItem = getOpMode().telemetry.addData("Left power", "%.2f", 0.0f);
-//        leftPowerItem.setRetained(true);
-//        rightPowerItem = getOpMode().telemetry.addData("Right power", "%.2f", 0.0f);
-//        rightPowerItem.setRetained(true);
     }
-
-//    public JoyeuseDrive(PaladinsOpMode opMode, Gamepad gamepad, DcMotor leftMidMotor, DcMotor rightMidMotor) {
-//        this(opMode, leftMidMotor, leftBackMotor, rightMidMotor, rightBackMotor);
-//    }
 
     public void liftUp() {
         liftIndex ++;
@@ -81,15 +69,14 @@ public class CortanaLift extends PaladinsComponent {
     }
 
     public void liftClampOpen() {
-        liftClamp.setPosition(0);
+        liftClamp.setPosition(0.2);
     }
     public void liftClampClose() {
         liftClamp.setPosition(0.7);
     }
 
-    private void liftReset() {
+    public void liftReset() {
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
     }
 
     public void setPower(double power) {

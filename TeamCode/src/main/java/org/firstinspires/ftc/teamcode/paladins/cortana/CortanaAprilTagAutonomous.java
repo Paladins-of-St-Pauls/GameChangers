@@ -98,6 +98,7 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
     private CortanaConfiguration config;
     private CortanaDrive drive;
     private ArrayDeque<Task> tasks = new ArrayDeque<>();
+    private CortanaLift lift;
 
 
     // UNITS ARE METERS
@@ -111,6 +112,7 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
     @Override
     protected void onInit() {
         config = CortanaConfiguration.newConfig(hardwareMap, telemetry);
+        lift = new CortanaLift(this, config.liftMotor, config.liftClamp, config.liftSensor);
         drive = new CortanaDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -179,9 +181,11 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
             }
             else if(tagOfInterest.id == 333)
             {
-                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.5, 0.5,0.5,-0.5));
-                tasks.add(new WaitTask(this, 0.5));
-                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
+//                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.5, 0.5,0.5,-0.5));
+//                tasks.add(new WaitTask(this, 0.5));
+//                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
+                tasks.add(new CortanaHarvesterTask(this, 5, lift, false, 6));
+
             }
         }
 

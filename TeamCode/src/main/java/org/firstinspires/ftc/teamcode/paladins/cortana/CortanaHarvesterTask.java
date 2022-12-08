@@ -21,6 +21,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
             this.lift = lift;
             this.IsClampClosed = IsClampClosed;
             this.liftMotor = liftMotor;
+            this.liftPos = liftPos;
         }
 
         @Override

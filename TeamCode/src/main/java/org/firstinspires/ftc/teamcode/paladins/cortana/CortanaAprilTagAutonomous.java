@@ -97,8 +97,9 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
 
     private CortanaConfiguration config;
     private CortanaDrive drive;
-    private ArrayDeque<Task> tasks = new ArrayDeque<>();
     private CortanaLift lift;
+    private ArrayDeque<Task> tasks = new ArrayDeque<>();
+
 
 
     // UNITS ARE METERS
@@ -157,18 +158,12 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
             sleep(20);
         }
 
-        /* Actually do something useful */
         if(tagOfInterest == null)
         {
             tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
         }
         else
         {
-            /*
-             * Insert your autonomous code here, probably using the tag pose to decide your configuration.
-             */
-
-            // e.g.
             if(tagOfInterest.id == 111)
             {
                 tasks.add(new CortanaDriveTask(this, 1.2, drive, 0.5, -0.5,-0.5,0.5));
@@ -200,14 +195,14 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
         currentTask.run();
         if (currentTask.isFinished()) {
             tasks.removeFirst();
-
         }
         if (tasks.isEmpty()) {
             config.backLeftMotor.setPower(0);
             config.backRightMotor.setPower(0);
             config.frontLeftMotor.setPower(0);
             config.frontRightMotor.setPower(0);
-
+            config.liftClamp.setPosition(0.2);
+            config.liftMotor.setPower(0);
         }
     }
 

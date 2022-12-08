@@ -48,6 +48,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 // opencv
+import org.checkerframework.checker.units.qual.C;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalConfiguration;
 import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDrive;
@@ -166,20 +167,41 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
         {
             if(tagOfInterest.id == 111)
             {
+                tasks.add(new CortanaHarvesterTask(this, 1,lift, true, 0));
+                tasks.add(new CortanaHarvesterTask(this, 3, lift, true, 8));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25,0.25,0.25,0.25));
+                tasks.add(new CortanaHarvesterTask(this, 2, lift, false, 8));
+                tasks.add(new CortanaHarvesterTask(this, 3, lift, false, 0));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25,-0.25, -0.25,-0.25));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
                 tasks.add(new CortanaDriveTask(this, 1.2, drive, 0.5, -0.5,-0.5,0.5));
                 tasks.add(new WaitTask(this, 0.5));
                 tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
             else if(tagOfInterest.id == 222)
             {
+                tasks.add(new CortanaHarvesterTask(this, 1,lift, true, 0));
+                tasks.add(new CortanaHarvesterTask(this, 3, lift, true, 8));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25,0.25,0.25,0.25));
+                tasks.add(new CortanaHarvesterTask(this, 2, lift, false, 8));
+                tasks.add(new CortanaHarvesterTask(this, 3, lift, false, 0));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25,-0.25, -0.25,-0.25));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
                 tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
             else if(tagOfInterest.id == 333)
             {
-//                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.5, 0.5,0.5,-0.5));
-//                tasks.add(new WaitTask(this, 0.5));
-//                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
-                tasks.add(new CortanaHarvesterTask(this, 5, lift, false, 6));
+
+                tasks.add(new CortanaHarvesterTask(this, 1,lift, true, 0));
+                tasks.add(new CortanaHarvesterTask(this, 3, lift, true, 8));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25,0.25,0.25,0.25));
+                tasks.add(new CortanaHarvesterTask(this, 2, lift, false, 8));
+                tasks.add(new CortanaHarvesterTask(this, 3, lift, false, 0));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25,-0.25, -0.25,-0.25));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
+                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.5, 0.5,0.5,-0.5));
+                tasks.add(new WaitTask(this, 0.5));
+                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
 
             }
         }

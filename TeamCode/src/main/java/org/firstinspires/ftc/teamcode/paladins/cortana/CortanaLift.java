@@ -15,14 +15,14 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  */
 
 public class CortanaLift extends PaladinsComponent {
-    public static int[] lift_positions = {0, 150, 250, 350, 450, 550, 600, 2100, 4000, 5700 };
+    public static int[] lift_positions = {0, 150, 250, 350, 450, 550, 600, 2150, 4050, 5750 };
     final private PaladinsOpMode opMode;
-    final DcMotor liftMotor;
-    final TouchSensor liftSensor;
-    final Servo liftClamp;
+    final public DcMotor liftMotor;
+    final public TouchSensor liftSensor;
+    final public Servo liftClamp;
 
 
-    double liftPower;
+    public double liftPower;
 
     private int liftIndex = 0;
 
@@ -34,22 +34,14 @@ public class CortanaLift extends PaladinsComponent {
         this.liftSensor = liftSensor;
         this.liftClamp = liftClamp;
         this.liftMotor = liftMotor;
-
         liftClamp.setPosition(0.2);
         liftClamp.scaleRange(0, 1);
-
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         liftMotor.setTargetPosition(0);
-
         liftPower = 0;
-
     }
 
     public void liftUp() {

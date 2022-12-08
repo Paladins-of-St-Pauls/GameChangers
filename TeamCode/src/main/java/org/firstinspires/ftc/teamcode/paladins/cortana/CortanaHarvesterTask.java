@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.paladins.cortana;
 
 import static org.firstinspires.ftc.teamcode.paladins.cortana.CortanaLift.lift_positions;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.BaseTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
@@ -15,11 +13,14 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
         private final CortanaLift lift;
         private int liftPos;
         private Boolean IsClampClosed;
+        DcMotor liftMotor;
 
-        public CortanaHarvesterTask(PaladinsOpMode opMode, double time, CortanaLift lift, Boolean IsClampClosed, int LiftPos) {
+
+        public CortanaHarvesterTask(PaladinsOpMode opMode, double time, CortanaLift lift, Boolean IsClampClosed, int liftPos) {
             super(opMode, time);
             this.lift = lift;
             this.IsClampClosed = IsClampClosed;
+            this.liftMotor = liftMotor;
         }
 
         @Override
@@ -40,6 +41,8 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
         public void run() {
             if (isFinished()) {
                 if (lift.isFinished()) {
+                    lift.setPower(0);
+                    lift.update();
                     return;
                 };
             }
@@ -50,6 +53,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
                 lift.liftClampOpen();
             }
             lift.liftMotor.setTargetPosition(lift_positions[liftPos]);
+            lift.setPower(1);
             lift.update();
         }
     }

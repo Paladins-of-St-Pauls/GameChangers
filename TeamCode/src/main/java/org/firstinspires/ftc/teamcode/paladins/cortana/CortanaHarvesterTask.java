@@ -34,14 +34,14 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
             lift.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             lift.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             lift.liftMotor.setTargetPosition(0);
-            lift.liftPower = 0;
+            lift.liftMotor.setPower(1);
         }
 
         @Override
         public void run() {
             if (isFinished()) {
                 if (lift.isFinished()) {
-                    lift.setPower(0);
+                    lift.liftMotor.setPower(0);
                     lift.update();
                     return;
                 };
@@ -53,7 +53,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
                 lift.liftClampOpen();
             }
             lift.liftMotor.setTargetPosition(lift_positions[liftPos]);
-            lift.setPower(1);
+            lift.liftMotor.setPower(1);
             lift.update();
         }
     }

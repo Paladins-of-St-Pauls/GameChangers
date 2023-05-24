@@ -34,6 +34,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
             lift.liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             lift.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             lift.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            lift.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             lift.liftMotor.setTargetPosition(0);
             lift.liftMotor.setPower(1);
         }
@@ -56,5 +57,6 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
             lift.liftMotor.setTargetPosition(lift_positions[liftPos]);
             lift.liftMotor.setPower(1);
             lift.update();
+
         }
     }

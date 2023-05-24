@@ -42,45 +42,24 @@ package org.firstinspires.ftc.teamcode.paladins.cortana;
  * SOFTWARE.
  */
 // robotcore
-import static java.lang.Boolean.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-// opencv
-import org.checkerframework.checker.units.qual.C;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalConfiguration;
-import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDrive;
-import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDriveEncoderTask;
-import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalSpinnerTask;
+import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
+import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
+import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
-// utils
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
-// robot config imports
-import org.firstinspires.ftc.teamcode.paladins.common.ButtonControl;
-import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.cortana.CortanaConfiguration;
-import org.firstinspires.ftc.teamcode.paladins.cortana.CortanaDriveTask;
-import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDriveEncoderTask;
-import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDriveTask;
-import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
-import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
-import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
-
-@Autonomous(name="Blue Tasks")
-public class CortanaAprilTagAutonomous extends PaladinsOpMode
+@Autonomous(name="Auto Testing")
+public class CortanaAprilTagAutonomousTesting extends PaladinsOpMode
 {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -168,9 +147,7 @@ public class CortanaAprilTagAutonomous extends PaladinsOpMode
             if(tagOfInterest.id == 111)
             {
                 tasks.add(new CortanaHarvesterTask(this, 1,lift, true, 0));
-                //close clamp
                 tasks.add(new CortanaHarvesterTask(this, 3, lift, true, 8));
-                // go to med goal (lift)
                 tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25,0.25,0.25,0.25));
                 tasks.add(new CortanaHarvesterTask(this, 2, lift, false, 8));
                 tasks.add(new CortanaHarvesterTask(this, 3, lift, false, 0));

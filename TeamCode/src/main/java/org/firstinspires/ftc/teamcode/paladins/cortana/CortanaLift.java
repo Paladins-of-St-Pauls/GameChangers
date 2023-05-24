@@ -81,7 +81,7 @@ public class CortanaLift extends PaladinsComponent {
         liftClamp.setPosition(0.2);
     }
     public void liftClampClose() {
-        liftClamp.setPosition(0.7);
+        liftClamp.setPosition(0.8);
     }
 
 //    public void liftReset() {

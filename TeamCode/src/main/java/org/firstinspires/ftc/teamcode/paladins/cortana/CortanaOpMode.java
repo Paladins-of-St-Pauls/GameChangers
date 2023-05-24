@@ -4,6 +4,7 @@ import static java.lang.Boolean.TRUE;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
@@ -15,6 +16,7 @@ public class CortanaOpMode extends PaladinsOpMode {
     private CortanaLift lift;
     private boolean up_pressed = false;
     private boolean down_pressed = false;
+    private double liftSpeed;
 
 
     @Override
@@ -55,15 +57,33 @@ public class CortanaOpMode extends PaladinsOpMode {
             yy = yy*2;
         }
 
-        lift.setPower(0.5);
-        if (up_pressed && !gamepad2.dpad_up) {
-            lift.liftUp();
-        } else if (down_pressed && !gamepad2.dpad_down) {
-            lift.liftDown();
+        liftSpeed = gamepad2.left_stick_y;
+        if(lift.liftSensor.isPressed() && gamepad2.left_stick_y <= 0) {
+            liftSpeed = 0;
         }
 
-        up_pressed = gamepad2.dpad_up;
-        down_pressed = gamepad2.dpad_down;
+//        lift.setPower(0.5);
+//        if (up_pressed && !gamepad2.dpad_up) {
+//            lift.liftUp();
+//        } else if (down_pressed && !gamepad2.dpad_down) {
+//            lift.liftDown();
+//        }
+
+//        if (gamepad2.x) {
+//            lift.highGoal();
+//        }
+//        if (gamepad2.y) {
+//            lift.midGoal();
+//        }
+//        if (gamepad2.b) {
+//            lift.lowGoal();
+//        }
+//        if (gamepad2.a) {
+//            lift.bottomOut();
+//        }
+
+//        up_pressed = gamepad2.dpad_up;
+//        down_pressed = gamepad2.dpad_down;
 
         if (gamepad1.dpad_left) {
             lift.liftClampOpen();
@@ -71,9 +91,9 @@ public class CortanaOpMode extends PaladinsOpMode {
         if (gamepad1.dpad_right){
             lift.liftClampClose();
         }
-            drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x);
-            lift.setPower(1);
+            drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x/2);
             drive.update();
+            lift.setPower(liftSpeed);
             lift.update();
 
 

@@ -78,10 +78,10 @@ public class CortanaLift extends PaladinsComponent {
         liftIndex = 0;
     }
     public void liftClampOpen() {
-        liftClamp.setPosition(0.2);
+        liftClamp.setPosition(0.8);
     }
     public void liftClampClose() {
-        liftClamp.setPosition(0.8);
+        liftClamp.setPosition(0.2);
     }
 
 //    public void liftReset() {

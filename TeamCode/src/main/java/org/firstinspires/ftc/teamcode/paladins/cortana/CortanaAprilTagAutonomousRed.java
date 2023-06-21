@@ -148,21 +148,28 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
              */
 
             // e.g.
-            if(tagOfInterest.id == 111)
+            if(tagOfInterest.id == 333)
             {
-                tasks.add(new CortanaDriveTask(this, 1, drive, 0.75, -0.75,-0.75,0.75));
+                tasks.add(new CortanaDriveTask(this, 2.4, drive, -0.25, 0.25,0.25,-0.25));
+                tasks.add(new CortanaDriveTask(this, 2.5, drive, 0.25, -0.25, -0.25,0.25));
+                // Park
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25, -0.25, -0.25,0.25));
+                tasks.add(new CortanaDriveTask(this, 1.1, drive, 0.37, -0.37,-0.37,0.37));
                 tasks.add(new WaitTask(this, 0.5));
                 tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
             else if(tagOfInterest.id == 222)
             {
-                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
+                tasks.add(new CortanaDriveTask(this, 2.4, drive, -0.25, 0.25,0.25,-0.25));
+                tasks.add(new CortanaDriveTask(this, 2.5, drive, 0.25, -0.25, -0.25,+0.25));
+                tasks.add(new CortanaDriveTask(this, 2, drive, -0.25,-0.25,-0.25,-0.25));
             }
-            else if(tagOfInterest.id == 333)
+            else if(tagOfInterest.id == 111)
             {
-                tasks.add(new CortanaDriveTask(this, 0.5, drive, -0.75, 0.75,0.75,-0.75));
+                tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25, -0.25, -0.25,0.25));
+                tasks.add(new CortanaDriveTask(this, 1.2, drive, -0.5, 0.5,0.5,-0.5));
                 tasks.add(new WaitTask(this, 0.5));
-                tasks.add(new CortanaDriveTask(this, 0.5, drive, -0.5,-0.5,-0.5,-0.5));
+                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
         }
 

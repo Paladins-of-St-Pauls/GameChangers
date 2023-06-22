@@ -32,10 +32,8 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
             lift.liftClamp.scaleRange(0, 1);
             lift.liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             lift.liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            lift.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             lift.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             lift.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            lift.liftMotor.setTargetPosition(0);
             lift.liftMotor.setPower(1);
         }
 
@@ -49,9 +47,9 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
                 };
             }
 
-            if (IsClampClosed = true) {
+            if (IsClampClosed == true) {
                 lift.liftClampClose();
-            } else if (IsClampClosed = false) {
+            } else if (IsClampClosed == false) {
                 lift.liftClampOpen();
             }
             lift.liftMotor.setTargetPosition(lift_positions[liftPos]);

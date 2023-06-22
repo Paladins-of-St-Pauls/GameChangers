@@ -60,6 +60,7 @@ public class CortanaOpMode extends PaladinsOpMode {
         liftSpeed = gamepad2.left_stick_y;
         if(lift.liftSensor.isPressed() && gamepad2.left_stick_y <= 0) {
             liftSpeed = 0;
+            lift.liftReset();
         }
 
 //        lift.setPower(0.5);

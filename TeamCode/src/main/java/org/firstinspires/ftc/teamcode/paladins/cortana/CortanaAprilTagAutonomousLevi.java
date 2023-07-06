@@ -117,14 +117,14 @@ public class CortanaAprilTagAutonomousLevi extends PaladinsOpMode
         TAGS_OF_INTEREST.put(333,3);
 
         int count=0;
-        while (tagOfInterest == null && !isStarted() && !isStopRequested()) {
+        while (!isStarted() && !isStopRequested()) {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
             if (currentDetections.size() != 0) {
                 for (AprilTagDetection tag : currentDetections) {
                     if (TAGS_OF_INTEREST.containsKey(tag.id)) {
                         tagOfInterest = tag;
                         telemetry.addLine(String.format("Tag id: %d", tag.id));
-                        break;
+
 
                     } else {
                         telemetry.addLine(String.format("Unrecognised Tag id: %d", tag.id));
@@ -140,59 +140,85 @@ public class CortanaAprilTagAutonomousLevi extends PaladinsOpMode
 
         if(tagOfInterest == null)
         {
-            tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
+            //tasks.add(new CortanaDriveTask(this, 1, drive, -1,1,1,-1));
         }
         else
         {
             if(tagOfInterest.id == 111)
             {
                 // close clamp and lift to zero
+                tasks.add(new CortanaResetTask(this, 0.1, lift));
                 tasks.add(new CortanaHarvesterTask(this, 1, lift, true, 0));
                 //go forward to the high goal
                 tasks.add(new CortanaDriveTask(this, 3, drive, -0.25, -0.25, -0.25, -0.25));
                 tasks.add(new CortanaDriveTask(this, 0.5, drive, 0.25, 0.25, 0.25, 0.25));
                 //lift up
-                tasks.add(new CortanaHarvesterTask(this, 4, lift, true, 1));
+                tasks.add(new CortanaHarvesterTask(this, 8, lift, true, 3));
                 // rotate slightly to get over the goal
-                tasks.add(new CortanaDriveTask(this, 1.75, drive, -0.125,0.125,-0.125,0.125));
+                tasks.add(new CortanaDriveTask(this, 1.75, drive, 0.125,-0.125,0.125,-0.125));
                 tasks.add(new CortanaDriveTask(this,1, drive, -0.125,-0.125,-0.125, -0.125));
                 // release cone into goal
                 tasks.add(new CortanaHarvesterTask(this, 3,lift,false,0));
                 tasks.add(new CortanaHarvesterTask(this, 3,lift,false,0));
                 // rotate back to straighen up
                 tasks.add(new CortanaDriveTask(this,1, drive, 0.125,0.125,0.125, 0.125));
-                tasks.add(new CortanaDriveTask(this, 1.75, drive, 0.125,-0.125,0.125,-0.125));
+                tasks.add(new CortanaDriveTask(this, 1.75, drive, -0.125,0.125,-0.125,0.125));
 
                 // drive back to the start pos
                 tasks.add(new CortanaDriveTask(this, 2.5, drive,0.25,0.25,0.25,0.25));
                 // drive to correct pos for tag id
                 tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
-                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.37, 0.37,0.37,-0.37));
+                tasks.add(new CortanaDriveTask(this, 1.3, drive, -0.37, 0.37,0.37,-0.37));
                 tasks.add(new WaitTask(this, 0.5));
                 tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
-            else if(tagOfInterest.id == 222)
-            {
-                tasks.add(new CortanaHarvesterTask(this, 1,lift, true, 0));
-                tasks.add(new CortanaHarvesterTask(this, 3, lift, true, 8));
-                tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25,0.25,0.25,0.25));
-                tasks.add(new CortanaHarvesterTask(this, 2, lift, false, 8));
-                tasks.add(new CortanaHarvesterTask(this, 3, lift, false, 0));
-                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25,-0.25, -0.25,-0.25));
-                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
-                tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
+            else if(tagOfInterest.id == 222) {
+                // close clamp and lift to zero
+                tasks.add(new CortanaResetTask(this, 0.1, lift));
+                tasks.add(new CortanaHarvesterTask(this, 1, lift, true, 0));
+                //go forward to the high goal
+                tasks.add(new CortanaDriveTask(this, 3, drive, -0.25, -0.25, -0.25, -0.25));
+                tasks.add(new CortanaDriveTask(this, 0.5, drive, 0.25, 0.25, 0.25, 0.25));
+                //lift up
+                tasks.add(new CortanaHarvesterTask(this, 8, lift, true, 3));
+                // rotate slightly to get over the goal
+                tasks.add(new CortanaDriveTask(this, 1.75, drive, 0.125,-0.125,0.125,-0.125));
+                tasks.add(new CortanaDriveTask(this,1, drive, -0.125,-0.125,-0.125, -0.125));
+                // release cone into goal
+                tasks.add(new CortanaHarvesterTask(this, 3,lift,false,0));
+                tasks.add(new CortanaHarvesterTask(this, 3,lift,false,0));
+                // rotate back to straighen up
+                tasks.add(new CortanaDriveTask(this,1, drive, 0.125,0.125,0.125, 0.125));
+                tasks.add(new CortanaDriveTask(this, 1.75, drive, -0.125,0.125,-0.125,0.125));
+
+                // drive back to the start pos
             }
             else if(tagOfInterest.id == 333)
             {
 
-                tasks.add(new CortanaHarvesterTask(this, 1,lift, true, 0));
-                tasks.add(new CortanaHarvesterTask(this, 3, lift, true, 8));
-                tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25,0.25,0.25,0.25));
-                tasks.add(new CortanaHarvesterTask(this, 2, lift, false, 8));
-                tasks.add(new CortanaHarvesterTask(this, 3, lift, false, 0));
-                tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25,-0.25, -0.25,-0.25));
+                /// close clamp and lift to zero
+                tasks.add(new CortanaResetTask(this, 0.1, lift));
+                tasks.add(new CortanaHarvesterTask(this, 1, lift, true, 0));
+                //go forward to the high goal
+                tasks.add(new CortanaDriveTask(this, 3, drive, -0.25, -0.25, -0.25, -0.25));
+                tasks.add(new CortanaDriveTask(this, 0.5, drive, 0.25, 0.25, 0.25, 0.25));
+                //lift up
+                tasks.add(new CortanaHarvesterTask(this, 8, lift, true, 3));
+                // rotate slightly to get over the goal
+                tasks.add(new CortanaDriveTask(this, 1.75, drive, 0.125,-0.125,0.125,-0.125));
+                tasks.add(new CortanaDriveTask(this,1, drive, -0.125,-0.125,-0.125, -0.125));
+                // release cone into goal
+                tasks.add(new CortanaHarvesterTask(this, 3,lift,false,0));
+                tasks.add(new CortanaHarvesterTask(this, 3,lift,false,0));
+                // rotate back to straighen up
+                tasks.add(new CortanaDriveTask(this,1, drive, 0.125,0.125,0.125, 0.125));
+                tasks.add(new CortanaDriveTask(this, 1.75, drive, -0.125,0.125,-0.125,0.125));
+
+                // drive back to the start pos
+                tasks.add(new CortanaDriveTask(this, 2.5, drive,0.25,0.25,0.25,0.25));
+                // drive to correct pos for tag id
                 tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
-                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.5, 0.5,0.5,-0.5));
+                tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.45, 0.45,0.45,-0.45));
                 tasks.add(new WaitTask(this, 0.5));
                 tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
 

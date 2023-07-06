@@ -101,7 +101,7 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                camera.startStreaming(1920, 1080, OpenCvCameraRotation.UPRIGHT);
+                camera.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
@@ -115,14 +115,14 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
         TAGS_OF_INTEREST.put(333,3);
 
         int count=0;
-        while (tagOfInterest == null && !isStarted() && !isStopRequested()) {
+        while (!isStarted() && !isStopRequested()) {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
             if (currentDetections.size() != 0) {
                 for (AprilTagDetection tag : currentDetections) {
                     if (TAGS_OF_INTEREST.containsKey(tag.id)) {
                         tagOfInterest = tag;
                         telemetry.addLine(String.format("Tag id: %d", tag.id));
-                        break;
+
 
                     } else {
                         telemetry.addLine(String.format("Unrecognised Tag id: %d", tag.id));
@@ -154,7 +154,7 @@ public class CortanaAprilTagAutonomousRed extends PaladinsOpMode
                 tasks.add(new CortanaDriveTask(this, 2.5, drive, 0.25, -0.25, -0.25,0.25));
                 // Park
                 tasks.add(new CortanaDriveTask(this, 0.2, drive, 0.25, -0.25, -0.25,0.25));
-                tasks.add(new CortanaDriveTask(this, 1.1, drive, 0.37, -0.37,-0.37,0.37));
+                tasks.add(new CortanaDriveTask(this, 1.25, drive, 0.37, -0.37,-0.37,0.37));
                 tasks.add(new WaitTask(this, 0.5));
                 tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }

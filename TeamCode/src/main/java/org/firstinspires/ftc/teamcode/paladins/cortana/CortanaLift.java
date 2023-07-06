@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
  */
 
 public class CortanaLift extends PaladinsComponent {
-    public static int[] lift_positions = {0, 4079, 4582, 6280};
+    public static int[] lift_positions = {0, 4100, 4600, 6400};
     final private PaladinsOpMode opMode;
     final public DcMotor liftMotor;
     final public TouchSensor liftSensor;

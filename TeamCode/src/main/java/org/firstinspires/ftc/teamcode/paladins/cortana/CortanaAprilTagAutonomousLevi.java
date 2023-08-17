@@ -26,7 +26,7 @@ package org.firstinspires.ftc.teamcode.paladins.cortana;
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without liCortanaAprilTagAutonomousmitation the rights
+ * in the Software without restriction, including without CortanaAprilTagAutonomous the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
@@ -165,10 +165,10 @@ public class CortanaAprilTagAutonomousLevi extends PaladinsOpMode
                 tasks.add(new CortanaDriveTask(this, 1.75, drive, -0.125,0.125,-0.125,0.125));
 
                 // drive back to the start pos
-                tasks.add(new CortanaDriveTask(this, 2.5, drive,0.25,0.25,0.25,0.25));
+                tasks.add(new CortanaDriveTask(this, 1.5, drive,0.5,0.5,0.5,0.5));
                 // drive to correct pos for tag id
                 tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
-                tasks.add(new CortanaDriveTask(this, 1.3, drive, -0.37, 0.37,0.37,-0.37));
+                tasks.add(new CortanaDriveTask(this, 0.7, drive, -0.45, 0.45,0.45,-0.45));
                 tasks.add(new WaitTask(this, 0.5));
                 tasks.add(new CortanaDriveTask(this, 1, drive, -0.5,-0.5,-0.5,-0.5));
             }
@@ -215,7 +215,7 @@ public class CortanaAprilTagAutonomousLevi extends PaladinsOpMode
                 tasks.add(new CortanaDriveTask(this, 1.75, drive, -0.125,0.125,-0.125,0.125));
 
                 // drive back to the start pos
-                tasks.add(new CortanaDriveTask(this, 2.5, drive,0.25,0.25,0.25,0.25));
+                tasks.add(new CortanaDriveTask(this, 1.5, drive,0.5,0.5,0.5,0.5));
                 // drive to correct pos for tag id
                 tasks.add(new CortanaDriveTask(this, 0.2, drive, -0.25, 0.25, 0.25,-0.25));
                 tasks.add(new CortanaDriveTask(this, 1.1, drive, -0.45, 0.45,0.45,-0.45));

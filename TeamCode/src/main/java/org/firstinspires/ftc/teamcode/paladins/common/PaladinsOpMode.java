@@ -53,7 +53,7 @@ public abstract class PaladinsOpMode extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         try {
-            telemetry.addData("GIT Version", BuildConfig.GIT_VERSION).setRetained(true);
+            telemetry.addData("Git Version:", BuildConfig.GIT_VERSION).setRetained(true);
             try {
                 setup();
                 onInit();

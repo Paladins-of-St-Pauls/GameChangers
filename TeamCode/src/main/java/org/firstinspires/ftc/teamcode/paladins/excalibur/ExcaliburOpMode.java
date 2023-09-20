@@ -36,10 +36,6 @@ public class ExcaliburOpMode extends PaladinsOpMode {
         }
 
         if (gamepad1.b) {
-            xx = xx/3;
-            yy = yy/3;
-        }
-        if (gamepad2.a) {
             xx = xx*2;
             yy = yy*2;
         }

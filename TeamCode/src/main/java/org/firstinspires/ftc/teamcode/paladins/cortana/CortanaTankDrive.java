@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.paladins.cortana;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseTankDrive;
-
+@Disabled
 @TeleOp(name = "CortanaTankDrive")
 public class CortanaTankDrive extends PaladinsOpMode {
     private CortanaConfiguration config;

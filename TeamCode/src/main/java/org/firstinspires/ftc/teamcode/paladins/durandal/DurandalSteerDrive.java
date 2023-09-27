@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.paladins.durandal;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.Range;
 

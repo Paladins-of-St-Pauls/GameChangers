@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.paladins.cortana;
 
 import static java.lang.Boolean.TRUE;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
-
+@Disabled
 @TeleOp(name = "CortanaMechanumDrive")
 public class CortanaOpMode extends PaladinsOpMode {
     private CortanaConfiguration config;

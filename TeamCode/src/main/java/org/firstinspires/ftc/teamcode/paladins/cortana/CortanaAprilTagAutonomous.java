@@ -45,6 +45,7 @@ package org.firstinspires.ftc.teamcode.paladins.cortana;
 import static java.lang.Boolean.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 // opencv
@@ -78,7 +79,7 @@ import org.firstinspires.ftc.teamcode.paladins.durandal.DurandalDriveTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
-
+@Disabled
 @Autonomous(name="Blue Tasks")
 public class CortanaAprilTagAutonomous extends PaladinsOpMode
 {

@@ -44,6 +44,7 @@ package org.firstinspires.ftc.teamcode.paladins.cortana;
 // robotcore
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -57,7 +58,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.TreeMap;
-
+@Disabled
 @Autonomous(name="Auto Testing")
 public class CortanaAprilTagAutonomousTesting extends PaladinsOpMode
 {

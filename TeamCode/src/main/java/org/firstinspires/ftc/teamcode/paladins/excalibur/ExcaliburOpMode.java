@@ -5,8 +5,6 @@ import static java.lang.Boolean.TRUE;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.cortana.CortanaConfiguration;
-import org.firstinspires.ftc.teamcode.paladins.cortana.CortanaLift;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
 
 @TeleOp(name = "ExcaliburMechanumDrive")

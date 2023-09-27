@@ -2,11 +2,12 @@ package org.firstinspires.ftc.teamcode.paladins.fierbois;
 
 import static java.lang.Boolean.TRUE;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
-
+@Disabled
 @TeleOp(name = "FierboisMechanumDrive")
 public class FierboisOpMode extends PaladinsOpMode {
     private FierboisConfiguration config;

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.paladins.joyeuse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.paladins.common.ButtonControl;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
-
+@Disabled
 @Autonomous(name = "JoyeuseSimpleAutonomous")
 public class JoyeuseSimpleAutonomous extends PaladinsOpMode {
     private JoyeuseConfiguration config;

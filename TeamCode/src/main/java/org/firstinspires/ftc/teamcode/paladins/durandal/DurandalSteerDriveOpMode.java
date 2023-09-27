@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.paladins.durandal;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.ButtonControl;
@@ -7,7 +8,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.GamePadMomentaryMotor;
 import org.firstinspires.ftc.teamcode.paladins.common.JoystickMomentaryServo;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 
-
+@Disabled
 @TeleOp(name = "DurandalSteerDrive")
 public class DurandalSteerDriveOpMode extends PaladinsOpMode {
     private DurandalConfiguration config;

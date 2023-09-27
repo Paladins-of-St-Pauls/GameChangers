@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.paladins.fierbois;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseDrive;
 import org.firstinspires.ftc.teamcode.paladins.joyeuse.JoyeuseTankDrive;
-
+@Disabled
 @TeleOp(name = "FierboisTankDrive")
 public class FierboisTankDrive extends PaladinsOpMode {
     private FierboisConfiguration config;

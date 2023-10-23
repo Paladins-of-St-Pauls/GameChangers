@@ -11,10 +11,12 @@ import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
 public class ExcaliburOpMode extends PaladinsOpMode {
     private ExcaliburConfiguration config;
     private NormalisedMecanumDrive drive;
+    private ExcaliburUtils utils;
     @Override
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
+        utils = new ExcaliburUtils(this, config.LSpinner, config.RSpinner);
     }
 
     @Override
@@ -37,7 +39,16 @@ public class ExcaliburOpMode extends PaladinsOpMode {
             xx = xx*2;
             yy = yy*2;
         }
+
+
+        if (gamepad1.x) {
+            utils.spinnerSpeed = 1;
+        } else {
+            utils.spinnerSpeed = 0;
+        }
+
             drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x/2);
             drive.update();
+            utils.update();
     }
 }

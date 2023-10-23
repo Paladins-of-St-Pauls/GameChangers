@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -26,6 +28,9 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     public DcMotor backLeftMotor;
     public DcMotor backRightMotor;
 
+    //Flywheel Config
+    public CRServo LSpinner;
+    public CRServo RSpinner;
     BNO055IMU imu;
 
     public double countsPerMotorRev = 288;
@@ -63,6 +68,9 @@ public class ExcaliburConfiguration extends RobotConfiguration {
 
         backLeftMotor = (DcMotor) getHardwareOn("backLeftMotor", hardwareMap.dcMotor);
         backRightMotor = (DcMotor) getHardwareOn("backRightMotor", hardwareMap.dcMotor);
+
+        LSpinner = (CRServo) getHardwareOn("LSpinner", hardwareMap.crservo);
+        RSpinner = (CRServo) getHardwareOn("RSpinner", hardwareMap.crservo);
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);

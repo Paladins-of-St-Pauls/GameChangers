@@ -51,7 +51,7 @@ dependencies {
 }
 
 dependencies {
-    implementation 'org.openftc:easyopencv:1.5.2'
+    implementation 'org.openftc:easyopencv:1.7.0'
 }
 
 dependencies {

@@ -31,6 +31,8 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     //Flywheel Config
     public CRServo LSpinner;
     public CRServo RSpinner;
+
+    public DcMotor Harvester;
     BNO055IMU imu;
 
     public double countsPerMotorRev = 288;
@@ -71,6 +73,8 @@ public class ExcaliburConfiguration extends RobotConfiguration {
 
         LSpinner = (CRServo) getHardwareOn("LSpinner", hardwareMap.crservo);
         RSpinner = (CRServo) getHardwareOn("RSpinner", hardwareMap.crservo);
+
+        Harvester = (DcMotor) getHardwareOn("Harvester", hardwareMap.dcMotor);
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);

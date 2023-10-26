@@ -79,4 +79,6 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+#everything to do with client configuration that doenst belong in github.
 /.idea/

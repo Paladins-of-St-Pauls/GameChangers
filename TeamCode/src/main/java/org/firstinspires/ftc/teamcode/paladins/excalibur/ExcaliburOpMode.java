@@ -16,7 +16,7 @@ public class ExcaliburOpMode extends PaladinsOpMode {
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
-        utils = new ExcaliburUtils(this, config.LSpinner, config.RSpinner, config.Harvester);
+        utils = new ExcaliburUtils(this, config.LSpinner, config.RSpinner, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor);
     }
 
     @Override
@@ -48,16 +48,19 @@ public class ExcaliburOpMode extends PaladinsOpMode {
         }
 
 
-        if (gamepad1.dpad_down) {
+        if (gamepad2.dpad_down) {
             utils.harvesterSpeed = -1;
         } else {
             utils.harvesterSpeed = 0;
         }
-        if (gamepad1.dpad_up) {
+        if (gamepad2.dpad_up) {
             utils.harvesterSpeed = 1;
         }
+        utils.liftSpeed = gamepad2.left_stick_y;
+
 
             drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x/2);
+
             drive.update();
             utils.update();
     }

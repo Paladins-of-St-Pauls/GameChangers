@@ -32,6 +32,9 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     public CRServo LSpinner;
     public CRServo RSpinner;
 
+    // lift config
+    public DcMotor RightLiftMotor;
+    public DcMotor LeftLiftMotor;
     public DcMotor Harvester;
     BNO055IMU imu;
 
@@ -78,6 +81,9 @@ public class ExcaliburConfiguration extends RobotConfiguration {
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        LeftLiftMotor = (DcMotor) getHardwareOn("leftLiftMotor", hardwareMap.dcMotor);
+        RightLiftMotor = (DcMotor) getHardwareOn("rightLiftMotor", hardwareMap.dcMotor);
 
 //        leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

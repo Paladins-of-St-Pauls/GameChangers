@@ -74,9 +74,6 @@ public class ExcaliburConfiguration extends RobotConfiguration {
         backLeftMotor = (DcMotor) getHardwareOn("backLeftMotor", hardwareMap.dcMotor);
         backRightMotor = (DcMotor) getHardwareOn("backRightMotor", hardwareMap.dcMotor);
 
-        LSpinner = (CRServo) getHardwareOn("LSpinner", hardwareMap.crservo);
-        RSpinner = (CRServo) getHardwareOn("RSpinner", hardwareMap.crservo);
-
         Harvester = (DcMotor) getHardwareOn("Harvester", hardwareMap.dcMotor);
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);

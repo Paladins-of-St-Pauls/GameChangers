@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+//import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
@@ -14,20 +15,20 @@ import java.util.List;
 
 public class SplitAveragePipeline extends OpenCvPipeline {
 
-    int CAMERA_WIDTH = 800;
-    int CAMERA_HEIGHT = 448;
+    int CAMERA_WIDTH = 1280;
+    int CAMERA_HEIGHT = 720;
 
     final List<Integer> ELEMENT_COLOR = Arrays.asList(255, 255, 0); //(red, green, blue)
 
     int line1x = CAMERA_WIDTH / 3;
     int line2x = (CAMERA_WIDTH / 3) * 2;
 
-    //Telemetry telemetry;
+//    Telemetry telemetry;
 
     static int color_zone = 1;
 
     //public SplitAveragePipeline(/*Telemetry telemetry, */int iCAMERA_HEIGHT, int iCAMERA_WIDTH){
-    //    //this.telemetry = telemetry;
+
     //    this.CAMERA_HEIGHT = iCAMERA_HEIGHT;
     //    this.CAMERA_WIDTH = iCAMERA_WIDTH;
     //}
@@ -60,22 +61,22 @@ public class SplitAveragePipeline extends OpenCvPipeline {
         double max_distance = Math.min(distance3, Math.min(distance1, distance2));
 
         if (max_distance == distance1){
-            telemetry.addData("Zone 1 Has Element", distance1);
+//            telemetry.addData("Zone 1 Has Element", distance1);
             color_zone = 1;
 
         }else if (max_distance == distance2){
-            telemetry.addData("Zone 2 Has Element", distance2);
+//            telemetry.addData("Zone 2 Has Element", distance2);
             color_zone = 2;
         }else{
-            telemetry.addData("Zone 3 Has Element", distance3);
+//            telemetry.addData("Zone 3 Has Element", distance3);
             color_zone = 3;
         }
 
-        telemetry.addData("\nZone 1 Color", avgColor1);
-        telemetry.addData("Zone 2 Color", avgColor2);
-        telemetry.addData("Zone 3 Color", avgColor3);
-
-        telemetry.update();
+//        telemetry.addData("\nZone 1 Color", avgColor1);
+//        telemetry.addData("Zone 2 Color", avgColor2);
+//        telemetry.addData("Zone 3 Color", avgColor3);
+//
+//        telemetry.update();
 
 
 

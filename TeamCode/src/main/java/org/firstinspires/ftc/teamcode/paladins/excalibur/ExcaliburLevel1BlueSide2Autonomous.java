@@ -18,14 +18,14 @@ public class ExcaliburLevel1BlueSide2Autonomous extends PaladinsOpMode {
 
     @Override
     protected void onInit() {
-    config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
-    drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
+        config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
+        drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
 
 
-    // Begin Auto
-    tasks.add(new ExcaliburDriveTask(this, 0.2, drive, 0.25, 0.25,0.25,0.25));
+        // Begin Auto
+        tasks.add(new ExcaliburDriveTask(this, 0.2, drive, 0.25, 0.25, 0.25, 0.25));
         tasks.add(new WaitTask(this, 0.5));
-        tasks.add(new ExcaliburDriveTask(this, 2, drive, -0.5, 0.5,0.5,-0.5));
+        tasks.add(new ExcaliburDriveTask(this, 2, drive, -0.5, 0.5, 0.5, -0.5));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ExcaliburLevel1BlueSide2Autonomous extends PaladinsOpMode {
 
         }
         if (tasks.isEmpty()) {
-            drive.setPower(0,0,0,0);
+            drive.setPower(0, 0, 0, 0);
             drive.update();
         }
     }

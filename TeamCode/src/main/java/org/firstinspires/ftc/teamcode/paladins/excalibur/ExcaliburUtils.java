@@ -33,7 +33,7 @@ public class ExcaliburUtils extends PaladinsComponent {
     public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake) {
         super(opMode);
 
-        this.Harvester  = Harvester;
+        this.Harvester = Harvester;
         this.LeftLiftMotor = LeftLiftMotor;
         this.RightLiftMotor = RightLiftMotor;
         this.BackLeftOutake = BackLeftOutake;
@@ -48,6 +48,7 @@ public class ExcaliburUtils extends PaladinsComponent {
         frontOutakeSpeed = frontOutakeSpeed;
         backOutakeSpeed = backOutakeSpeed;
     }
+
     @SuppressLint("DefaultLocale")
     public void update() {
         Harvester.setPower(harvesterSpeed);

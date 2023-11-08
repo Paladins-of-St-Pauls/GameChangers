@@ -37,7 +37,7 @@ public class ExcaliburDriveTask extends BaseTask implements Task {
         drive.setPower(frontLeftSpeed, frontRightSpeed, backLeftSpeed, backRightSpeed);
         drive.update();
         if (isFinished()) {
-            drive.setPower(0, 0, 0,0);
+            drive.setPower(0, 0, 0, 0);
             drive.update();
             return;
         }

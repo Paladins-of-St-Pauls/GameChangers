@@ -17,12 +17,12 @@ public class ExcaliburLevel1RedSide1Autonomous extends PaladinsOpMode {
 
     @Override
     protected void onInit() {
-    config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
-    drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
+        config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
+        drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
 
 
-    // Begin Auto
-    tasks.add(new ExcaliburDriveTask(this, 1, drive, 0.5, -0.5,-0.5,0.5));
+        // Begin Auto
+        tasks.add(new ExcaliburDriveTask(this, 1, drive, 0.5, -0.5, -0.5, 0.5));
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ExcaliburLevel1RedSide1Autonomous extends PaladinsOpMode {
 
         }
         if (tasks.isEmpty()) {
-            drive.setPower(0,0,0,0);
+            drive.setPower(0, 0, 0, 0);
             drive.update();
         }
     }

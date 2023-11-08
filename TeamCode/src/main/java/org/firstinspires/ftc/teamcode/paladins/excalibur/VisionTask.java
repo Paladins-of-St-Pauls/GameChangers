@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.BaseTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
+
 import java.util.ArrayDeque;
 
 public class VisionTask extends BaseTask implements Task {
@@ -35,6 +36,7 @@ public class VisionTask extends BaseTask implements Task {
         drive = new ExcaliburDrive(opMode, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
 
     }
+
     @Override
     public void run() {
         if (isFinished()) {
@@ -47,106 +49,106 @@ public class VisionTask extends BaseTask implements Task {
             if (zone == 1) {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 1 Left"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe right 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 2) {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 2 Left"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe right 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 3) {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 3 Left"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe right 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             }
         }
         if (alliance == Alliance.BLUELEFT) {
             if (zone == 1) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 1 Left"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe left 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 2) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 2 Left"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe left 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 3) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 3 Left"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe left 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             }
         }
         if (alliance == Alliance.REDRIGHT) {
             if (zone == 1) {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 1 Right"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe right 2.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 2) {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 2 Right"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe right 2.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 3) {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 3 Right"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe right 2.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             }
         }
         if (alliance == Alliance.BLUERIGHT) {
             if (zone == 1) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 1 Right"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe left 2.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 2) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 2 Right"));
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe left 2.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             } else if (zone == 3) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 3 Right"));
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive,1,1,1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
                 // strafe left 2.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 2.5, drive, 1, 1, 1, 1));
                 //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1,1,1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
             }
         }
         this.isFinished = true;

@@ -104,9 +104,9 @@ public class ExcaliburDrive extends PaladinsComponent {
         int newBackLeftTarget;
         int newBackRightTarget;
         newFrontLeftTarget = frontLeftMotor.getCurrentPosition() + (int) frontLeftDistance;
-        newFrontRightTarget =  frontRightMotor.getCurrentPosition() + (int) frontRightDistance;
-        newBackLeftTarget =  backLeftMotor.getCurrentPosition() + (int) backLeftDistance;
-        newBackRightTarget =  backRightMotor.getCurrentPosition() + (int) backRightDistance;
+        newFrontRightTarget = frontRightMotor.getCurrentPosition() + (int) frontRightDistance;
+        newBackLeftTarget = backLeftMotor.getCurrentPosition() + (int) backLeftDistance;
+        newBackRightTarget = backRightMotor.getCurrentPosition() + (int) backRightDistance;
         frontLeftMotor.setTargetPosition(newFrontLeftTarget);
         frontRightMotor.setTargetPosition(newFrontRightTarget);
         backLeftMotor.setTargetPosition(newBackLeftTarget);

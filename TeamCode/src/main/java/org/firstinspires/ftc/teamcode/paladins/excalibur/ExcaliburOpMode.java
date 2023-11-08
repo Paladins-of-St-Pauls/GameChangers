@@ -8,12 +8,12 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
 
 
-
 @TeleOp(name = "ExcaliburMechanumDrive")
 public class ExcaliburOpMode extends PaladinsOpMode {
     private ExcaliburConfiguration config;
     private NormalisedMecanumDrive drive;
     private ExcaliburUtils utils;
+
     @Override
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
@@ -31,17 +31,16 @@ public class ExcaliburOpMode extends PaladinsOpMode {
             xx = gamepad1.right_stick_x;
         } else {
             if (Math.abs(gamepad1.right_trigger) > 0) {
-                yy = -gamepad1.right_trigger/2;
+                yy = -gamepad1.right_trigger / 2;
             } else {
-                yy = gamepad1.left_trigger/2;
+                yy = gamepad1.left_trigger / 2;
             }
         }
 
         if (gamepad1.b) {
-            xx = xx*2;
-            yy = yy*2;
+            xx = xx * 2;
+            yy = yy * 2;
         }
-
 
 
         if (gamepad2.dpad_down) {
@@ -59,12 +58,11 @@ public class ExcaliburOpMode extends PaladinsOpMode {
         } else {
             utils.frontOutakeSpeed = 0;
         }
-        
 
 
-            drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x/2);
+        drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x / 2);
 
-            drive.update();
-            utils.update();
+        drive.update();
+        utils.update();
     }
 }

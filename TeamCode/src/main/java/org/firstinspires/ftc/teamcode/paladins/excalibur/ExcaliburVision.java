@@ -22,22 +22,19 @@ public class ExcaliburVision {
 
     int zone = 1;
 
-    public ExcaliburVision(HardwareMap hardwareMap, Telemetry telemetry){
+    public ExcaliburVision(HardwareMap hardwareMap, Telemetry telemetry) {
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"));
         splitAveragePipeline = new SplitAveragePipeline(telemetry);
 
         camera.setPipeline(splitAveragePipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
+            public void onOpened() {
                 camera.startStreaming(camW, camH, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
-            public void onError(int errorCode)
-            {
+            public void onError(int errorCode) {
 
             }
         });

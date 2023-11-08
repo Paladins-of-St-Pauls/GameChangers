@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
 
+
+
 @TeleOp(name = "ExcaliburMechanumDrive")
 public class ExcaliburOpMode extends PaladinsOpMode {
     private ExcaliburConfiguration config;
@@ -16,7 +18,7 @@ public class ExcaliburOpMode extends PaladinsOpMode {
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
-        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor);
+        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake);
     }
 
     @Override
@@ -51,6 +53,13 @@ public class ExcaliburOpMode extends PaladinsOpMode {
             utils.harvesterSpeed = 1;
         }
         utils.liftSpeed = gamepad2.left_stick_y;
+
+        if (gamepad2.right_bumper) {
+            utils.frontOutakeSpeed = 1;
+        } else {
+            utils.frontOutakeSpeed = 0;
+        }
+        
 
 
             drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x/2);

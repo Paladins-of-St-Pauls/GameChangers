@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
 import org.firstinspires.ftc.teamcode.paladins.excalibur.ExcaliburVision;
+import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 
 import java.util.ArrayDeque;
 
@@ -22,30 +23,29 @@ public class ExcaliburLevel2BlueSide2Autonomous extends PaladinsOpMode {
 
     @Override
     protected void onInit() {
-    config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
-    drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
-    excaliburVision = new ExcaliburVision(hardwareMap);
+        config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
+        drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
+        excaliburVision = new ExcaliburVision(hardwareMap, telemetry);
+
+        tasks.add(new WaitTask(this, 3));
+        tasks.add(new VisionTask(this, tasks, Alliance.BLUE, 3));
     }
 
     @Override
     protected void activeLoop() throws InterruptedException {
 
-        while(true) {
-            element_zone = excaliburVision.ElementDetection(telemetry);
+        Task currentTask = tasks.peekFirst();
+        if (currentTask == null) {
+            return;
         }
+        currentTask.run();
+        if (currentTask.isFinished()) {
+            tasks.removeFirst();
 
-//        Task currentTask = tasks.peekFirst();
-//        if (currentTask == null) {
-//            return;
-//        }
-//        currentTask.run();
-//        if (currentTask.isFinished()) {
-//            tasks.removeFirst();
-//
-//        }
-//        if (tasks.isEmpty()) {
-//            drive.setPower(0,0,0,0);
-//            drive.update();
-//        }
+        }
+        if (tasks.isEmpty()) {
+            drive.setPower(0, 0, 0, 0);
+            drive.update();
+        }
     }
 }

@@ -36,6 +36,11 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     public DcMotor RightLiftMotor;
     public DcMotor LeftLiftMotor;
     public DcMotor Harvester;
+
+    public Servo BackLeftOutake;
+    public Servo BackRightOutake;
+    public CRServo FrontLeftOutake;
+    public CRServo FrontRightOutake;
     BNO055IMU imu;
 
     public double countsPerMotorRev = 288;
@@ -81,6 +86,11 @@ public class ExcaliburConfiguration extends RobotConfiguration {
 
         LeftLiftMotor = (DcMotor) getHardwareOn("leftLiftMotor", hardwareMap.dcMotor);
         RightLiftMotor = (DcMotor) getHardwareOn("rightLiftMotor", hardwareMap.dcMotor);
+
+        FrontLeftOutake = (CRServo) getHardwareOn("frontLeftOutake", hardwareMap.crservo);
+        FrontRightOutake = (CRServo) getHardwareOn("frontRightOutake", hardwareMap.crservo);
+        BackLeftOutake = (Servo) getHardwareOn("backLeftOutake", hardwareMap.servo);
+        BackRightOutake = (Servo) getHardwareOn("backRightOutake", hardwareMap.servo);
 
 //        leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

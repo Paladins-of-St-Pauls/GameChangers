@@ -22,9 +22,9 @@ public class ExcaliburVision {
 
     int zone = 1;
 
-    public ExcaliburVision(HardwareMap hardwareMap){
+    public ExcaliburVision(HardwareMap hardwareMap, Telemetry telemetry){
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"));
-        splitAveragePipeline = new SplitAveragePipeline();
+        splitAveragePipeline = new SplitAveragePipeline(telemetry);
 
         camera.setPipeline(splitAveragePipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()

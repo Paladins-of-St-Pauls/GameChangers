@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.paladins.excalibur;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 //import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
@@ -27,11 +28,9 @@ public class SplitAveragePipeline extends OpenCvPipeline {
 
     static int color_zone = 1;
 
-    //public SplitAveragePipeline(/*Telemetry telemetry, */int iCAMERA_HEIGHT, int iCAMERA_WIDTH){
+    public SplitAveragePipeline(Telemetry telemetry) {
 
-    //    this.CAMERA_HEIGHT = iCAMERA_HEIGHT;
-    //    this.CAMERA_WIDTH = iCAMERA_WIDTH;
-    //}
+    }
 
     @Override
     public Mat processFrame(Mat input) {
@@ -60,30 +59,29 @@ public class SplitAveragePipeline extends OpenCvPipeline {
 
         double max_distance = Math.min(distance3, Math.min(distance1, distance2));
 
-        if (max_distance == distance1){
-//            telemetry.addData("Zone 1 Has Element", distance1);
+        if (max_distance == distance1) {
+            telemetry.addData("Zone 1 Has Element", distance1);
             color_zone = 1;
 
-        }else if (max_distance == distance2){
-//            telemetry.addData("Zone 2 Has Element", distance2);
+        } else if (max_distance == distance2) {
+            telemetry.addData("Zone 2 Has Element", distance2);
             color_zone = 2;
-        }else{
-//            telemetry.addData("Zone 3 Has Element", distance3);
+        } else {
+            telemetry.addData("Zone 3 Has Element", distance3);
             color_zone = 3;
         }
 
-//        telemetry.addData("\nZone 1 Color", avgColor1);
-//        telemetry.addData("Zone 2 Color", avgColor2);
-//        telemetry.addData("Zone 3 Color", avgColor3);
+        telemetry.addData("\nZone 1 Color", avgColor1);
+        telemetry.addData("Zone 2 Color", avgColor2);
+        telemetry.addData("Zone 3 Color", avgColor3);
 //
-//        telemetry.update();
-
+        telemetry.update();
 
 
         return input;
     }
 
-    public double color_distance(Scalar color1, List color2){
+    public double color_distance(Scalar color1, List color2) {
         double r1 = color1.val[0];
         double g1 = color1.val[1];
         double b1 = color1.val[2];
@@ -95,7 +93,7 @@ public class SplitAveragePipeline extends OpenCvPipeline {
         return Math.sqrt(Math.pow((r1 - r2), 2) + Math.pow((g1 - g2), 2) + Math.pow((b1 - b2), 2));
     }
 
-    public static int get_element_zone(){
+    public static int get_element_zone() {
         return color_zone;
     }
 

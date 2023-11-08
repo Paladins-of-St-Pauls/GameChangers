@@ -1,19 +1,14 @@
 package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
-
-import org.firstinspires.ftc.teamcode.paladins.excalibur.ExcaliburVision;
 import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 
 import java.util.ArrayDeque;
 
-@Disabled
-@Autonomous(name = "ExcaliburLevel2BlueSide2Autonomous")
-public class ExcaliburLevel2BlueSide2Autonomous extends PaladinsOpMode {
+public class ExcaliburAutonomous extends PaladinsOpMode {
     private ExcaliburConfiguration config;
     private ExcaliburDrive drive;
     private ArrayDeque<Task> tasks = new ArrayDeque<>();
@@ -21,7 +16,14 @@ public class ExcaliburLevel2BlueSide2Autonomous extends PaladinsOpMode {
     public int element_zone = 1;
     private int ServoHoldTime = 1;
 
+    final private Alliance alliance;
+
     private ExcaliburVision excaliburVision;
+
+    public ExcaliburAutonomous(Alliance alliance) {
+        super();
+        this.alliance = alliance;
+    }
 
     @Override
     protected void onInit() {
@@ -30,6 +32,7 @@ public class ExcaliburLevel2BlueSide2Autonomous extends PaladinsOpMode {
         excaliburVision = new ExcaliburVision(hardwareMap, telemetry);
 
         tasks.add(new WaitTask(this, 3));
+        tasks.add(new VisionTask(this, tasks, alliance, 27));
     }
 
     @Override

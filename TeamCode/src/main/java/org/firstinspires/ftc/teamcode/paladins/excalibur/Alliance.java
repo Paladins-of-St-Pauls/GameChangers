@@ -1,3 +1,3 @@
 package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
-public enum Alliance { RED, BLUE}
+public enum Alliance { REDLEFT, REDRIGHT, BLUELEFT, BLUERIGHT}

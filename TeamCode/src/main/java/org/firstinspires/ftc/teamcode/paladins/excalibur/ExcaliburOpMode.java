@@ -18,7 +18,7 @@ public class ExcaliburOpMode extends PaladinsOpMode {
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
-        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake);
+        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter);
     }
 
     @Override
@@ -54,10 +54,31 @@ public class ExcaliburOpMode extends PaladinsOpMode {
         utils.liftSpeed = gamepad2.left_stick_y;
 
         if (gamepad2.right_bumper) {
-            utils.frontOutakeSpeed = 1;
-        } else {
+            utils.frontOutakeSpeed = -1;
+        }
+        else {
             utils.frontOutakeSpeed = 0;
         }
+        if (gamepad2.left_bumper) {
+            utils.frontOutakeSpeed = 1;
+        }
+
+        if (gamepad2.y) {
+            utils.backOutakePos = 1;
+        }
+        if (gamepad2.x) {
+            utils.backOutakePos = 0;
+        }
+        if (gamepad2.dpad_left) {
+            utils.planeShooterPos = 1;
+        }
+        if (gamepad2.dpad_right) {
+            utils.planeShooterPos = 0;
+        }
+        telemetry.addData("OutakeSpeed", utils.frontOutakeSpeed);
+        telemetry.addData("HarvesterSpeed", utils.harvesterSpeed);
+        telemetry.addData("LiftSpeed", utils.liftSpeed);
+
 
 
         drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x / 2);

@@ -24,13 +24,17 @@ public class ExcaliburUtils extends PaladinsComponent {
     final private CRServo FrontLeftOutake;
     final private CRServo FrontRightOutake;
 
+    final private Servo PlaneShooter;
+
 
     public double harvesterSpeed;
     public double backOutakePos;
     public double frontOutakeSpeed;
     public double liftSpeed;
 
-    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake) {
+    public double planeShooterPos;
+
+    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake, Servo PlaneShooter) {
         super(opMode);
 
         this.Harvester = Harvester;
@@ -40,6 +44,7 @@ public class ExcaliburUtils extends PaladinsComponent {
         this.BackRightOutake = BackRightOutake;
         this.FrontLeftOutake = FrontLeftOutake;
         this.FrontRightOutake = FrontRightOutake;
+        this.PlaneShooter = PlaneShooter;
     }
 
     public void setPower(double harvesterSpeed, double liftSpeed, double backOutakeSpeed, double frontOutakeSpeed) {
@@ -56,7 +61,8 @@ public class ExcaliburUtils extends PaladinsComponent {
         RightLiftMotor.setPower(-liftSpeed);
 
         BackLeftOutake.setPosition(backOutakePos);
-        BackRightOutake.setPosition(-backOutakePos);
+        BackRightOutake.setPosition(backOutakePos);
+        PlaneShooter.setPosition(planeShooterPos);
 
         FrontLeftOutake.setPower(frontOutakeSpeed);
         FrontRightOutake.setPower(-frontOutakeSpeed);

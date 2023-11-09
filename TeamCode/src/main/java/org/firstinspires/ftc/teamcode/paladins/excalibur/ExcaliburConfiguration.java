@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
+import static com.qualcomm.robotcore.hardware.Servo.Direction.REVERSE;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -41,6 +44,9 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     public Servo BackRightOutake;
     public CRServo FrontLeftOutake;
     public CRServo FrontRightOutake;
+
+    public Servo PlaneShooter;
+
     BNO055IMU imu;
 
     public double countsPerMotorRev = 288;
@@ -92,11 +98,11 @@ public class ExcaliburConfiguration extends RobotConfiguration {
         BackLeftOutake = (Servo) getHardwareOn("backLeftOutake", hardwareMap.servo);
         BackRightOutake = (Servo) getHardwareOn("backRightOutake", hardwareMap.servo);
 
-//        leftMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        rightMidMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//
-//        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//        rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        PlaneShooter = (Servo) getHardwareOn("planeShooter", hardwareMap.servo);
+        
+        BackLeftOutake.setDirection(REVERSE);
+
+
 
         // Set up the parameters with which we will use our IMU. Note that integration
         // algorithm here just reports accelerations to the logcat log; it doesn't actually

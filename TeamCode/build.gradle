@@ -26,7 +26,7 @@ def getVersionName = { ->
         return stdout.toString().trim()
     }
     catch (ignored) {
-        return null;
+        return null
     }
 }
 
@@ -43,11 +43,11 @@ android {
 dependencies {
     implementation project(':FtcRobotController')
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
-    implementation 'org.firstinspires.ftc:Hardware:6.2.0'
-    implementation 'org.firstinspires.ftc:RobotCore:6.2.0'
-    implementation 'org.firstinspires.ftc:FtcCommon:6.2.0'
-    implementation 'org.firstinspires.ftc:OnBotJava:6.2.0'
-    implementation 'org.firstinspires.ftc:Inspection:6.2.0'
+    implementation 'org.firstinspires.ftc:Hardware:9.0.1'
+    implementation 'org.firstinspires.ftc:RobotCore:9.0.1'
+    implementation 'org.firstinspires.ftc:FtcCommon:9.0.1'
+    implementation 'org.firstinspires.ftc:OnBotJava:9.0.1'
+    implementation 'org.firstinspires.ftc:Inspection:9.0.1'
 }
 
 dependencies {
@@ -55,5 +55,5 @@ dependencies {
 }
 
 dependencies {
-    implementation 'org.openftc:apriltag:1.1.0'
+    implementation 'org.openftc:apriltag:2.0.0'
 }

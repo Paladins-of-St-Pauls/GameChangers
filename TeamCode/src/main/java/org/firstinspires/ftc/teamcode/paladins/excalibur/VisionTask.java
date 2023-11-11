@@ -34,7 +34,7 @@ public class VisionTask extends BaseTask implements Task {
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new ExcaliburDrive(opMode, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
-
+        utils = new ExcaliburUtils(opMode, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor);
     }
 
     @Override
@@ -50,10 +50,14 @@ public class VisionTask extends BaseTask implements Task {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 1 Left"));
                 //forward 1 tile
                 tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
-                // strafe right 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
-                //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
+                //Outake purple pixel
+                tasks.add(new ExcaliburUtilsTask(opMode, 1,utils,-1,0,0,0));
+                //straffe right 3 tiles   // strafe right 5 tiles
+                //tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
+                //backward 1 tile
+                //straffe right 1 tile
+                //tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
+
             } else if (zone == 2) {
                 tasks.add(new MessageTask(opMode, 1, "Red Zone 2 Left"));
                 //forward 1 tile

@@ -24,12 +24,12 @@ public class SplitAveragePipeline extends OpenCvPipeline {
     int line1x = CAMERA_WIDTH / 3;
     int line2x = (CAMERA_WIDTH / 3) * 2;
 
-//    Telemetry telemetry;
+    Telemetry telemetry;
 
     static int color_zone = 1;
 
     public SplitAveragePipeline(Telemetry telemetry) {
-
+        this.telemetry = telemetry;
     }
 
     @Override

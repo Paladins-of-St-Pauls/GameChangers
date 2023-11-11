@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -16,15 +18,18 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 public class ExcaliburUtils extends PaladinsComponent {
 
     final private DcMotor Harvester;
-    final private DcMotor LeftLiftMotor;
-    final private DcMotor RightLiftMotor;
+    final DcMotor LeftLiftMotor;
+    final DcMotor RightLiftMotor;
 
-    final private Servo BackLeftOutake;
-    final private Servo BackRightOutake;
+    final Servo BackLeftOutake;
+    final Servo BackRightOutake;
     final private CRServo FrontLeftOutake;
     final private CRServo FrontRightOutake;
 
     final private Servo PlaneShooter;
+
+    final public RevColorSensorV3 RSensor;
+    final public RevColorSensorV3 LSensor;
 
 
     public double harvesterSpeed;
@@ -34,7 +39,7 @@ public class ExcaliburUtils extends PaladinsComponent {
 
     public double planeShooterPos;
 
-    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake, Servo PlaneShooter) {
+    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake, Servo PlaneShooter, RevColorSensorV3 RSensor, RevColorSensorV3 LSensor) {
         super(opMode);
 
         this.Harvester = Harvester;
@@ -45,6 +50,8 @@ public class ExcaliburUtils extends PaladinsComponent {
         this.FrontLeftOutake = FrontLeftOutake;
         this.FrontRightOutake = FrontRightOutake;
         this.PlaneShooter = PlaneShooter;
+        this.RSensor = RSensor;
+        this.LSensor = LSensor;
     }
 
     public void setPower(double harvesterSpeed, double liftSpeed, double backOutakeSpeed, double frontOutakeSpeed) {

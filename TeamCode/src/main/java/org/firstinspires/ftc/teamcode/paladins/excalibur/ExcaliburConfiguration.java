@@ -4,6 +4,7 @@ import static com.qualcomm.robotcore.hardware.Servo.Direction.REVERSE;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -46,6 +47,9 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     public CRServo FrontRightOutake;
 
     public Servo PlaneShooter;
+
+    public RevColorSensorV3 LSensor;
+    public RevColorSensorV3 RSensor;
 
     BNO055IMU imu;
 
@@ -99,7 +103,10 @@ public class ExcaliburConfiguration extends RobotConfiguration {
         BackRightOutake = (Servo) getHardwareOn("backRightOutake", hardwareMap.servo);
 
         PlaneShooter = (Servo) getHardwareOn("planeShooter", hardwareMap.servo);
-        
+
+        RSensor = (RevColorSensorV3) getHardwareOn("RSensor", hardwareMap.colorSensor);
+        LSensor = (RevColorSensorV3) getHardwareOn("LSensor", hardwareMap.colorSensor);
+
         BackLeftOutake.setDirection(REVERSE);
 
 

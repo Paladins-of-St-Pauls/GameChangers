@@ -64,8 +64,8 @@ public class ExcaliburUtils extends PaladinsComponent {
     @SuppressLint("DefaultLocale")
     public void update() {
         Harvester.setPower(harvesterSpeed);
-        LeftLiftMotor.setPower(liftSpeed);
-        RightLiftMotor.setPower(-liftSpeed);
+        LeftLiftMotor.setPower(liftSpeed/3);
+        RightLiftMotor.setPower(-(liftSpeed/3));
 
         BackLeftOutake.setPosition(backOutakePos);
         BackRightOutake.setPosition(backOutakePos);

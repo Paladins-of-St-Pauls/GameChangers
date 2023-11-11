@@ -23,6 +23,11 @@ public class ExcaliburOpMode extends PaladinsOpMode {
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
         utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor);
 
+        config.frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        config.frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        config.backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        config.backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         utils.RightLiftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         utils.LeftLiftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         utils.LeftLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -61,7 +66,8 @@ public class ExcaliburOpMode extends PaladinsOpMode {
         if (gamepad2.dpad_up) {
             utils.harvesterSpeed = 1;
         }
-        utils.liftSpeed = gamepad2.left_stick_y / 2;
+
+        utils.liftSpeed = gamepad2.left_stick_y;
 
         if (gamepad2.right_bumper) {
             utils.frontOutakeSpeed = -1;
@@ -72,12 +78,6 @@ public class ExcaliburOpMode extends PaladinsOpMode {
             utils.frontOutakeSpeed = 1;
         }
 
-        if (gamepad2.y) {
-            utils.backOutakePos = 1;
-        }
-        if (gamepad2.x) {
-            utils.backOutakePos = 0;
-        }
         if (gamepad2.a) {
             utils.planeShooterPos = 1;
         }
@@ -85,12 +85,14 @@ public class ExcaliburOpMode extends PaladinsOpMode {
             utils.planeShooterPos = 0;
         }
 
+
+
         liftAvg = (Math.abs(utils.LeftLiftMotor.getCurrentPosition()) + Math.abs(utils.RightLiftMotor.getCurrentPosition())) / 2;
 
 
-        if (liftAvg > 1875) {
+        if (liftAvg > 1750) {
             utils.backOutakePos = 0;
-        } else if (liftAvg < 1875) {
+        } else if (liftAvg < 1750) {
             utils.backOutakePos = 1;
         }
 

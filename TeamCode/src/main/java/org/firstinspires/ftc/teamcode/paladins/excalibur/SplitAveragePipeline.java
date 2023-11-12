@@ -75,8 +75,6 @@ public class SplitAveragePipeline extends OpenCvPipeline {
         telemetry.addData("Zone 2 Color", avgColor2);
         telemetry.addData("Zone 3 Color", avgColor3);
         telemetry.update();
-
-
         return input;
     }
 

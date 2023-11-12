@@ -62,7 +62,7 @@ public class NormalisedMecanumDrive extends PaladinsComponent {
         this.speedY = clipMotorPower(speedY);
         this.speedR = clipMotorPower(speedR);
     }
-    
+
     public void setSpeedPolarR(double speed, double direction, double speedR) {
         double radians = Math.toRadians(direction);
         this.speedX = clipMotorPower(speed * Math.cos(radians));

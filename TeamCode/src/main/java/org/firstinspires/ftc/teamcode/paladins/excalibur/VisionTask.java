@@ -79,28 +79,23 @@ public class VisionTask extends BaseTask implements Task {
         if (alliance == Alliance.BLUELEFT) {
             if (zone == 1) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 1 Left"));
-                //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
-                // strafe left 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
-                //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
+                //drive up to spike point
+                tasks.add(new ExcaliburDriveTask(opMode, 0.3, drive, -1,1,1,-1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.3, drive, 1,1,1,1));
+                //eject pixel
+                tasks.add(new ExcaliburUtilsTask(opMode, 1, utils, -1, 0,0,0));
             } else if (zone == 2) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 2 Left"));
-                //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
-                // strafe left 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
-                //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.3, drive, 1,1,1,1));
+                //eject pixel
+                tasks.add(new ExcaliburUtilsTask(opMode, 1, utils, -1, 0,0,0));
             } else if (zone == 3) {
                 tasks.add(new MessageTask(opMode, 1, "Blue Zone 3 Left"));
                 //forward 1 tile
-                tasks.add(new ExcaliburDriveTask(opMode, 1, drive, 1, 1, 1, 1));
-                // strafe left 5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 5, drive, 1, 1, 1, 1));
-                //forward 0.5 tiles
-                tasks.add(new ExcaliburDriveTask(opMode, 0.5, drive, 1, 1, 1, 1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.3, drive, 1,-1,-1,1));
+                tasks.add(new ExcaliburDriveTask(opMode, 0.3, drive, 1,1,1,1));
+                //eject pixel
+                tasks.add(new ExcaliburUtilsTask(opMode, 1, utils, -1, 0,0,0));
             }
         }
         if (alliance == Alliance.REDRIGHT) {

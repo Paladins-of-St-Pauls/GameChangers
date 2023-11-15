@@ -6,16 +6,15 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
 
-import org.firstinspires.ftc.teamcode.paladins.excalibur.ExcaliburVision;
 import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 
 import java.util.ArrayDeque;
 
-@Disabled
-@Autonomous(name = "ExcaliburLevel2BlueSide2Autonomous")
-public class ExcaliburLevel2BlueSide2Autonomous extends PaladinsOpMode {
+@Autonomous(name = "ExcaliburLevel2BlueSide1Autonomous")
+public class ExcaliburLevel2BlueSide1Autonomous extends PaladinsOpMode {
     private ExcaliburConfiguration config;
     private ExcaliburDrive drive;
+    private ExcaliburUtils utils;
     private ArrayDeque<Task> tasks = new ArrayDeque<>();
 
     public int element_zone = 1;
@@ -23,13 +22,21 @@ public class ExcaliburLevel2BlueSide2Autonomous extends PaladinsOpMode {
 
     private ExcaliburVision excaliburVision;
 
+
     @Override
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
-        excaliburVision = new ExcaliburVision(hardwareMap, telemetry);
+        utils = new ExcaliburUtils(this, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
+
 
         tasks.add(new WaitTask(this, 3));
+        tasks.add(new ExcaliburDriveTask(this, 0.3, drive, 1,1,1,1));
+        tasks.add(new ExcaliburUtilsTask(this, 1, utils, -1, 0,0,0));
+        tasks.add(new ExcaliburDriveTask(this, 0.3, drive, -1,-1,-1,-1));
+        tasks.add(new ExcaliburDriveTask(this, 1, drive, -0.5, 0.5, 0.5, -0.5));
+
+
     }
 
     @Override

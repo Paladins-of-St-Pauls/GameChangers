@@ -31,15 +31,19 @@ public class ExcaliburUtils extends PaladinsComponent {
     final public RevColorSensorV3 RSensor;
     final public RevColorSensorV3 LSensor;
 
+    final DcMotor indexMotor;
+
 
     public double harvesterSpeed;
     public double backOutakePos;
     public double frontOutakeSpeed;
     public double liftSpeed;
 
+    public int indexPos;
+
     public double planeShooterPos;
 
-    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake, Servo PlaneShooter, RevColorSensorV3 RSensor, RevColorSensorV3 LSensor) {
+    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake, Servo PlaneShooter, RevColorSensorV3 RSensor, RevColorSensorV3 LSensor, DcMotor indexMotor) {
         super(opMode);
 
         this.Harvester = Harvester;
@@ -52,6 +56,7 @@ public class ExcaliburUtils extends PaladinsComponent {
         this.PlaneShooter = PlaneShooter;
         this.RSensor = RSensor;
         this.LSensor = LSensor;
+        this.indexMotor = indexMotor;
     }
 
     public void setPower(double harvesterSpeed, double liftSpeed, double backOutakeSpeed, double frontOutakeSpeed) {
@@ -59,6 +64,10 @@ public class ExcaliburUtils extends PaladinsComponent {
         liftSpeed = liftSpeed;
         frontOutakeSpeed = frontOutakeSpeed;
         backOutakeSpeed = backOutakeSpeed;
+
+        indexMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        indexMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        indexMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     @SuppressLint("DefaultLocale")
@@ -66,6 +75,8 @@ public class ExcaliburUtils extends PaladinsComponent {
         Harvester.setPower(harvesterSpeed);
         LeftLiftMotor.setPower(liftSpeed/3);
         RightLiftMotor.setPower(-(liftSpeed/3));
+
+        indexMotor.setTargetPosition(indexPos);
 
         BackLeftOutake.setPosition(backOutakePos);
         BackRightOutake.setPosition(backOutakePos);

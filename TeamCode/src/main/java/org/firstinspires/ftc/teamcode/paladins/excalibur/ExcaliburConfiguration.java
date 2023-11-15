@@ -51,6 +51,8 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     public RevColorSensorV3 LSensor;
     public RevColorSensorV3 RSensor;
 
+    public DcMotor indexMotor;
+
     BNO055IMU imu;
 
     public double countsPerMotorRev = 288;
@@ -108,6 +110,8 @@ public class ExcaliburConfiguration extends RobotConfiguration {
         LSensor = (RevColorSensorV3) getHardwareOn("LSensor", hardwareMap.colorSensor);
 
         BackLeftOutake.setDirection(REVERSE);
+
+        indexMotor = (DcMotor) getHardwareOn("indexMotor", hardwareMap.dcMotor);
 
 
 

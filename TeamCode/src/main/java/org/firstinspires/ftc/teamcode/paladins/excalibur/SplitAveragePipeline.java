@@ -40,6 +40,9 @@ public class SplitAveragePipeline extends OpenCvPipeline {
         Mat zone1 = input.submat(new Rect(0, 0, line1x, CAMERA_HEIGHT));
         Mat zone2 = input.submat(new Rect(line1x, 0, line2x - line1x, CAMERA_HEIGHT));
         Mat zone3 = input.submat(new Rect(line2x, 0, CAMERA_WIDTH - line2x, CAMERA_HEIGHT));
+        Mat zone1bot = input.submat(new Rect(0, CAMERA_HEIGHT-20, line1x, 20));
+        Mat zone2bot = input.submat(new Rect(line1x, CAMERA_HEIGHT-20, line2x - line1x, 20));
+        Mat zone3bot = input.submat(new Rect(line2x, CAMERA_HEIGHT-20, CAMERA_WIDTH - line2x, 20));
 
         //Averaging the colors in the zones
         Scalar avgColor1 = Core.mean(zone1);
@@ -47,9 +50,9 @@ public class SplitAveragePipeline extends OpenCvPipeline {
         Scalar avgColor3 = Core.mean(zone3);
 
         //Putting averaged colors on zones (we can see on camera now)
-        zone1.setTo(avgColor1);
-        zone2.setTo(avgColor2);
-        zone3.setTo(avgColor3);
+        zone1bot.setTo(avgColor1);
+        zone2bot.setTo(avgColor2);
+        zone3bot.setTo(avgColor3);
 
         double distance1 = color_distance(avgColor1, ELEMENT_COLOR);
         double distance2 = color_distance(avgColor2, ELEMENT_COLOR);

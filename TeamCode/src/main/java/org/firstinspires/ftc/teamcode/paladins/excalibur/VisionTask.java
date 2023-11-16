@@ -24,6 +24,9 @@ public class VisionTask extends BaseTask implements Task {
         super(opMode, time);
         this.tasks = tasks;
         this.alliance = alliance;
+        config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
+        drive = new ExcaliburDrive(opMode, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
+        utils = new ExcaliburUtils(opMode, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
 
     }
 
@@ -32,9 +35,6 @@ public class VisionTask extends BaseTask implements Task {
     }
 
     protected void onInit() {
-        config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
-        drive = new ExcaliburDrive(opMode, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
-        utils = new ExcaliburUtils(opMode, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
     }
 
     @Override

@@ -61,6 +61,7 @@ public class ExcaliburConfiguration extends RobotConfiguration {
 
     public double countsPerCm = (countsPerMotorRev * driveGearReduction) / (wheelDiameterCm * Math.PI);
 
+    private static ExcaliburConfiguration config = null;
     /**
      * Factory method for this class
      *
@@ -69,8 +70,10 @@ public class ExcaliburConfiguration extends RobotConfiguration {
      * @return
      */
     public static ExcaliburConfiguration newConfig(HardwareMap hardwareMap, Telemetry telemetry) {
-        ExcaliburConfiguration config = new ExcaliburConfiguration();
-        config.init(hardwareMap, telemetry);
+        if (config == null) {
+            config = new ExcaliburConfiguration();
+            config.init(hardwareMap, telemetry);
+        }
         return config;
     }
 

@@ -21,9 +21,6 @@ public class ExcaliburDriveTask extends BaseTask implements Task {
         this.frontRightSpeed = -frontRightSpeed;
         this.backLeftSpeed = -backLeftSpeed;
         this.backRightSpeed = -backRightSpeed;
-
-
-        drive.setEncoder(false);
     }
 
     @Override

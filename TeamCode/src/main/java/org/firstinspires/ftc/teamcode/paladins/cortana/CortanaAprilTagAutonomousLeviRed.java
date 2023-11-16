@@ -148,7 +148,6 @@ public class CortanaAprilTagAutonomousLeviRed extends PaladinsOpMode
             if(tagOfInterest.id == 111)
             {
                 // close clamp and lift to zero
-                tasks.add(new CortanaResetTask(this, 0.1, lift));
                 tasks.add(new CortanaHarvesterTask(this, 1, lift, true, 0));
                 //go forward to the high goal
                 tasks.add(new CortanaDriveTask(this, 3, drive, -0.25, -0.25, -0.25, -0.25));
@@ -175,7 +174,6 @@ public class CortanaAprilTagAutonomousLeviRed extends PaladinsOpMode
             }
             else if(tagOfInterest.id == 222) {
                 // close clamp and lift to zero
-                tasks.add(new CortanaResetTask(this, 0.1, lift));
                 tasks.add(new CortanaHarvesterTask(this, 1, lift, true, 0));
                 //go forward to the high goal
                 tasks.add(new CortanaDriveTask(this, 3, drive, -0.25, -0.25, -0.25, -0.25));
@@ -198,7 +196,6 @@ public class CortanaAprilTagAutonomousLeviRed extends PaladinsOpMode
             {
 
                 /// close clamp and lift to zero
-                tasks.add(new CortanaResetTask(this, 0.1, lift));
                 tasks.add(new CortanaHarvesterTask(this, 1, lift, true, 0));
                 //go forward to the high goal
                 tasks.add(new CortanaDriveTask(this, 3, drive, -0.25, -0.25, -0.25, -0.25));

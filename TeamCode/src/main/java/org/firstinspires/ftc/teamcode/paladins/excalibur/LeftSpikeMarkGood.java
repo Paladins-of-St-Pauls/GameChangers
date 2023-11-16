@@ -29,7 +29,7 @@ public class LeftSpikeMarkGood extends PaladinsOpMode {
 
 
         tasks.add(new WaitTask(this, 3));
-        tasks.add(new ExcaliburDriveTask(this, 0.48, drive, 0.5,0.5,0.5,0.5));
+        tasks.add(new ExcaliburDriveTask(this, 0.48, drive, 0.3,0.3,0.3,0.3));
         tasks.add(new WaitTask(this,3));
         tasks.add(new ExcaliburDriveTask(this,0.7,drive,-1,0,0,1));
         tasks.add(new WaitTask(this, 3));

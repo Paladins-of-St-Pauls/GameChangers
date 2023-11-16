@@ -23,7 +23,7 @@ public class ExcaliburLevel1BlueSide1Autonomous extends PaladinsOpMode {
 
         // Begin Auto
         tasks.add(new ExcaliburDriveTask(this, 1, drive, -0.5, 0.5, 0.5, -0.5));
-    }
+        }
 
     @Override
     protected void activeLoop() throws InterruptedException {

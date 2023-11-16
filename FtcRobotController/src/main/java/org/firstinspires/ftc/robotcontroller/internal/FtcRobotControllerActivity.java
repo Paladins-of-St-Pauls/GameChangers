@@ -395,7 +395,7 @@ public class FtcRobotControllerActivity extends Activity
     readNetworkType();
     ServiceController.startService(FtcRobotControllerWatchdogService.class);
     bindToService();
-    RobotLog.logAppInfo();
+//    RobotLog.logAppInfo();
     RobotLog.logDeviceInfo();
     AndroidBoard.getInstance().logAndroidBoardInfo();
 

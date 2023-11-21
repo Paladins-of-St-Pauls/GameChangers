@@ -70,10 +70,8 @@ public class ExcaliburConfiguration extends RobotConfiguration {
      * @return
      */
     public static ExcaliburConfiguration newConfig(HardwareMap hardwareMap, Telemetry telemetry) {
-        if (config == null) {
-            config = new ExcaliburConfiguration();
-            config.init(hardwareMap, telemetry);
-        }
+        ExcaliburConfiguration config = new ExcaliburConfiguration();
+        config.init(hardwareMap, telemetry);
         return config;
     }
 

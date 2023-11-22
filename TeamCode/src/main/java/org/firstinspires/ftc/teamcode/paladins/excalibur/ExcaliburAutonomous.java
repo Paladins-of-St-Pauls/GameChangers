@@ -23,7 +23,7 @@ public class ExcaliburAutonomous extends PaladinsOpMode {
 
     ColourCountVision vision;
 
-    public ExcaliburAutonomous(Alliance alliance, Scalar upperColour, Scalar lowerColour) {
+    public ExcaliburAutonomous(Alliance alliance, Scalar lowerColour, Scalar upperColour) {
         super();
         this.alliance = alliance;
         this.upperColour = upperColour;

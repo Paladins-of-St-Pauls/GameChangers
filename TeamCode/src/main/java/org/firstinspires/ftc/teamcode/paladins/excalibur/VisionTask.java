@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.BaseTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.MessageTask;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
+import org.opencv.core.Scalar;
 
 import java.util.ArrayDeque;
 
@@ -19,15 +20,17 @@ public class VisionTask extends BaseTask implements Task {
     private ExcaliburDrive drive;
     private ExcaliburUtils utils;
 
+    private ColourCountVision vision;
 
-    public VisionTask(PaladinsOpMode opMode, ArrayDeque<Task> tasks, Alliance alliance, double time) {
+
+    public VisionTask(PaladinsOpMode opMode, ExcaliburConfiguration config, ArrayDeque<Task> tasks, Alliance alliance, ColourCountVision vision, double time) {
         super(opMode, time);
         this.tasks = tasks;
         this.alliance = alliance;
-        config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
+        this.vision = vision;
+        this.config = config;
         drive = new ExcaliburDrive(opMode, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
-        utils = new ExcaliburUtils(opMode, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
-
+        utils = new ExcaliburUtils(opMode, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.FrontOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
     }
 
     void update() {
@@ -43,7 +46,7 @@ public class VisionTask extends BaseTask implements Task {
             return;
         }
 
-        int zone = SplitAveragePipeline.get_element_zone();
+        int zone = vision.colourZone();
 
         if (alliance == Alliance.REDLEFT) {
             if (zone == 1) {

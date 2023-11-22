@@ -21,10 +21,8 @@ public class ExcaliburUtils extends PaladinsComponent {
     final DcMotor LeftLiftMotor;
     final DcMotor RightLiftMotor;
 
-    final Servo BackLeftOutake;
-    final Servo BackRightOutake;
-    final private CRServo FrontLeftOutake;
-    final private CRServo FrontRightOutake;
+
+    final private CRServo FrontOutake;
 
     final private Servo PlaneShooter;
 
@@ -39,35 +37,32 @@ public class ExcaliburUtils extends PaladinsComponent {
     public double frontOutakeSpeed;
     public double liftSpeed;
 
-    public int indexPos;
+    public double indexSpeed;
 
     public double planeShooterPos;
 
-    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, Servo BackLeftOutake, Servo BackRightOutake, CRServo FrontLeftOutake, CRServo FrontRightOutake, Servo PlaneShooter, RevColorSensorV3 RSensor, RevColorSensorV3 LSensor, DcMotor indexMotor) {
+    public ExcaliburUtils(PaladinsOpMode opMode, DcMotor Harvester, DcMotor LeftLiftMotor, DcMotor RightLiftMotor, CRServo FrontOutake, Servo PlaneShooter, RevColorSensorV3 RSensor, RevColorSensorV3 LSensor, DcMotor indexMotor) {
         super(opMode);
 
         this.Harvester = Harvester;
         this.LeftLiftMotor = LeftLiftMotor;
         this.RightLiftMotor = RightLiftMotor;
-        this.BackLeftOutake = BackLeftOutake;
-        this.BackRightOutake = BackRightOutake;
-        this.FrontLeftOutake = FrontLeftOutake;
-        this.FrontRightOutake = FrontRightOutake;
+        this.FrontOutake = FrontOutake;
         this.PlaneShooter = PlaneShooter;
         this.RSensor = RSensor;
         this.LSensor = LSensor;
         this.indexMotor = indexMotor;
     }
 
-    public void setPower(double harvesterSpeed, double liftSpeed, double backOutakeSpeed, double frontOutakeSpeed) {
+    public void setPower(double harvesterSpeed, double liftSpeed, double backOutakeSpeed, double frontOutakeSpeed, double indexSpeed) {
         harvesterSpeed = harvesterSpeed;
         liftSpeed = liftSpeed;
+
         frontOutakeSpeed = frontOutakeSpeed;
         backOutakeSpeed = backOutakeSpeed;
+        indexSpeed = indexSpeed;
 
         indexMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        indexMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        indexMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     @SuppressLint("DefaultLocale")
@@ -76,14 +71,11 @@ public class ExcaliburUtils extends PaladinsComponent {
         LeftLiftMotor.setPower(liftSpeed/3);
         RightLiftMotor.setPower(-(liftSpeed/3));
 
-        indexMotor.setTargetPosition(indexPos);
+        indexMotor.setPower(indexSpeed);
 
-        BackLeftOutake.setPosition(backOutakePos);
-        BackRightOutake.setPosition(backOutakePos);
         PlaneShooter.setPosition(planeShooterPos);
 
-        FrontLeftOutake.setPower(frontOutakeSpeed);
-        FrontRightOutake.setPower(-frontOutakeSpeed);
+        FrontOutake.setPower(frontOutakeSpeed);
 
     }
 }

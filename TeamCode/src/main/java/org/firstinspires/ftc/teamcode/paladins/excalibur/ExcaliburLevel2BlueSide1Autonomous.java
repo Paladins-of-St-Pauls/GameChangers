@@ -1,15 +1,17 @@
 package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.tasks.Task;
+
 import org.firstinspires.ftc.teamcode.paladins.tasks.WaitTask;
 
 import java.util.ArrayDeque;
 
-@Autonomous(name = "ExcaliburLevel2RedSide1Autonomous")
-public class ExcaliburLevel2RedSide1Autonomous extends PaladinsOpMode {
+@Autonomous(name = "ExcaliburLevel2BlueSide1Autonomous")
+public class ExcaliburLevel2BlueSide1Autonomous extends PaladinsOpMode {
     private ExcaliburConfiguration config;
     private ExcaliburDrive drive;
     private ExcaliburUtils utils;
@@ -27,11 +29,12 @@ public class ExcaliburLevel2RedSide1Autonomous extends PaladinsOpMode {
         drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
         utils = new ExcaliburUtils(this, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.FrontOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
 
+
         tasks.add(new WaitTask(this, 3));
         tasks.add(new ExcaliburDriveTask(this, 0.3, drive, 1,1,1,1));
         tasks.add(new ExcaliburUtilsTask(this, 1, utils, -1, 0,0,0));
         tasks.add(new ExcaliburDriveTask(this, 0.3, drive, -1,-1,-1,-1));
-        tasks.add(new ExcaliburDriveTask(this, 1, drive, 0.5, -0.5, -0.5, 0.5));
+        tasks.add(new ExcaliburDriveTask(this, 1, drive, -0.5, 0.5, 0.5, -0.5));
 
 
     }

@@ -6,13 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.checkerframework.checker.units.qual.A;
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
 import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
 
 
 @TeleOp(name = "ExcaliburMechanumDrive")
 public class ExcaliburOpMode extends PaladinsOpMode {
-    private ExcaliburConfiguration config;
+    public ExcaliburConfiguration config;
     private NormalisedMecanumDrive drive;
     private ExcaliburUtils utils;
 
@@ -22,7 +23,7 @@ public class ExcaliburOpMode extends PaladinsOpMode {
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new NormalisedMecanumDrive(this, config.frontLeftMotor, config.frontRightMotor, config.backLeftMotor, config.backRightMotor, TRUE);
-        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
+        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.FrontOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
 
         config.frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         config.frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -68,7 +69,7 @@ public class ExcaliburOpMode extends PaladinsOpMode {
             utils.harvesterSpeed = 1;
         }
 
-        utils.liftSpeed = gamepad2.left_stick_y;
+        utils.liftSpeed = gamepad2.left_stick_y/2;
 
         if (gamepad2.right_bumper) {
             utils.frontOutakeSpeed = -1;
@@ -86,22 +87,11 @@ public class ExcaliburOpMode extends PaladinsOpMode {
             utils.planeShooterPos = 0;
         }
 
+        utils.indexSpeed = (gamepad2.right_stick_y/3);
 
 
         liftAvg = (Math.abs(utils.LeftLiftMotor.getCurrentPosition()) + Math.abs(utils.RightLiftMotor.getCurrentPosition())) / 2;
 
-
-        if (liftAvg > 1750) {
-            utils.backOutakePos = 0;
-        } else if (liftAvg < 1750) {
-            utils.backOutakePos = 1;
-        }
-
-        if (gamepad2.y) {
-            utils.indexPos = 100;
-        } else if (gamepad2.x) {
-            utils.indexPos = 0;
-        }
 
 
         gamepad1.rumble(utils.LSensor.blue(), utils.RSensor.blue(), 5);
@@ -110,15 +100,9 @@ public class ExcaliburOpMode extends PaladinsOpMode {
         telemetry.addData("OutakeSpeed", utils.frontOutakeSpeed);
         telemetry.addData("HarvesterSpeed", utils.harvesterSpeed);
         telemetry.addData("LiftSpeed", utils.liftSpeed);
-        telemetry.addData("LSensorB", utils.LSensor.blue());
-        telemetry.addData("RSensorB", utils.RSensor.blue());
-        telemetry.addData("LSensorR", utils.LSensor.red());
-        telemetry.addData("RSensorR", utils.RSensor.red());
-        telemetry.addData("Lift L", utils.LeftLiftMotor.getCurrentPosition());
-        telemetry.addData("Lift R", utils.RightLiftMotor.getCurrentPosition());
-        telemetry.addData("liftAvg", liftAvg);
-        telemetry.addData("BLOutakePos", utils.BackLeftOutake.getPosition());
-        telemetry.addData("RLOutakePos", utils.BackRightOutake.getPosition());
+        telemetry.addData("liftPos", liftAvg);
+        telemetry.addData("indexSpeed", utils.indexSpeed);
+
 
 
         drive.setSpeedXYR(-yy, xx, -gamepad1.left_stick_x / 2);

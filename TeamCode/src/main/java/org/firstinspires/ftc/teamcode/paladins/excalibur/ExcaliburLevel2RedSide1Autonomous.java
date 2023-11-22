@@ -25,7 +25,7 @@ public class ExcaliburLevel2RedSide1Autonomous extends PaladinsOpMode {
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
-        utils = new ExcaliburUtils(this, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
+        utils = new ExcaliburUtils(this, config.Harvester, config.LeftLiftMotor, config.RightLiftMotor, config.FrontOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
 
         tasks.add(new WaitTask(this, 3));
         tasks.add(new ExcaliburDriveTask(this, 0.3, drive, 1,1,1,1));

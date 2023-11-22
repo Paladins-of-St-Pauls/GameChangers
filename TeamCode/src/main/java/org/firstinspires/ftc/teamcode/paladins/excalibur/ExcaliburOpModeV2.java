@@ -1,17 +1,13 @@
 package org.firstinspires.ftc.teamcode.paladins.excalibur;
 
-import static java.lang.Boolean.TRUE;
-
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.paladins.common.PaladinsOpMode;
-import org.firstinspires.ftc.teamcode.paladins.mecanum.NormalisedMecanumDrive;
-import org.opencv.core.Mat;
 
 
 @TeleOp(name = "ExcaliburMechanumDriveV2")
-public class ExcaliburAlternateOpMode extends PaladinsOpMode {
+public class ExcaliburOpModeV2 extends PaladinsOpMode {
     private ExcaliburConfiguration config;
     private ExcaliburDrive drive;
     private ExcaliburUtils utils;
@@ -22,7 +18,7 @@ public class ExcaliburAlternateOpMode extends PaladinsOpMode {
     protected void onInit() {
         config = ExcaliburConfiguration.newConfig(hardwareMap, telemetry);
         drive = new ExcaliburDrive(this, config.backLeftMotor, config.backRightMotor, config.frontLeftMotor, config.frontRightMotor);
-        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.BackLeftOutake, config.BackRightOutake, config.FrontLeftOutake, config.FrontRightOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
+        utils = new ExcaliburUtils(this, config.Harvester, config.RightLiftMotor, config.LeftLiftMotor, config.FrontOutake, config.PlaneShooter, config.RSensor, config.LSensor, config.indexMotor);
 
         config.frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         config.frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -94,11 +90,7 @@ public class ExcaliburAlternateOpMode extends PaladinsOpMode {
         } else if (liftAvg < 1750) {
             utils.backOutakePos = 1;
         }
-        if (gamepad2.y) {
-            utils.indexPos = 100;
-        } else if (gamepad2.x) {
-            utils.indexPos = 0;
-        }
+
 
         telemetry.addData("OutakeSpeed", utils.frontOutakeSpeed);
         telemetry.addData("HarvesterSpeed", utils.harvesterSpeed);

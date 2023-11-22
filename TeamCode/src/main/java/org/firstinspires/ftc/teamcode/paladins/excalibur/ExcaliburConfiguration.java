@@ -41,10 +41,7 @@ public class ExcaliburConfiguration extends RobotConfiguration {
     public DcMotor LeftLiftMotor;
     public DcMotor Harvester;
 
-    public Servo BackLeftOutake;
-    public Servo BackRightOutake;
-    public CRServo FrontLeftOutake;
-    public CRServo FrontRightOutake;
+    public CRServo FrontOutake;
 
     public Servo PlaneShooter;
 
@@ -100,17 +97,12 @@ public class ExcaliburConfiguration extends RobotConfiguration {
         LeftLiftMotor = (DcMotor) getHardwareOn("leftLiftMotor", hardwareMap.dcMotor);
         RightLiftMotor = (DcMotor) getHardwareOn("rightLiftMotor", hardwareMap.dcMotor);
 
-        FrontLeftOutake = (CRServo) getHardwareOn("frontLeftOutake", hardwareMap.crservo);
-        FrontRightOutake = (CRServo) getHardwareOn("frontRightOutake", hardwareMap.crservo);
-        BackLeftOutake = (Servo) getHardwareOn("backLeftOutake", hardwareMap.servo);
-        BackRightOutake = (Servo) getHardwareOn("backRightOutake", hardwareMap.servo);
+        FrontOutake = (CRServo) getHardwareOn("frontOutake", hardwareMap.crservo);
 
         PlaneShooter = (Servo) getHardwareOn("planeShooter", hardwareMap.servo);
 
         RSensor = (RevColorSensorV3) getHardwareOn("RSensor", hardwareMap.colorSensor);
         LSensor = (RevColorSensorV3) getHardwareOn("LSensor", hardwareMap.colorSensor);
-
-        BackLeftOutake.setDirection(REVERSE);
 
         indexMotor = (DcMotor) getHardwareOn("indexMotor", hardwareMap.dcMotor);
 
